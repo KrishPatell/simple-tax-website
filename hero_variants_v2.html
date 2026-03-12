@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Section Variants v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #fff; }
+
+:root {
+  --navy:  #0F1F45;
+  --teal:  #00B4B0;
+  --teal2: #009B98;
+  --off:   #F7F9FC;
+  --line:  #E8EDF5;
+  --muted: #8895AE;
+  --body:  #3D4A61;
+  --red:   #DC2626;
+  --gold:  #D4A574;
+}
+
+.variant { display: none; }
+.variant.active { display: block; }
+
+/* VARIANT 3 - Asymmetric Modern */
+.v3-hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 80px 60px; background: white;
+  position: relative; overflow: hidden;
+}
+.v3-bg {
+  position: absolute; top: 0; right: 0; width: 600px; height: 600px;
+  background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%);
+  border-radius: 0 0 0 200px; z-index: 0;
+}
+.v3-content {
+  position: relative; z-index: 1; max-width: 550px;
+}
+.v3-eyebrow {
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 8px;
+}
+.v3-eyebrow::before { content: '✓'; }
+.v3-h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 56px; font-weight: 800; line-height: 1.15;
+  color: var(--navy); margin-bottom: 24px; letter-spacing: -1px;
+}
+.v3-h1 em { font-style: normal; color: var(--teal); }
+.v3-sub {
+  font-size: 16px; color: var(--body); line-height: 1.8;
+  margin-bottom: 36px;
+}
+.v3-features {
+  display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px;
+}
+.v3-feature {
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.v3-feature-icon {
+  width: 20px; height: 20px; min-width: 20px;
+  background: var(--teal); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 12px; margin-top: 2px;
+}
+.v3-feature-text { font-size: 14px; color: var(--body); }
+.v3-cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--teal); color: white;
+  border: none; border-radius: 12px;
+  padding: 18px 44px; font-family: 'Outfit', sans-serif;
+  font-size: 16px; font-weight: 700; cursor: pointer;
+  transition: all .3s; box-shadow: 0 12px 40px rgba(0,180,176,.3);
+}
+.v3-cta:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,180,176,.4); }
+
+/* VARIANT 4 - Testimonial Focus */
+.v4-hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 100px 40px 80px;
+  background: linear-gradient(180deg, #F8FBFF 0%, #EEF8FC 100%);
+  position: relative; overflow: hidden;
+}
+.v4-testimonial-band {
+  margin-bottom: 48px;
+  display: flex; align-items: center; gap: 16px;
+  background: white; padding: 12px 20px; border-radius: 16px;
+  border: 1px solid var(--line); box-shadow: 0 2px 12px rgba(0,0,0,.05);
+}
+.v4-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal), var(--teal2));
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 14px; font-weight: 700;
+}
+.v4-testimonial-text {
+  font-size: 13px; color: var(--body); font-weight: 500;
+  display: flex; align-items: center; gap: 4px;
+}
+.v4-stars { display: flex; gap: 2px; }
+.v4-star { color: var(--teal); font-size: 12px; }
+.v4-content { text-align: center; max-width: 720px; }
+.v4-h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 56px; font-weight: 800; line-height: 1.1;
+  color: var(--navy); margin-bottom: 20px; letter-spacing: -1px;
+}
+.v4-h1 em { font-style: normal; color: var(--teal); }
+.v4-sub {
+  font-size: 17px; color: var(--body); line-height: 1.75;
+  margin-bottom: 44px; max-width: 600px; margin-left: auto; margin-right: auto;
+}
+.v4-cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: linear-gradient(135deg, var(--teal), var(--teal2));
+  color: white; border: none; border-radius: 12px;
+  padding: 18px 44px; font-family: 'Outfit', sans-serif;
+  font-size: 16px; font-weight: 700; cursor: pointer;
+  transition: all .3s; box-shadow: 0 12px 40px rgba(0,180,176,.3);
+}
+.v4-cta:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,180,176,.4); }
+.v4-reviews {
+  margin-top: 44px;
+  display: flex; align-items: center; gap: 24px; justify-content: center; flex-wrap: wrap;
+}
+.v4-review-item {
+  text-align: center;
+}
+.v4-review-number {
+  font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 700; color: var(--teal);
+}
+.v4-review-label {
+  font-size: 12px; color: var(--muted); font-weight: 600;
+}
+
+.controls {
+  position: fixed; top: 20px; left: 20px; z-index: 999;
+  background: white; padding: 16px 24px; border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.12);
+  display: flex; gap: 12px;
+}
+.btn-variant {
+  padding: 8px 16px; border: 1.5px solid var(--line);
+  border-radius: 8px; background: white; cursor: pointer;
+  font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600;
+  color: var(--muted); transition: all .2s;
+}
+.btn-variant.active {
+  border-color: var(--teal); color: var(--teal); background: #F0FDFB;
+}
+.btn-variant:hover { border-color: var(--teal); color: var(--teal); }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <button class="btn-variant active" onclick="showVariant(3)">Variant 3: Asymmetric</button>
+  <button class="btn-variant" onclick="showVariant(4)">Variant 4: Testimonial</button>
+</div>
+
+<!-- VARIANT 3 -->
+<div id="v3" class="variant active">
+  <section class="v3-hero">
+    <div class="v3-bg"></div>
+    <div class="v3-content">
+      <div class="v3-eyebrow">IRS Tax Relief Experts</div>
+      <h1 class="v3-h1">Resolve Your <em>Tax Debt</em> in Days, Not Years</h1>
+      <p class="v3-sub">Get a personalized resolution plan from IRS-accredited specialists. Free consultation, no obligation.</p>
+      <div class="v3-features">
+        <div class="v3-feature">
+          <div class="v3-feature-icon">✓</div>
+          <div class="v3-feature-text"><strong>Expert guidance</strong> — IRS-accredited specialists</div>
+        </div>
+        <div class="v3-feature">
+          <div class="v3-feature-icon">✓</div>
+          <div class="v3-feature-text"><strong>Fast results</strong> — Many cases resolved in 6-12 months</div>
+        </div>
+        <div class="v3-feature">
+          <div class="v3-feature-icon">✓</div>
+          <div class="v3-feature-text"><strong>100% confidential</strong> — Your privacy is protected</div>
+        </div>
+      </div>
+      <button class="v3-cta">
+        Start Your Free Review
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+</div>
+
+<!-- VARIANT 4 -->
+<div id="v4" class="variant">
+  <section class="v4-hero">
+    <div class="v4-testimonial-band">
+      <div class="v4-avatar">MR</div>
+      <div class="v4-testimonial-text">
+        "This service saved me thousands" — Michael R.
+        <div class="v4-stars">
+          <span class="v4-star">★</span><span class="v4-star">★</span><span class="v4-star">★</span><span class="v4-star">★</span><span class="v4-star">★</span>
+        </div>
+      </div>
+    </div>
+    <div class="v4-content">
+      <h1 class="v4-h1">Stop Stressing About Your <em>Tax Debt</em> Today</h1>
+      <p class="v4-sub">Join thousands who've found relief through our IRS specialists. Get your personalized plan in just 10 minutes.</p>
+      <button class="v4-cta">
+        See What You Qualify For
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <div class="v4-reviews">
+        <div class="v4-review-item">
+          <div class="v4-review-number">4.9★</div>
+          <div class="v4-review-label">Average Rating</div>
+        </div>
+        <div class="v4-review-item">
+          <div class="v4-review-number">12K+</div>
+          <div class="v4-review-label">Happy Clients</div>
+        </div>
+        <div class="v4-review-item">
+          <div class="v4-review-number">$500M+</div>
+          <div class="v4-review-label">Debt Resolved</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+function showVariant(n) {
+  document.querySelectorAll('.variant').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.btn-variant').forEach(b => b.classList.remove('active'));
+  document.getElementById('v' + n).classList.add('active');
+  document.querySelectorAll('.btn-variant')[n-3].classList.add('active');
+}
+</script>
+</body>
+</html>
