@@ -1013,11 +1013,11 @@ function s5(){
     <p class="sub">We need a few details to start building your personalized resolution plan.</p>
     <div class="fields">
       <div class="field-row">
-        <div class="field"><label>First Name</label><input id="fn" placeholder="John" value="${S.firstName}"></div>
-        <div class="field"><label>Last Name</label><input id="ln" placeholder="Smith" value="${S.lastName}"></div>
+        <div class="field"><label>First Name</label><input id="fn" placeholder="John" value="${S.firstName}" pattern="[a-zA-Z\s'-]+" oninput="this.value = this.value.replace(/[^a-zA-Z\s'-]/g, '')"></div>
+        <div class="field"><label>Last Name</label><input id="ln" placeholder="Smith" value="${S.lastName}" pattern="[a-zA-Z\s'-]+" oninput="this.value = this.value.replace(/[^a-zA-Z\s'-]/g, '')"></div>
       </div>
-      <div class="field"><label>Email Address</label><input id="em" type="email" placeholder="john@email.com" value="${S.email}"></div>
-      <div class="field"><label>Phone Number</label><input id="ph" type="tel" placeholder="(555) 000-0000" value="${S.phone}" oninput="formatPhone(this)"></div>
+      <div class="field"><label>Email Address</label><input id="em" type="email" placeholder="john@email.com" value="${S.email}" required></div>
+      <div class="field"><label>Phone Number</label><input id="ph" type="tel" placeholder="(555) 000-0000" value="${S.phone}" oninput="formatPhone(this); this.setCustomValidity(this.value.replace(/\D/g,'').length < 10 ? 'Please enter a complete 10-digit phone number' : '')" minlength="10" maxlength="14" required></div>
     </div>
     <button class="cta dark" onclick="saveContactAndGo()">
       Continue
@@ -1439,9 +1439,24 @@ function saveContactAndGo(){
   S.lastName  = document.getElementById('ln')?.value.trim()||'';
   S.email     = document.getElementById('em')?.value.trim()||'';
   S.phone     = document.getElementById('ph')?.value.trim()||'';
-  if(!S.firstName||!S.lastName){alert('Please enter your first and last name.');return;}
+  
+  // Validate first name - letters only, no numbers or symbols
+  if(!S.firstName){alert('Please enter your first name.');return;}
+  if(!/^[a-zA-Z\s'-]+$/.test(S.firstName)){alert('First name can only contain letters.');return;}
+  
+  // Validate last name - letters only, no numbers or symbols
+  if(!S.lastName){alert('Please enter your last name.');return;}
+  if(!/^[a-zA-Z\s'-]+$/.test(S.lastName)){alert('Last name can only contain letters.');return;}
+  
+  // Validate email - proper email format
   if(!S.email){alert('Please enter your email address.');return;}
-  if(!S.phone){alert('Please enter your phone number.');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(S.email)){alert('Please enter a valid email address.');return;}
+  
+  // Validate phone - must have 10 digits
+  const phoneDigits = S.phone.replace(/\D/g,'');
+  if(!phoneDigits){alert('Please enter your phone number.');return;}
+  if(phoneDigits.length < 10){alert('Please enter a complete 10-digit phone number.');return;}
+  
   go(6);
 }
 
