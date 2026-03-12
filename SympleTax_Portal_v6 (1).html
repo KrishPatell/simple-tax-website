@@ -949,11 +949,6 @@ function s4(){
       <div class="calc-panel">
         <div class="calc-panel-title">The Cost of Waiting</div>
         <div class="calc-panel-sub">Based on your estimated ${fmt(d)} balance, here's what the IRS is adding in penalties and interest right now.</div>
-        <div class="calc-daily-box">
-          <div class="calc-daily-label">Accruing Daily</div>
-          <div class="calc-daily-num">${fmt(da)}</div>
-          <div class="calc-daily-sub">per day in penalties & interest</div>
-        </div>
         <table class="calc-table">
           <thead><tr><th>If you wait</th><th>Added cost</th><th style="text-align:right">New balance</th></tr></thead>
           <tbody>
@@ -962,7 +957,7 @@ function s4(){
             <tr><td>12 months</td><td style="color:#991B1B;font-weight:600">+${fmt(m12)}</td><td class="calc-amt" style="color:#991B1B">${fmt(d+m12)}</td></tr>
           </tbody>
         </table>
-        <div class="notice warn" style="margin-bottom:20px">⚠️ <span>Every day you wait costs you <strong>${fmt(da)}</strong>. Let's stop the clock and get you on a path to resolution.</span></div>
+        <div class="notice warn" style="margin-bottom:20px">⚠️ <span>Every day you wait, your debt grows. Let's stop the clock and get you on a path to resolution.</span></div>
         <div style="display: flex; justify-content: center; margin-top: 28px;">
           <button class="cta teal calc-cta" onclick="go(5)">
             Let's Get Started
@@ -1137,9 +1132,9 @@ function s10(){
     <h1 class="hed">What waiting is <em>already</em> costing you.</h1>
     <p class="sub">The IRS charges 0.5% per month in failure-to-pay penalties, plus compounding daily interest. Your balance is growing right now.</p>
     <div class="cow-hero">
-      <div class="hbox-lbl">Accruing daily on your ${fmt(d)} balance</div>
-      <div class="cow-num" id="cowNum">${fmt(da)}</div>
-      <div class="cow-lbl">per day in penalties & interest</div>
+      <div class="hbox-lbl">Penalties and interest added in 12 months</div>
+      <div class="cow-num" id="cowNum">${fmt(da*365)}</div>
+      <div class="cow-lbl">if you don't take action</div>
     </div>
     <table class="cow-table">
       <thead><tr><th>If you wait</th><th>Penalties added</th><th style="text-align:right">New balance</th></tr></thead>
@@ -1426,18 +1421,18 @@ function runAnalysis(){
 }
 
 function startTicker(){
-  const da=daily(); let shown=da*0.85;
+  const da=daily(); const fullYear=da*365;
+  let shown=fullYear*0.7;
   const el=document.getElementById('cowNum');
   if(!el) return;
   el.textContent='$'+shown.toFixed(2);
-  const targetVal=da*1.25;
   const iv=setInterval(()=>{
-    shown+=da/25;
-    if(shown>=targetVal) shown=targetVal;
+    shown+=fullYear/30;
+    if(shown>=fullYear) shown=fullYear;
     const t=document.getElementById('cowNum');
     if(!t){clearInterval(iv);return;}
     t.textContent='$'+shown.toFixed(2);
-    if(shown>=targetVal) clearInterval(iv);
+    if(shown>=fullYear) clearInterval(iv);
   },50);
 }
 
