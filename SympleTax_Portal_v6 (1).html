@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SympleTax — Resolve Your Tax Debt 100% Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:  #0F1F45;
+  --navy2: #1B2F60;
+  --teal:  #00B4B0;
+  --teal2: #009B98;
+  --white: #FFFFFF;
+  --off:   #F7F9FC;
+  --line:  #E8EDF5;
+  --muted: #8895AE;
+  --body:  #3D4A61;
+  --red:   #DC2626;
+  --green: #16A34A;
+  --gold:  #D97706;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--white);
+  color: var(--navy);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── HEADER ─────────────────────────────── */
+.hdr {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+  height: 64px;
+  display: flex; align-items: center;
+  padding: 0 40px;
+  justify-content: space-between;
+}
+.logo { display: flex; align-items: baseline; gap: 1px; text-decoration: none; }
+.logo .l1 { font-family: 'Outfit', sans-serif; font-size: 21px; font-weight: 600; color: var(--navy); }
+.logo .l2 { font-family: 'Outfit', sans-serif; font-size: 21px; font-weight: 600; color: var(--teal); }
+.hdr-right { display: flex; align-items: center; gap: 24px; }
+.hdr-secure { font-size: 12px; font-weight: 500; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+.hdr-phone { font-size: 13px; font-weight: 600; color: var(--navy); text-decoration: none; letter-spacing: 0.2px; }
+.hdr-phone:hover { color: var(--teal); }
+
+/* ─── PROGRESS BAR (portal only) ───────── */
+.prog-wrap {
+  position: fixed; top: 64px; left: 0; right: 0; z-index: 200;
+  background: var(--white); border-bottom: 1px solid var(--line);
+  padding: 10px 40px;
+  display: none;
+}
+.prog-inner { max-width: 560px; margin: 0 auto; display: flex; align-items: center; gap: 10px; }
+.prog-track { flex: 1; height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.prog-fill { height: 100%; background: var(--teal); border-radius: 2px; transition: width .5s cubic-bezier(.4,0,.2,1); }
+.prog-lbl { font-size: 12px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+.prog-lbl span { color: var(--navy); }
+
+/* ─── LANDING ────────────────────────────── */
+#landing { display: block; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 100px 24px 80px;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 700px 500px at 50% -100px, rgba(0,180,176,.07), transparent),
+    radial-gradient(ellipse 500px 400px at 100% 60%, rgba(15,31,69,.04), transparent);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--off); border: 1px solid var(--line);
+  border-radius: 20px; padding: 6px 16px;
+  font-size: 12px; font-weight: 600; color: var(--muted);
+  letter-spacing: 0.5px; margin-bottom: 28px;
+  animation: fadeUp .6s ease both;
+}
+.hero-eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+.hero-h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(38px, 6vw, 62px);
+  font-weight: 700; line-height: 1.12;
+  color: var(--navy); max-width: 680px;
+  margin-bottom: 22px; letter-spacing: -1px;
+  animation: fadeUp .6s .1s ease both;
+}
+.hero-h1 em {  color: var(--teal); }
+.hero-sub {
+  font-size: 18px; font-weight: 400; color: var(--body);
+  line-height: 1.65; max-width: 500px;
+  margin-bottom: 40px;
+  animation: fadeUp .6s .2s ease both;
+}
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--navy); color: white;
+  border: none; border-radius: 14px;
+  padding: 18px 40px; font-family: 'Outfit', sans-serif;
+  font-size: 17px; font-weight: 600; cursor: pointer;
+  transition: all .2s; letter-spacing: 0.2px;
+  box-shadow: 0 8px 32px rgba(15,31,69,.2);
+  animation: fadeUp .6s .3s ease both;
+}
+.hero-cta:hover { background: var(--navy2); transform: translateY(-2px); box-shadow: 0 14px 40px rgba(15,31,69,.28); }
+.hero-meta {
+  margin-top: 18px; font-size: 13px; color: var(--muted);
+  display: flex; align-items: center; gap: 6px;
+  animation: fadeUp .6s .4s ease both;
+}
+.hero-meta-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--line); }
+.hero-trust {
+  margin-top: 48px;
+  display: flex; align-items: center; gap: 28px; flex-wrap: wrap; justify-content: center;
+  animation: fadeUp .6s .5s ease both;
+}
+.htrust { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--muted); font-weight: 500; }
+.htrust svg { color: var(--teal); flex-shrink: 0; }
+
+/* SCROLL INDICATOR */
+.scroll-hint {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase;
+  animation: fadeUp .6s .7s ease both;
+}
+.scroll-dot {
+  width: 24px; height: 38px; border: 2px solid var(--line); border-radius: 12px;
+  display: flex; justify-content: center; padding-top: 6px;
+}
+.scroll-dot::after {
+  content: ''; width: 4px; height: 8px; border-radius: 2px;
+  background: var(--teal); animation: scrollBob 1.5s ease infinite;
+}
+@keyframes scrollBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+/* CEO SECTION */
+.ceo-section {
+  background: var(--off); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  padding: 80px 24px;
+}
+.ceo-inner {
+  max-width: 680px; margin: 0 auto;
+  display: flex; gap: 48px; align-items: flex-start;
+}
+.ceo-avatar {
+  width: 88px; height: 88px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--navy), var(--navy2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px; border: 3px solid white;
+  box-shadow: 0 4px 20px rgba(15,31,69,.15);
+}
+.ceo-content {}
+.ceo-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; }
+.ceo-quote {
+  font-family: 'Outfit', sans-serif;
+  font-size: 19px; font-weight: 400; 
+  color: var(--navy); line-height: 1.7; margin-bottom: 20px;
+}
+.ceo-quote::before { content: '\201C'; }
+.ceo-quote::after  { content: '\201D'; }
+.ceo-sig { font-size: 14px; font-weight: 600; color: var(--body); }
+.ceo-sig span { font-weight: 400; color: var(--muted); }
+
+/* HOW IT WORKS */
+.hiw-section { padding: 100px 24px; background: var(--white); }
+.hiw-inner { max-width: 760px; margin: 0 auto; }
+.section-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--teal); border-radius: 1px; }
+.section-h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 38px; font-weight: 600; color: var(--navy);
+  margin-bottom: 56px; letter-spacing: -0.5px;
+}
+.hiw-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; position: relative; }
+.hiw-steps::before {
+  content: ''; position: absolute;
+  top: 28px; left: calc(16.67% + 20px); right: calc(16.67% + 20px);
+  height: 1px; background: var(--line);
+}
+.hiw-step { padding: 0 24px 0 0; }
+.hiw-step:last-child { padding-right: 0; }
+.hiw-num {
+  width: 56px; height: 56px; border-radius: 50%;
+  border: 2px solid var(--line); background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700;
+  color: var(--navy); margin-bottom: 24px; position: relative; z-index: 1;
+}
+.hiw-step-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.hiw-step-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+/* BOTTOM CTA */
+.bottom-cta {
+  background: var(--navy);
+  padding: 100px 24px;
+  text-align: center;
+}
+.bottom-cta-h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 40px; font-weight: 600; color: white;
+  margin-bottom: 16px; letter-spacing: -0.5px;
+}
+.bottom-cta-h2 em { color: var(--teal);  }
+.bottom-cta-sub { font-size: 16px; color: rgba(255,255,255,.6); margin-bottom: 36px; }
+.bottom-cta-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--teal); color: white;
+  border: none; border-radius: 14px;
+  padding: 18px 40px; font-family: 'Outfit', sans-serif;
+  font-size: 17px; font-weight: 600; cursor: pointer;
+  transition: all .2s;
+  box-shadow: 0 8px 32px rgba(0,180,176,.35);
+}
+.bottom-cta-btn:hover { background: var(--teal2); transform: translateY(-2px); }
+.bottom-note { font-size: 12px; color: rgba(255,255,255,.35); margin-top: 14px; }
+
+/* ─── PORTAL ─────────────────────────────── */
+#portal { display: none; }
+.stage {
+  min-height: 100vh;
+  padding-top: 120px; padding-bottom: 80px;
+  display: flex; align-items: flex-start; justify-content: center;
+}
+.stage-inner {
+  width: 100%; max-width: 540px; padding: 0 24px;
+  animation: fadeUp .45s cubic-bezier(.22,.68,0,1.15) both;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+/* EYEBROW */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.8px;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 14px;
+}
+.eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+
+/* HEADLINE */
+.hed {
+  font-family: 'Outfit', sans-serif;
+  font-size: 34px; font-weight: 600; line-height: 1.2;
+  color: var(--navy); margin-bottom: 10px; letter-spacing: -0.3px;
+}
+.hed em {  color: var(--teal); }
+.sub { font-size: 15px; color: var(--body); line-height: 1.65; margin-bottom: 32px; }
+
+/* CHOICE LIST */
+.choices { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.choice {
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px 20px; border: 1.5px solid var(--line);
+  border-radius: 14px; cursor: pointer; background: var(--white);
+  transition: all .18s;
+}
+.choice:hover { border-color: var(--teal); background: #F0FDFB; }
+.choice.sel  { border-color: var(--teal); background: #F0FDFB; }
+.c-radio {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid var(--line); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .18s;
+}
+.choice.sel .c-radio { background: var(--teal); border-color: var(--teal); }
+.c-radio::after { content:''; width:7px; height:7px; border-radius:50%; background:white; opacity:0; transition:opacity .18s; }
+.choice.sel .c-radio::after { opacity:1; }
+.c-body { flex:1; }
+.c-title { font-size: 15px; font-weight: 600; color: var(--navy); }
+.c-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.c-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; flex-shrink: 0; }
+.badge-warn { background:#FEF3C7; color:var(--gold); }
+.badge-urgent { background:#FEE2E2; color:var(--red); }
+.badge-good { background:#DCFCE7; color:var(--green); }
+
+/* BUTTON GRID */
+.btn-grid { display: grid; gap: 10px; margin-bottom: 28px; }
+.btn-grid.col2 { grid-template-columns:1fr 1fr; }
+.btn-grid.col3 { grid-template-columns:1fr 1fr 1fr; }
+.gbtn {
+  padding: 16px 12px; border: 1.5px solid var(--line);
+  border-radius: 12px; cursor: pointer; text-align: center;
+  font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600;
+  color: var(--body); background: var(--white); transition: all .18s;
+  line-height: 1.3;
+}
+.gbtn:hover { border-color: var(--teal); color: var(--teal); background: #F0FDFB; }
+.gbtn.sel { border-color: var(--teal); background: var(--teal); color: white; }
+.gbtn small { display: block; font-size: 11px; font-weight: 400; margin-top: 3px; opacity: .75; }
+
+/* NOTICE */
+.notice {
+  border-radius: 12px; padding: 14px 18px;
+  font-size: 13px; line-height: 1.6; margin-bottom: 20px;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.notice.warn { background:#FFFBEB; border:1px solid #FCD34D; color:#92400E; }
+.notice.info { background:#F0FDFB; border:1px solid #6EE7E0; color:#065F46; }
+
+/* HIGHLIGHT BOX */
+.hbox {
+  background: var(--off); border: 1px solid var(--line);
+  border-radius: 14px; padding: 20px 22px; margin-bottom: 24px;
+}
+.hbox-lbl { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.hbox-val { font-family: 'Outfit', sans-serif; font-size: 30px; font-weight: 700; color: var(--navy); }
+.hbox-val.red { color: var(--red); }
+.hbox-val.green { color: var(--green); }
+.hbox-desc { font-size: 13px; color: var(--muted); margin-top: 5px; line-height: 1.6; }
+
+/* DIVIDER */
+.div { height: 1px; background: var(--line); margin: 26px 0; }
+
+/* SECTION LABEL */
+.sec-lbl { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 12px; }
+
+/* CTA BUTTON */
+.cta {
+  width: 100%; height: 54px; border: none; border-radius: 14px;
+  font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+  transition: all .2s; letter-spacing: 0.2px;
+}
+.cta.dark { background: var(--navy); color: white; box-shadow: 0 6px 24px rgba(15,31,69,.2); }
+.cta.dark:hover { background: var(--navy2); transform:translateY(-1px); box-shadow:0 10px 30px rgba(15,31,69,.25); }
+.cta.teal { background: linear-gradient(135deg, var(--teal), var(--teal2)); color: white; box-shadow: 0 6px 24px rgba(0,180,176,.3); }
+.cta.teal:hover { transform:translateY(-1px); box-shadow:0 10px 30px rgba(0,180,176,.38); }
+.back-btn {
+  background: none; border: none; font-family: 'Outfit', sans-serif;
+  font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer;
+  display: flex; align-items: center; gap: 5px; margin-top: 14px;
+  transition: color .2s; padding: 0;
+}
+.back-btn:hover { color: var(--navy); }
+
+/* ANALYSIS */
+.alist { display: flex; flex-direction: column; gap: 0; margin: 28px 0; }
+.aitem {
+  display: flex; align-items: center; gap: 16px;
+  padding: 15px 0; border-bottom: 1px solid var(--line);
+  font-size: 14px; font-weight: 500; color: var(--muted);
+  transition: color .4s;
+}
+.aitem:last-child { border-bottom: none; }
+.aitem.done { color: var(--navy); }
+.aitem.active { color: var(--navy); }
+.aicon {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--line); font-size: 15px; transition: background .4s;
+}
+.aitem.done .aicon { background: #DCFCE7; }
+.aitem.active .aicon { background: #FFFBEB; animation: apulse 1s ease infinite alternate; }
+@keyframes apulse { from{opacity:.7} to{opacity:1} }
+
+/* SAVINGS HERO */
+.sav-hero {
+  background: var(--navy); border-radius: 20px;
+  padding: 36px 32px; text-align: center; margin-bottom: 22px;
+  position: relative; overflow: hidden;
+}
+.sav-hero::before {
+  content:''; position:absolute;
+  width:360px; height:360px; border-radius:50%;
+  background: radial-gradient(circle, rgba(0,180,176,.16), transparent 70%);
+  top:-100px; right:-100px; pointer-events:none;
+}
+.sav-lbl { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.45); margin-bottom:10px; }
+.sav-amount { font-family: 'Outfit', sans-serif; font-size:60px; font-weight:700; color:var(--teal); line-height:1; margin-bottom:10px; }
+.sav-sub { font-size:14px; color:rgba(255,255,255,.6); }
+.sav-sub strong { color:white; }
+
+.stats-row { display: grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:20px; }
+.stat { text-align:center; padding:16px 10px; border:1.5px solid var(--line); border-radius:12px; }
+.stat-val { font-family: 'Outfit', sans-serif; font-size:21px; font-weight:600; color:var(--navy); }
+.stat-val.red { color:var(--red); }
+.stat-val.green { color:var(--green); }
+.stat-lbl { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); margin-top:4px; }
+
+.prog-pills { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+.prog-pill {
+  display:inline-flex; align-items:center; gap:5px;
+  padding:5px 13px; border-radius:20px;
+  background:#F0FDFB; border:1px solid rgba(0,180,176,.25);
+  font-size:12px; font-weight:600; color:var(--teal2);
+}
+.prog-pill::before { content:'✓'; }
+
+/* COST OF WAITING */
+.cow-hero {
+  background:var(--off); border:1px solid var(--line);
+  border-radius:14px; padding:28px; text-align:center; margin-bottom:22px;
+}
+.cow-num { font-family: 'Outfit', sans-serif; font-size:50px; font-weight:700; color:var(--red); line-height:1; margin:10px 0; }
+.cow-lbl { font-size:13px; color:var(--muted); }
+.cow-table { width:100%; border-collapse:collapse; margin-bottom:20px; }
+.cow-table thead th { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--muted); padding:8px 16px; text-align:left; border-bottom:1px solid var(--line); }
+.cow-table tbody tr { border-bottom:1px solid var(--line); }
+.cow-table tbody tr:last-child { border-bottom:none; }
+.cow-table tbody td { padding:13px 16px; font-size:14px; color:var(--body); font-weight:500; }
+.cow-table td.amt { font-family: 'Outfit', sans-serif; font-size:17px; font-weight:600; color:var(--red); text-align:right; }
+
+/* TEAM */
+.team-list { display:flex; flex-direction:column; gap:10px; margin-bottom:24px; }
+.tmem {
+  display:flex; align-items:center; gap:16px;
+  padding:16px 18px; border:1.5px solid var(--line); border-radius:14px; background:var(--white);
+}
+.tavatar { width:44px; height:44px; border-radius:12px; background:var(--off); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.trole { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--teal); margin-bottom:2px; }
+.ttitle { font-size:14px; font-weight:600; color:var(--navy); margin-bottom:2px; }
+.tdesc { font-size:12px; color:var(--muted); line-height:1.5; }
+
+/* PAYMENT */
+.pay-sum { background:var(--off); border:1px solid var(--line); border-radius:14px; padding:20px; margin-bottom:20px; }
+.pay-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; font-size:14px; border-bottom:1px solid var(--line); }
+.pay-row:last-child { border-bottom:none; padding-top:14px; margin-top:4px; }
+.pay-row:last-child .pk { font-weight:700; font-size:15px; color:var(--navy); }
+.pay-row:last-child .pv { font-family: 'Outfit', sans-serif; font-size:26px; font-weight:700; color:var(--navy); }
+.pk { color:var(--muted); font-weight:500; }
+.pv { font-weight:600; color:var(--navy); }
+.pv.red { color:var(--red); }
+.pv.green { color:var(--green); }
+
+.fields { display:flex; flex-direction:column; gap:13px; margin-bottom:18px; }
+.field { display:flex; flex-direction:column; gap:7px; }
+.field label { font-size:11px; font-weight:700; letter-spacing:.5px; color:var(--muted); text-transform:uppercase; }
+.field input {
+  height:50px; padding:0 16px;
+  border:1.5px solid var(--line); border-radius:12px;
+  font-family:'Outfit',sans-serif; font-size:15px; font-weight:500;
+  color:var(--navy); background:var(--white); outline:none;
+  transition:border-color .2s, box-shadow .2s;
+}
+.field input::placeholder { color:#C0C8D8; font-weight:400; }
+.field input:focus { border-color:var(--teal); box-shadow:0 0 0 4px rgba(0,180,176,.1); }
+.field-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+
+.guarantee {
+  display:flex; gap:14px; align-items:flex-start;
+  padding:15px 18px; background:#F0FDF4; border:1px solid #BBF7D0;
+  border-radius:12px; margin-bottom:18px;
+}
+.gicon { font-size:22px; flex-shrink:0; }
+.gtext h5 { font-size:13px; font-weight:700; color:#166534; margin-bottom:2px; }
+.gtext p { font-size:12px; color:#15803D; line-height:1.5; }
+
+.processing { text-align:center; padding:48px 0; display:none; }
+.proc-ring { width:52px; height:52px; border-radius:50%; border:3px solid var(--line); border-top-color:var(--teal); animation:spin .9s linear infinite; margin:0 auto 18px; }
+@keyframes spin { to{transform:rotate(360deg)} }
+
+/* SUCCESS */
+.success-icon {
+  width:72px; height:72px; border-radius:50%;
+  background:linear-gradient(135deg,var(--teal),var(--teal2));
+  display:flex; align-items:center; justify-content:center; font-size:30px;
+  margin:0 auto 22px; box-shadow:0 12px 36px rgba(0,180,176,.28);
+  animation:popIn .6s cubic-bezier(.175,.885,.32,1.275) both;
+}
+@keyframes popIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+.case-box { border:2px dashed var(--line); border-radius:14px; padding:22px; text-align:center; margin:22px 0; }
+.case-box-lbl { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.case-box-num { font-family: 'Outfit', sans-serif; font-size:28px; font-weight:700; color:var(--navy); letter-spacing:3px; }
+.nsteps { display:flex; flex-direction:column; gap:0; }
+.ns { display:flex; gap:15px; padding:15px 0; border-bottom:1px solid var(--line); }
+.ns:last-child { border-bottom:none; }
+.nsnum { width:26px; height:26px; border-radius:50%; background:var(--teal); color:white; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; margin-top:2px; }
+.nstitle { font-size:14px; font-weight:600; color:var(--navy); }
+.nsdesc { font-size:13px; color:var(--muted); margin-top:2px; line-height:1.5; }
+
+/* TRUST ROW */
+.trust-row { display:flex; gap:16px; margin-top:16px; flex-wrap:wrap; }
+.titem { display:flex; align-items:center; gap:5px; font-size:12px; color:var(--muted); font-weight:500; }
+.titem svg { color:var(--teal); }
+
+/* FOOTER */
+footer {
+  background:var(--navy); padding:32px 40px;
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+}
+.footer-logo .l1 { font-family: 'Outfit', sans-serif; font-size:18px; font-weight:600; color:white; }
+.footer-logo .l2 { font-family: 'Outfit', sans-serif; font-size:18px; font-weight:600; color:var(--teal); }
+footer p { font-size:12px; color:rgba(255,255,255,.3); }
+
+/* RESPONSIVE */
+@media (max-width:600px) {
+  .hdr { padding:0 20px; }
+  .hero-h1 { font-size:34px; }
+  .hero-sub { font-size:15px; }
+  .ceo-inner { flex-direction:column; gap:24px; }
+  .hiw-steps { grid-template-columns:1fr; }
+  .hiw-steps::before { display:none; }
+  .stats-row { grid-template-columns:1fr 1fr; }
+  .field-row { grid-template-columns:1fr; }
+  .btn-grid.col3 { grid-template-columns:1fr 1fr; }
+  .prog-wrap { padding:10px 20px; }
+}
+
+
+/* Back button */
+.back-btn {
+  background: none; border: none; font-family: inherit;
+  font-size: 14px; font-weight: 500; color: var(--muted);
+  cursor: pointer; margin-top: 14px; padding: 0;
+  display: inline-flex; align-items: center; gap: 4px;
+  transition: color .15s;
+}
+.back-btn:hover { color: var(--navy); }
+
+/* Group label */
+.group-label {
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--muted); margin: 20px 0 10px;
+}
+
+/* Info notice */
+.notice.info {
+  background: #EFF8FF; border-color: #BFDBFE; color: #1E40AF;
+}
+</style>
+</head>
+
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <a class="logo" href="#"><span class="l1">symple</span><span class="l2">tax</span></a>
+  <div class="hdr-right">
+    <div class="hdr-secure">
+      <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Secure & Encrypted
+    </div>
+    <a class="hdr-phone" href="tel:18005551234">(800) 555-1234</a>
+  </div>
+</header>
+
+<!-- PROGRESS (portal only) -->
+<div class="prog-wrap" id="progWrap">
+  <div class="prog-inner">
+    <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+    <div class="prog-lbl">Step <span id="progCur">1</span> of <span id="progTotal">8</span></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!--  LANDING PAGE                           -->
+<!-- ════════════════════════════════════════ -->
+<div id="landing">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow"><div class="hero-eyebrow-dot"></div>IRS Tax Relief — 100% Online</div>
+    <h1 class="hero-h1">Resolve Your Tax Debt<br><em>100% Online.</em></h1>
+    <p class="hero-sub">Find out what you owe, what programs you qualify for, and get a personalized resolution plan — in about 10 minutes.</p>
+    <button class="hero-cta" onclick="startPortal()">
+      Get Started
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <div class="hero-meta">
+      <span>Takes about 10 minutes</span>
+      <div class="hero-meta-dot"></div>
+      <span>No obligation</span>
+      <div class="hero-meta-dot"></div>
+      <span>100% confidential</span>
+    </div>
+    <div class="hero-trust">
+      <div class="htrust">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        256-bit SSL
+      </div>
+      <div class="htrust">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        IRS-Accredited Specialists
+      </div>
+      <div class="htrust">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+        4.9 Star Rating
+      </div>
+      <div class="htrust">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        A+ BBB Rating
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-dot"></div>
+      scroll
+    </div>
+  </section>
+
+  <!-- CEO MESSAGE -->
+  <section class="ceo-section">
+    <div class="ceo-inner">
+      <div class="ceo-avatar">👤</div>
+      <div class="ceo-content">
+        <div class="ceo-label">A Message from Our CEO</div>
+        <p class="ceo-quote">For more than a decade, my team and I have been working to make tax relief more affordable, more transparent, and easier for everyday taxpayers to navigate. Today, we're proud to offer a solution that gives you a faster, clearer path to resolving your tax issues. We hope this experience helps you move forward with confidence — we're honored to be part of that journey.</p>
+        <div class="ceo-sig">Ari Hassan &nbsp;<span>— CEO, SympleTax</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="hiw-section">
+    <div class="hiw-inner">
+      <div class="section-eyebrow">How it works</div>
+      <h2 class="section-h2">Three steps to resolution.</h2>
+      <div class="hiw-steps">
+        <div class="hiw-step">
+          <div class="hiw-num">1</div>
+          <div class="hiw-step-title">Answer a few questions</div>
+          <div class="hiw-step-desc">Tell us about your tax situation — an estimate is all we need to get started.</div>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-num">2</div>
+          <div class="hiw-step-title">We analyze your case</div>
+          <div class="hiw-step-desc">We identify every IRS relief program you qualify for and calculate your settlement range.</div>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-num">3</div>
+          <div class="hiw-step-title">Get your personalized plan</div>
+          <div class="hiw-step-desc">See your resolution options, choose a path, and enroll — all online in minutes.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="bottom-cta">
+    <h2 class="bottom-cta-h2">Ready to <em>stop the clock</em> on your IRS debt?</h2>
+    <p class="bottom-cta-sub">The IRS adds penalties every single day. Find out what you owe and how much you could save — free.</p>
+    <button class="bottom-cta-btn" onclick="startPortal()">
+      Start My Free Analysis
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <p class="bottom-note">No credit card required &nbsp;·&nbsp; Takes about 10 minutes &nbsp;·&nbsp; 100% confidential</p>
+  </section>
+
+  <footer>
+    <div class="footer-logo"><span class="l1">symple</span><span class="l2">tax</span></div>
+    <p>© 2025 SympleTax. All rights reserved. &nbsp;|&nbsp; Not a law firm. Tax relief results vary by case.</p>
+  </footer>
+
+</div><!-- /landing -->
+
+<!-- ════════════════════════════════════════ -->
+<!--  PORTAL                                 -->
+<!-- ════════════════════════════════════════ -->
+<div id="portal">
+  <div class="stage"><div class="stage-inner" id="content"></div></div>
+</div>
+
+
+<script>
+
+// ══════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════
+const S = {
+  step:1,
+  debtRange:'', debtType:'', irsNotice:'', taxSituation:'', yearsSelected:[], yearsOwed:'',
+  income:'', expenses:'', assets:'', equity:'',
+  firstName:'', lastName:'', email:'', phone:'',
+  caseNum:''
+};
+
+const TOTAL_STEPS = 11;
+
+const DEBT_MID  = {under5:3000,s5to10:7500,s10to25:17500,s25to50:37500,s50to100:75000,s100plus:125000};
+const INC_MID   = {under30:22500,s30to50:40000,s50to75:62500,s75to100:87500,s100to150:125000,s150plus:175000};
+const EXP_MID   = {under2:1500,s2to3:2500,s3to5:4000,s5plus:6000};
+const ASSET_MID = {none:0,under25:12500,s25to100:62500,s100plus:150000};
+const EQ_MID    = {none:0,under50:25000,s50to150:100000,s150plus:200000};
+
+const debt  = ()=> DEBT_MID[S.debtRange]  || 25000;
+const inc   = ()=> INC_MID[S.income]      || 55000;
+const exp   = ()=> EXP_MID[S.expenses]    || 2500;
+const asset = ()=> ASSET_MID[S.assets]    || 0;
+const eq    = ()=> EQ_MID[S.equity]       || 0;
+
+const rcp     = ()=> Math.max((inc()/12 - exp())*0.55, 0);
+const oic     = ()=> Math.max(rcp()*12 + (asset()+eq())*0.8, 500);
+const savings = ()=> Math.max(debt()-oic(), 0);
+const daily   = ()=> debt()*0.000822;
+const fmt     = n => '$'+Math.round(n).toLocaleString();
+const pct     = (s,d)=> Math.round(s/d*100);
+
+// ══════════════════════════════════════════
+//  NAVIGATION
+// ══════════════════════════════════════════
+function startPortal(){
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('portal').style.display  = 'block';
+  document.getElementById('progWrap').style.display = 'block';
+  window.scrollTo({top:0});
+  render();
+}
+
+function go(n){ S.step=n; render(); }
+function back(){ if(S.step>1){S.step--; render();} }
+
+function render(){
+  const pct = Math.round((S.step/TOTAL_STEPS)*100);
+  document.getElementById('progFill').style.width = pct+'%';
+  document.getElementById('progCur').textContent  = S.step;
+  const c = document.getElementById('content');
+  c.style.animation='none'; c.offsetHeight; c.style.animation='';
+  c.innerHTML = STEPS[S.step]();
+  window.scrollTo({top:0,behavior:'smooth'});
+  afterRender();
+}
+
+// ══════════════════════════════════════════
+//  STEP 1 — DEBT RANGE
+// ══════════════════════════════════════════
+
+
+
+// ── S1: How much do you owe ──────────────────────
+function s1(){
+  const opts=[
+    {val:'under5',   label:'Under $5,000'},
+    {val:'s5to10',   label:'$5,000 – $10,000'},
+    {val:'s10to25',  label:'$10,000 – $25,000'},
+    {val:'s25to50',  label:'$25,000 – $50,000'},
+    {val:'s50to100', label:'$50,000 – $100,000'},
+    {val:'s100plus', label:'$100,000+'},
+  ];
+  return `
+    <h1 class="hed">How much do you currently owe the IRS?</h1>
+    <div class="choices">
+      ${opts.map(o=>`
+        <div class="choice${S.debtRange===o.val?' sel':''}" onclick="tapGo('debtRange','${o.val}',this,2)">
+          <div class="c-radio"></div>
+          <div class="c-text"><strong>${o.label}</strong></div>
+        </div>`).join('')}
+    </div>
+  `;
+}
+
+// ── S2: Federal / State / Both ───────────────────
+function s2(){
+  const opts=[
+    {val:'federal', label:'Federal Taxes'},
+    {val:'state',   label:'State Taxes'},
+    {val:'both',    label:'Federal & State'},
+    {val:'unsure',  label:"I'm Not Sure"},
+  ];
+  return `
+    <h1 class="hed">Do you owe Federal taxes, State taxes, or both?</h1>
+    <div class="choices">
+      ${opts.map(o=>`
+        <div class="choice${S.debtType===o.val?' sel':''}" onclick="tapGo('debtType','${o.val}',this,3)">
+          <div class="c-radio"></div>
+          <div class="c-text"><strong>${o.label}</strong></div>
+        </div>`).join('')}
+    </div>
+    <button class="back-btn" onclick="go(1)">← Back</button>
+  `;
+}
+
+// ── S3: IRS Notices ──────────────────────────────
+function s3(){
+  const opts=[
+    {val:'none',        label:'No Notice Yet'},
+    {val:'cp14',        label:'Balance Due Notice (CP14 / CP501)'},
+    {val:'levy',        label:'Bank Levy'},
+    {val:'garnishment', label:'Wage Garnishment'},
+    {val:'lien',        label:'Federal Tax Lien'},
+    {val:'unsure',      label:"I'm Not Sure"},
+  ];
+  const urgent=S.irsNotice==='levy'||S.irsNotice==='garnishment';
+  return `
+    <h1 class="hed">Have you received any IRS notices?</h1>
+    <div class="choices">
+      ${opts.map(o=>`
+        <div class="choice${S.irsNotice===o.val?' sel':''}" onclick="pickNotice('${o.val}',this)">
+          <div class="c-radio"></div>
+          <div class="c-text"><strong>${o.label}</strong></div>
+        </div>`).join('')}
+    </div>
+    ${urgent?`<div class="notice warn">⚠️ <span><strong>This requires immediate action.</strong> Our team can issue an emergency hold on IRS collection activity within 24–48 hours of filing.</span></div><button class="cta dark" onclick="go(4)" style="margin-top:20px">Continue</button>`:''}
+    <button class="back-btn" onclick="go(2)">← Back</button>
+  `;
+}
+
+// ── S4: Situation ────────────────────────────────
+function s4(){
+  const opts=[
+    {val:'back_taxes', label:'I owe back taxes'},
+    {val:'unfiled',    label:"I haven't filed my taxes"},
+    {val:'both',       label:'Both'},
+    {val:'unsure',     label:"I'm not sure"},
+  ];
+  return `
+    <h1 class="hed">What best describes your situation?</h1>
+    <div class="choices">
+      ${opts.map(o=>`
+        <div class="choice${S.taxSituation===o.val?' sel':''}" onclick="tapGo('taxSituation','${o.val}',this,5)">
+          <div class="c-radio"></div>
+          <div class="c-text"><strong>${o.label}</strong></div>
+        </div>`).join('')}
+    </div>
+    <button class="back-btn" onclick="go(3)">← Back</button>
+  `;
+}
+
+// ── S5: Which Tax Years ──────────────────────────
+function s5(){
+  const yr=new Date().getFullYear();
+  const years=[];
+  for(let y=yr;y>=yr-10;y--) years.push(String(y));
+  return `
+    <h1 class="hed">Which tax years do you owe for?</h1>
+    <p class="sub">Select all that apply — include years with unpaid balances or unfiled returns.</p>
+    <div class="choices" id="yearChoices">
+      ${years.map(y=>`
+        <div class="choice${S.yearsSelected.includes(y)?' sel':''}" onclick="toggleYear('${y}',this)">
+          <div class="c-radio"></div>
+          <div class="c-text"><strong>${y}</strong></div>
+        </div>`).join('')}
+    </div>
+    <button class="cta dark" onclick="if(!S.yearsSelected.length){alert('Select at least one year.');return;} go(6)" style="margin-top:20px">Continue</button>
+    <button class="back-btn" onclick="go(4)">← Back</button>
+  `;
+}
+
+// ── S6: Annual Income ────────────────────────────
+function s6(){
+  const opts=[
+    {val:'under30',   label:'Under $30,000'},
+    {val:'s30to50',   label:'$30,000 – $50,000'},
+    {val:'s50to75',   label:'$50,000 – $75,000'},
+    {val:'s75to100',  label:'$75,000 – $100,000'},
+    {val:'s100to150', label:'$100,000 – $150,000'},
+    {val:'s150plus',  label:'$150,000+'},
+  ];
+  return `
+    <h1 class="hed">What's your approximate annual income?</h1>
+    <div class="choices">
+      ${opts.map(o=>`
+        <div class="choice${S.income===o.val?' sel':''}" onclick="tapGo('income','${o.val}',this,7)">
+          <div class="c-radio"></div>
+          <div class="c-text"><strong>${o.label}</strong></div>
+        </div>`).join('')}
+    </div>
+    <div class="notice info">💡 The IRS uses your income to calculate the minimum they can legally require you to pay — your <strong>Reasonable Collection Potential (RCP)</strong>.</div>
+    <button class="back-btn" onclick="go(5)">← Back</button>
+  `;
+}
+
+// ── S7: Expenses & Assets ────────────────────────
+function s7(){
+  const expOpts=[
+    {val:'under2',label:'Under $2,000/mo'},{val:'s2to3',label:'$2,000 – $3,000/mo'},
+    {val:'s3to5',label:'$3,000 – $5,000/mo'},{val:'s5plus',label:'$5,000+/mo'}
+  ];
+  const assetOpts=[
+    {val:'none',label:'None'},{val:'under25',label:'Under $25,000'},
+    {val:'s25to100',label:'$25,000 – $100,000'},{val:'s100plus',label:'$100,000+'}
+  ];
+  const eqOpts=[
+    {val:'none',label:'None'},{val:'under50',label:'Under $50,000'},
+    {val:'s50to150',label:'$50,000 – $150,000'},{val:'s150plus',label:'$150,000+'}
+  ];
+  const mkGroup=(opts,key,label)=>`
+    <p class="group-label">${label}</p>
+    <div class="choices gbtn-group" style="margin-bottom:20px">
+      ${opts.map(o=>`
+        <div class="choice${S[key]===o.val?' sel':''}" onclick="selGroup('${key}','${o.val}',this)">
+          <div class="c-radio"></div>
+          <div class="c-text"><strong>${o.label}</strong></div>
+        </div>`).join('')}
+    </div>`;
+  return `
+    <h1 class="hed">A few more financial details.</h1>
+    <p class="sub">These help us calculate your exact IRS settlement range.</p>
+    ${mkGroup(expOpts,'expenses','Monthly Living Expenses')}
+    ${mkGroup(assetOpts,'assets','Total Savings & Investments')}
+    ${mkGroup(eqOpts,'equity','Home / Vehicle Equity')}
+    <button class="cta teal" onclick="if(!S.expenses||!S.assets||!S.equity){alert('Please answer all three sections.');return;} go(8)">
+      Run My Analysis →
+    </button>
+    <button class="back-btn" onclick="go(6)">← Back</button>
+  `;
+}
+
+
+
+function s8(){
+  return `
+    <div class="eyebrow"><div class="eyebrow-dot"></div>Analysis Running</div>
+    <h1 class="hed">Calculating your IRS settlement range…</h1>
+    <p class="sub">Reviewing your profile against current IRS Collection Financial Standards and all available relief programs.</p>
+    <div class="alist" id="alist">
+      <div class="aitem" id="ai1"><div class="aicon">🏛️</div>Checking IRS database eligibility</div>
+      <div class="aitem" id="ai2"><div class="aicon">📊</div>Calculating your Reasonable Collection Potential</div>
+      <div class="aitem" id="ai3"><div class="aicon">🤝</div>Evaluating Offer in Compromise qualification</div>
+      <div class="aitem" id="ai4"><div class="aicon">🛡️</div>Reviewing penalty abatement opportunities</div>
+      <div class="aitem" id="ai5"><div class="aicon">✅</div>Matching you to the best resolution program</div>
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════════
+//  STEP 7 — COST OF WAITING
+// ══════════════════════════════════════════
+
+
+function s9(){
+  const d=debt(), da=daily();
+  const m3=da*90, m6=da*180, m12=da*365;
+  return `
+    <div class="eyebrow"><div class="eyebrow-dot"></div>The Real Cost</div>
+    <h1 class="hed">What waiting is <em>already</em> costing you.</h1>
+    <p class="sub">The IRS charges 0.5% per month in failure-to-pay penalties, plus compounding daily interest. Your balance is growing right now.</p>
+    <div class="cow-hero">
+      <div class="hbox-lbl">Accruing daily on your ${fmt(d)} balance</div>
+      <div class="cow-num" id="cowNum">${fmt(da)}</div>
+      <div class="cow-lbl">per day in penalties & interest</div>
+    </div>
+    <table class="cow-table">
+      <thead><tr><th>If you wait</th><th>Penalties added</th><th style="text-align:right">New balance</th></tr></thead>
+      <tbody>
+        <tr><td>3 months</td><td style="color:var(--gold);font-weight:600">+${fmt(m3)}</td><td class="amt">${fmt(d+m3)}</td></tr>
+        <tr><td>6 months</td><td style="color:var(--red);font-weight:600">+${fmt(m6)}</td><td class="amt">${fmt(d+m6)}</td></tr>
+        <tr><td>12 months</td><td style="color:#991B1B;font-weight:600">+${fmt(m12)}</td><td class="amt" style="color:#991B1B">${fmt(d+m12)}</td></tr>
+      </tbody>
+    </table>
+    <div class="notice warn">⚠️ Once a federal tax lien is filed, your credit score drops and the IRS can seize assets without additional warning.</div>
+    <button class="cta teal" onclick="go(10)">
+      Show Me My Savings
+      <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <button class="back-btn" onclick="back()">← Back</button>
+  `;
+}
+
+// ══════════════════════════════════════════
+//  STEP 8 — SAVINGS + CONTACT + PAYMENT
+// ══════════════════════════════════════════
+
+
+function s10(){
+  const d=debt(), o=oic(), s=savings(), sp=pct(s,d);
+  const progs=[];
+  if(o<d*.9) progs.push('Offer in Compromise');
+  if(rcp()<300) progs.push('Currently Not Collectible');
+  progs.push('Penalty Abatement');
+  if(S.yearsOwed!=='1') progs.push('Installment Agreement');
+  progs.push('IRS Fresh Start Program');
+
+  return `
+    <div class="eyebrow"><div class="eyebrow-dot"></div>Your Results</div>
+    <h1 class="hed">You may be able to settle for <em>${fmt(o)}.</em></h1>
+    <p class="sub">Based on your profile and IRS guidelines, here is your personalized settlement analysis.</p>
+
+    <div class="sav-hero">
+      <div class="sav-lbl">Estimated Total Savings</div>
+      <div class="sav-amount">${fmt(s)}</div>
+      <div class="sav-sub">Settle <strong>${fmt(d)}</strong> for as little as <strong>${fmt(o)}</strong> — a ${sp}% reduction</div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat"><div class="stat-val red">${fmt(d)}</div><div class="stat-lbl">You Owe</div></div>
+      <div class="stat"><div class="stat-val">${fmt(o)}</div><div class="stat-lbl">You Pay</div></div>
+      <div class="stat"><div class="stat-val green">${fmt(s)}</div><div class="stat-lbl">You Save</div></div>
+    </div>
+
+    <div class="sec-lbl" style="margin-bottom:10px">Programs You May Qualify For</div>
+    <div class="prog-pills" style="margin-bottom:24px">${progs.map(p=>`<span class="prog-pill">${p}</span>`).join('')}</div>
+
+    <div class="notice info">💡 Estimates follow IRS Collection Financial Standards. Your enrolled agent will confirm exact qualification during your onboarding call.</div>
+
+    <div class="div"></div>
+
+    <p style="font-family: 'Outfit', sans-serif;font-size:20px;font-weight:600;color:var(--navy);margin-bottom:6px;">Submit your case for <span style="color:var(--teal)">$99</span></p>
+    <p class="sub" style="margin-bottom:20px">Activate your dedicated 4-person team: Case Manager, Enrolled Agent, Negotiation Officer & Tax Specialist.</p>
+
+    <div class="team-list">
+      <div class="tmem"><div class="tavatar">👔</div><div><div class="trole">Case Manager</div><div class="ttitle">Your Direct Point of Contact</div><div class="tdesc">Manages your case end-to-end. Available by phone and email.</div></div></div>
+      <div class="tmem"><div class="tavatar">🏛️</div><div><div class="trole">Enrolled Agent</div><div class="ttitle">IRS-Licensed Practitioner</div><div class="tdesc">Federally licensed to represent you before the IRS at every level.</div></div></div>
+      <div class="tmem"><div class="tavatar">⚖️</div><div><div class="trole">Negotiation Officer</div><div class="ttitle">Settlement Specialist</div><div class="tdesc">Handles all IRS communication, OIC submissions, and appeals.</div></div></div>
+      <div class="tmem"><div class="tavatar">📋</div><div><div class="trole">Tax Specialist</div><div class="ttitle">Compliance Expert</div><div class="tdesc">Handles back taxes, amended returns, and IRS compliance.</div></div></div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="pay-sum">
+      <div class="pay-row"><span class="pk">Tax Debt Owed</span><span class="pv red">${fmt(d)}</span></div>
+      <div class="pay-row"><span class="pk">Estimated Settlement</span><span class="pv">${fmt(o)}</span></div>
+      <div class="pay-row"><span class="pk">Estimated Savings</span><span class="pv green">${fmt(s)}</span></div>
+      <div class="pay-row"><span class="pk">Case Activation Fee</span><span class="pv">$99.00</span></div>
+      <div class="pay-row"><span class="pk">Total Due Today</span><span class="pv">$99.00</span></div>
+    </div>
+
+    <div class="guarantee">
+      <div class="gicon">🛡️</div>
+      <div class="gtext">
+        <h5>30-Day Money-Back Guarantee</h5>
+        <p>If our team determines you don't qualify for any IRS relief program within 30 days, we'll refund your $99 in full — no questions asked.</p>
+      </div>
+    </div>
+
+    <p class="sec-lbl" style="margin-bottom:12px">Your Information</p>
+    <div class="fields" id="infoFields">
+      <div class="field-row">
+        <div class="field"><label>First Name</label><input id="fn" placeholder="John" value="${S.firstName}"></div>
+        <div class="field"><label>Last Name</label><input id="ln" placeholder="Smith" value="${S.lastName}"></div>
+      </div>
+      <div class="field"><label>Email Address</label><input id="em" type="email" placeholder="john@email.com" value="${S.email}"></div>
+      <div class="field"><label>Phone Number</label><input id="ph" type="tel" placeholder="(555) 000-0000" value="${S.phone}"></div>
+    </div>
+
+    <p class="sec-lbl" style="margin-bottom:12px">Payment</p>
+    <div class="fields" id="cardFields">
+      <div class="field"><label>Card Number</label><input id="ccnum" placeholder="1234 5678 9012 3456" maxlength="19" oninput="fmtCard(this)"></div>
+      <div class="field-row">
+        <div class="field"><label>Expiry</label><input placeholder="MM / YY" maxlength="7" oninput="fmtExp(this)"></div>
+        <div class="field"><label>CVV</label><input placeholder="•••" maxlength="4"></div>
+      </div>
+    </div>
+
+    <div class="processing" id="proc">
+      <div class="proc-ring"></div>
+      <div style="font-size:15px;font-weight:600;color:var(--navy)">Processing your secure payment…</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:6px">Please don't close this window</div>
+    </div>
+
+    <button class="cta teal" id="payBtn" onclick="processPayment()">
+      🔒 &nbsp;Pay $99 & Activate My Case
+    </button>
+
+    <div class="trust-row" style="justify-content:center;margin-top:16px">
+      <div class="titem"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>256-bit SSL</div>
+      <div class="titem"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>PCI Compliant</div>
+      <div class="titem"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M3 10h18M3 14h18"/></svg>Visa / MC / Amex</div>
+    </div>
+
+    <button class="back-btn" style="margin-top:8px" onclick="back()">← Back</button>
+  `;
+}
+
+// ══════════════════════════════════════════
+//  SUCCESS (step 9)
+// ══════════════════════════════════════════
+
+
+function s11(){
+  const d=debt(), o=oic(), s=savings();
+  return `
+    <div style="text-align:center">
+      <div class="success-icon">✓</div>
+      <div class="eyebrow" style="justify-content:center"><div class="eyebrow-dot"></div>Case Submitted</div>
+      <h1 class="hed" style="text-align:center">You're on your way to <em>tax freedom.</em></h1>
+      <p class="sub" style="text-align:center;margin-bottom:0">Your payment was received and your case is officially open. Welcome to SympleTax${S.firstName?', '+S.firstName:''}.</p>
+      <div class="case-box">
+        <div class="case-box-lbl">Your Case Number</div>
+        <div class="case-box-num">${S.caseNum}</div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:28px">Confirmation sent to <strong>${S.email}</strong></p>
+    </div>
+    <div class="hbox" style="text-align:center;margin-bottom:28px">
+      <div class="hbox-lbl">Estimated Outcome</div>
+      <div class="hbox-val green">${fmt(s)}</div>
+      <div class="hbox-desc">Settling ${fmt(d)} for approximately ${fmt(o)}</div>
+    </div>
+    <div class="nsteps">
+      <div class="ns"><div class="nsnum">1</div><div><div class="nstitle">Check your email</div><div class="nsdesc">Welcome email with case details, portal login, and your Case Manager's direct line.</div></div></div>
+      <div class="ns"><div class="nsnum">2</div><div><div class="nstitle">Onboarding call — within 24 hours</div><div class="nsdesc">Your Case Manager will call ${S.phone||'you'} to introduce your team and outline next steps.</div></div></div>
+      <div class="ns"><div class="nsnum">3</div><div><div class="nstitle">Upload your documents</div><div class="nsdesc">Your secure SympleTax portal lets you upload IRS notices and tax returns from any device.</div></div></div>
+      <div class="ns"><div class="nsnum">4</div><div><div class="nstitle">Your team gets to work</div><div class="nsdesc">We pull IRS transcripts, confirm your resolution strategy, and begin negotiations.</div></div></div>
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════════
+//  STEP MAP
+// ══════════════════════════════════════════
+const STEPS = {1:s1,2:s2,3:s3,4:s4,5:s5,6:s6,7:s7,8:s8,9:s9,10:s10,11:s11};
+
+// ══════════════════════════════════════════
+//  HELPERS
+// ══════════════════════════════════════════
+
+
+function sel(key,val,el,qSelector){
+  S[key]=val;
+  document.querySelectorAll(qSelector+' .choice').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function selBtn(key,val,el){
+  S[key]=val;
+  el.parentElement.querySelectorAll('.gbtn').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function rerender(){ render(); }
+function fmtCard(el){ let v=el.value.replace(/\D/g,'').substring(0,16); el.value=v.replace(/(.{4})/g,'$1 ').trim(); }
+function fmtExp(el){ let v=el.value.replace(/\D/g,'').substring(0,4); if(v.length>=2) v=v.substring(0,2)+' / '+v.substring(2); el.value=v; }
+
+function processPayment(){
+  S.firstName = document.getElementById('fn')?.value.trim()||'';
+  S.lastName  = document.getElementById('ln')?.value.trim()||'';
+  S.email     = document.getElementById('em')?.value.trim()||'';
+  S.phone     = document.getElementById('ph')?.value.trim()||'';
+  const num   = document.getElementById('ccnum')?.value.replace(/\s/g,'')||'';
+  if(!S.email||!S.phone){alert('Please enter your email and phone number.');return;}
+  if(num.length<15){alert('Please enter a valid card number.');return;}
+  document.getElementById('infoFields').style.display='none';
+  document.getElementById('cardFields').style.display='none';
+  document.getElementById('payBtn').style.display='none';
+  document.querySelector('.back-btn').style.display='none';
+  document.getElementById('proc').style.display='block';
+  S.caseNum='ST-'+new Date().getFullYear()+'-'+String(Math.floor(Math.random()*9000)+1000);
+  setTimeout(()=>{ S.step=11; render(); }, 3000);
+}
+
+// ══════════════════════════════════════════
+//  AFTER RENDER
+// ══════════════════════════════════════════
+function afterRender(){
+  if(S.step===6) runAnalysis();
+  if(S.step===7) startTicker();
+}
+
+function runAnalysis(){
+  const ids=['ai1','ai2','ai3','ai4','ai5'];
+  let i=0;
+  (function tick(){
+    if(i>0){
+      const p=document.getElementById(ids[i-1]);
+      if(p){p.classList.remove('active');p.classList.add('done');p.querySelector('.aicon').textContent='✓';}
+    }
+    if(i<ids.length){
+      const c=document.getElementById(ids[i]);
+      if(c) c.classList.add('active');
+      i++; setTimeout(tick,950);
+    } else {
+      setTimeout(()=>go(9),500);
+    }
+  })();
+}
+
+function startTicker(){
+  const da=daily(); let shown=da;
+  const el=document.getElementById('cowNum');
+  if(!el) return;
+  const iv=setInterval(()=>{
+    shown+=da/120;
+    const t=document.getElementById('cowNum');
+    if(!t){clearInterval(iv);return;}
+    t.textContent='$'+shown.toFixed(2);
+  },100);
+}
+
+
+// New helpers for v6
+function tapGo(key,val,el,next){
+  sel(key,val,el,'.choices');
+  setTimeout(()=>go(next),300);
+}
+
+function pickNotice(val,el){
+  sel('irsNotice',val,el,'.choices');
+  const urgent=val==='levy'||val==='garnishment';
+  if(urgent){ render(); }
+  else{ setTimeout(()=>go(4),300); }
+}
+
+function toggleYear(yr,el){
+  const i=S.yearsSelected.indexOf(yr);
+  if(i===-1){ S.yearsSelected.push(yr); el.classList.add('sel'); }
+  else{ S.yearsSelected.splice(i,1); el.classList.remove('sel'); }
+}
+
+function selGroup(key,val,el){
+  S[key]=val;
+  el.closest('.choices').querySelectorAll('.choice').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+}
+</script>
+</html>
