@@ -1,0 +1,13 @@
+{
+  "build": {
+    "command": "",
+    "outputDirectory": "."
+  },
+  "rewrites": [
+    { "source": "/", "destination": "/SympleTax_Portal_v6 (1).html" },
+    { "source": "/hero-variants", "destination": "/hero_variants.html" },
+    { "source": "/hero-variants-v2", "destination": "/hero_variants_v2.html" },
+    { "source": "/form", "destination": "/SympleTax_Portal_v6 (1).html" },
+    { "source": "/api/:path*", "destination": "/backend/server.js" }
+  ]
+}
