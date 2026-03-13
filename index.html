@@ -1307,8 +1307,8 @@ function s11(){
         <div class="plan-radio"></div>
       </div>
       <div class="plan-card${isMonthly?' sel':''}" onclick="selectPlan('monthly')">
-        <div class="plan-card-price">$79</div>
-        <div class="plan-card-label">per month &times; 2 months</div>
+        <div class="plan-card-price">$79/mo</div>
+        <div class="plan-card-label">2 payments. Split 2 weeks apart.</div>
         <div class="plan-radio"></div>
       </div>
     </div>
@@ -1326,7 +1326,7 @@ function s11(){
       <div class="pay-row"><span class="pk">Tax Debt Owed</span><span class="pv red">${fmt(d)}</span></div>
       <div class="pay-row"><span class="pk">Estimated Settlement</span><span class="pv">${fmt(o)}</span></div>
       <div class="pay-row"><span class="pk">Estimated Savings</span><span class="pv green">${fmt(s)}</span></div>
-      <div class="pay-row"><span class="pk">Case Activation Fee</span><span class="pv" id="feeDisplay">${isFull?'$99.00':'$79.00/mo &times; 2'}</span></div>
+      <div class="pay-row"><span class="pk">Case Activation Fee</span><span class="pv" id="feeDisplay">${isFull?'$99.00':'$79/mo &times; 2'}</span></div>
       <div class="pay-row"><span class="pk">Total Due Today</span><span class="pv" id="totalDisplay">${todayLabel}</span></div>
     </div>
 

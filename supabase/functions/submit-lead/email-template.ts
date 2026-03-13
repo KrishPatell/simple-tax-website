@@ -168,7 +168,7 @@ export function buildLeadEmailHtml(data: LeadEmailData, recipientType: 'user' | 
 
         <table style="width:100%;border-collapse:collapse;">
           <tr><td colspan="2" style="padding:12px 0 8px;border-bottom:2px solid #00B4B0;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0F1F45;">Payment</td></tr>
-          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;width:140px;">Plan</td><td style="padding:10px 0;font-size:14px;font-weight:600;">${data.payment_plan === 'monthly' ? '2 Payments ($79 × 2)' : 'Pay in Full ($99)'}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;width:140px;">Plan</td><td style="padding:10px 0;font-size:14px;font-weight:600;">${data.payment_plan === 'monthly' ? '2 Payments ($79/mo × 2)' : 'Pay in Full ($99)'}</td></tr>
         </table>
 
         ${recipientType === 'user' ? `

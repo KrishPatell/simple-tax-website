@@ -250,11 +250,11 @@ body {
   box-shadow: 0 2px 20px rgba(0,0,0,.04);
 }
 .ceo-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); margin-bottom: 20px; }
-.ceo-quote-mark { font-size: 72px; line-height: 0.8; color: #E8EDF5; font-family: Georgia, serif; margin-bottom: 16px; }
+.ceo-quote-mark { font-size: 72px; line-height: 0.8; color: #E8EDF5; font-family: Georgia, serif; margin-bottom: 8px; }
 .ceo-quote {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 17px; font-weight: 500;
-  color: #0A1629; line-height: 1.75; margin-bottom: 28px;
+  color: #0A1629; line-height: 1.75; margin: 0 0 28px 0;
 }
 .ceo-sig-row { display: flex; align-items: center; gap: 14px; }
 .ceo-avatar {
@@ -2722,14 +2722,14 @@ function s15(){
         <div class="plan-radio"></div>
       </div>
       <div class="plan-card${isMonthly?' sel':''}" onclick="selectPlan('monthly')">
-        <div class="plan-card-price">$79 &times; 2</div>
-        <div class="plan-card-label">Total: $158. Split 2 weeks apart.</div>
+        <div class="plan-card-price">$79/mo &times; 2</div>
+        <div class="plan-card-label">2 payments of $79/mo. Split 2 weeks apart.</div>
         <div class="plan-radio"></div>
       </div>
     </div>
 
     <div class="pay-sum" style="margin-bottom:20px">
-      <div class="pay-row"><span class="pk">Case Activation Fee</span><span class="pv" id="feeDisplay">${isFull?'$99.00':'$79.00/mo &times; 2'}</span></div>
+      <div class="pay-row"><span class="pk">Case Activation Fee</span><span class="pv" id="feeDisplay">${isFull?'$99.00':'$79/mo &times; 2'}</span></div>
       <div class="pay-row"><span class="pk">Total Due Today</span><span class="pv" id="totalDisplay">${todayLabel}</span></div>
     </div>
 
