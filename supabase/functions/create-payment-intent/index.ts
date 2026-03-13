@@ -1,5 +1,5 @@
 // Supabase Edge Function: create-payment-intent
-// Creates Stripe PaymentIntent via REST API (no Stripe SDK - avoids Deno.runMicrotasks error)
+// Creates Stripe PaymentIntent via REST API (Stripe Node SDK fails in Deno Edge Runtime)
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',

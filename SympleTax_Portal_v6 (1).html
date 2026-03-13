@@ -476,6 +476,72 @@ body {
 /* SECTION LABEL */
 .sec-lbl { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 12px; }
 
+/* IRS BALANCE CARD + WHERE YOU FALL */
+.irs-balance-card {
+  background: var(--off); border: 1px solid var(--line); border-radius: 14px;
+  padding: 20px 24px; margin-bottom: 20px;
+}
+.irs-balance-card label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; display: block; }
+.where-you-fall {
+  background: var(--off); border: 1px solid var(--line); border-radius: 14px;
+  padding: 20px 24px; margin-bottom: 24px;
+}
+.where-you-fall-lbl { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin-bottom: 16px; display: block; }
+.where-you-fall-bar {
+  height: 12px; background: #E0E7FF; border-radius: 6px; position: relative; margin-bottom: 12px;
+  overflow: visible;
+}
+.where-you-fall-fill {
+  height: 100%; background: linear-gradient(90deg, var(--teal) 0%, var(--teal2) 100%); border-radius: 6px;
+  transition: width .3s ease;
+}
+.where-you-fall-dot {
+  position: absolute; top: 50%; transform: translate(-50%, -50%);
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--navy); border: 3px solid white; box-shadow: 0 2px 8px rgba(15,31,69,.25);
+  transition: left .3s ease; z-index: 2;
+}
+.where-you-fall-labels {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 16px;
+}
+.where-you-fall-mid { font-size: 12px; font-weight: 700; color: var(--teal2); }
+.where-you-fall-summary { font-size: 14px; color: var(--body); line-height: 1.6; }
+.where-you-fall-summary strong { color: var(--navy); font-weight: 700; }
+
+/* REAL ESTATE STEP */
+.realestate-notice {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: var(--off); border: 1px solid var(--line); border-radius: 12px;
+  padding: 14px 18px; margin-bottom: 20px;
+  font-size: 13px; color: var(--body); line-height: 1.6;
+}
+.realestate-notice svg { flex-shrink: 0; margin-top: 2px; }
+.property-details-card {
+  background: var(--white); border: 1px solid var(--line); border-radius: 14px;
+  padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(15,31,69,.04);
+}
+.property-details-title {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700;
+  color: var(--navy); margin-bottom: 20px;
+}
+.property-details-title svg { color: var(--teal); flex-shrink: 0; }
+
+/* MONTHLY INCOME STEP */
+.income-summary-box {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: var(--off); border: 1px solid var(--line); border-radius: 14px;
+  padding: 20px 24px; margin-top: 24px;
+  font-size: 14px; color: var(--body); line-height: 1.6;
+}
+.income-summary-box .income-summary-icon {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(0,180,176,.12); color: var(--teal);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.income-summary-box strong { color: var(--navy); font-weight: 700; }
+
 /* DEBT AMOUNT INPUT */
 .debt-input-wrap {
   margin-bottom: 28px;
@@ -849,13 +915,13 @@ body {
 .titem svg { color:var(--teal); }
 
 /* PAYMENT CARD ICONS */
-.payment-icons { display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
-.payment-icons-label { font-size:12px; color:var(--muted); font-weight:600; margin-right:4px; }
-.payment-icon { height:24px; display:flex; align-items:center; }
+.payment-icons { display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap; min-height:28px; }
+.payment-icons-label { font-size:13px; color:var(--body); font-weight:600; margin-right:8px; }
+.payment-icon { height:24px; min-width:40px; display:flex; align-items:center; }
 .payment-icon svg { height:100%; width:auto; }
-.payment-icons-inline { display:flex; align-items:center; gap:6px; }
-.payment-icon-sm { width:32px; height:20px; object-fit:contain; display:inline-block; }
-.payment-icon img { height:100%; width:auto; object-fit:contain; }
+.payment-icons-inline { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.payment-icon-sm { width:32px; height:20px; min-width:32px; object-fit:contain; display:inline-block; }
+.payment-icon img { height:100%; width:auto; min-width:32px; object-fit:contain; }
 
 /* GROUP LABEL */
 .group-label {
@@ -1432,6 +1498,15 @@ const US_STATES = ["Alabama","Alaska","Arizona","Arkansas","California","Colorad
 const COUNTIES_BY_STATE = {"Alabama":["Autauga","Baldwin","Barbour","Bibb","Blount","Bullock","Butler","Calhoun","Chambers","Cherokee","Chilton","Choctaw","Clarke","Clay","Cleburne","Coffee","Colbert","Conecuh","Coosa","Covington","Crenshaw","Cullman","Dale","Dallas","DeKalb","Elmore","Escambia","Etowah","Fayette","Franklin","Geneva","Greene","Hale","Henry","Houston","Jackson","Jefferson","Lamar","Lauderdale","Lawrence","Lee","Limestone","Lowndes","Macon","Madison","Marengo","Marion","Marshall","Mobile","Monroe","Montgomery","Morgan","Perry","Pickens","Pike","Randolph","Russell","St. Clair","Shelby","Sumter","Talladega","Tallapoosa","Tuscaloosa","Walker","Washington","Wilcox","Winston"],"Alaska":["Aleutians East","Aleutians West","Anchorage","Bethel","Bristol Bay","Denali","Dillingham","Fairbanks North Star","Haines","Juneau","Kenai Peninsula","Ketchikan Gateway","Kodiak Island","Lake and Peninsula","Matanuska-Susitna","Nome","North Slope","Northwest Arctic","Petersburg","Prince of Wales-Hyder","Sitka","Skagway","Southeast Fairbanks","Valdez-Cordova","Wade Hampton","Wrangell","Yakutat","Yukon-Koyukuk"],"Arizona":["Apache","Cochise","Coconino","Gila","Graham","Greenlee","La Paz","Maricopa","Mohave","Navajo","Pima","Pinal","Santa Cruz","Yavapai","Yuma"],"Arkansas":["Arkansas","Ashley","Baxter","Benton","Boone","Bradley","Calhoun","Carroll","Chicot","Clark","Clay","Cleburne","Cleveland","Columbia","Conway","Craighead","Crawford","Crittenden","Cross","Dallas","Desha","Drew","Faulkner","Franklin","Fulton","Garland","Grant","Greene","Hempstead","Hot Spring","Howard","Independence","Izard","Jackson","Jefferson","Johnson","Lafayette","Lawrence","Lee","Lincoln","Little River","Logan","Lonoke","Madison","Marion","Miller","Mississippi","Monroe","Montgomery","Nevada","Newton","Ouachita","Perry","Phillips","Pike","Poinsett","Polk","Pope","Prairie","Pulaski","Randolph","St. Francis","Saline","Scott","Searcy","Sebastian","Sevier","Sharp","Stone","Union","Van Buren","Washington","White","Woodruff","Yell"],"California":["Alameda","Alpine","Amador","Butte","Calaveras","Colusa","Contra Costa","Del Norte","El Dorado","Fresno","Glenn","Humboldt","Imperial","Inyo","Kern","Kings","Lake","Lassen","Los Angeles","Madera","Marin","Mariposa","Mendocino","Merced","Modoc","Mono","Monterey","Napa","Nevada","Orange","Placer","Plumas","Riverside","Sacramento","San Benito","San Bernardino","San Diego","San Francisco","San Joaquin","San Luis Obispo","San Mateo","Santa Barbara","Santa Clara","Santa Cruz","Shasta","Sierra","Siskiyou","Solano","Sonoma","Stanislaus","Sutter","Tehama","Trinity","Tulare","Tuolumne","Ventura","Yolo","Yuba"],"Colorado":["Adams","Alamosa","Arapahoe","Archuleta","Baca","Bent","Boulder","Broomfield","Chaffee","Cheyenne","Clear Creek","Conejos","Costilla","Crowley","Custer","Delta","Denver","Dolores","Douglas","Eagle","Elbert","El Paso","Fremont","Garfield","Gilpin","Grand","Gunnison","Hinsdale","Huerfano","Jackson","Jefferson","Kiowa","Kit Carson","Lake","La Plata","Larimer","Las Animas","Lincoln","Logan","Mesa","Mineral","Moffat","Montezuma","Montrose","Morgan","Otero","Ouray","Park","Phillips","Pitkin","Prowers","Pueblo","Rio Blanco","Rio Grande","Routt","Saguache","San Juan","San Miguel","Sedgwick","Summit","Teller","Washington","Weld","Yuma"],"Connecticut":["Fairfield","Hartford","Litchfield","Middlesex","New Haven","New London","Tolland","Windham"],"Delaware":["Kent","New Castle","Sussex"],"District of Columbia":["District of Columbia"],"Florida":["Alachua","Baker","Bay","Bradford","Brevard","Broward","Calhoun","Charlotte","Citrus","Clay","Collier","Columbia","DeSoto","Dixie","Duval","Escambia","Flagler","Franklin","Gadsden","Gilchrist","Glades","Gulf","Hamilton","Hardee","Hendry","Hernando","Highlands","Hillsborough","Holmes","Indian River","Jackson","Jefferson","Lafayette","Lake","Lee","Leon","Levy","Liberty","Madison","Manatee","Marion","Martin","Miami-Dade","Monroe","Nassau","Okaloosa","Okeechobee","Orange","Osceola","Palm Beach","Pasco","Pinellas","Polk","Putnam","St. Johns","St. Lucie","Santa Rosa","Sarasota","Seminole","Sumter","Suwannee","Taylor","Union","Volusia","Wakulla","Walton","Washington"],"Georgia":["Appling","Atkinson","Bacon","Baker","Baldwin","Banks","Barrow","Bartow","Ben Hill","Berrien","Bibb","Bleckley","Brantley","Brooks","Bryan","Bulloch","Burke","Butts","Calhoun","Camden","Candler","Carroll","Catoosa","Charlton","Chatham","Chattahoochee","Chattooga","Cherokee","Clarke","Clay","Clayton","Clinch","Cobb","Coffee","Colquitt","Columbia","Cook","Coweta","Crawford","Crisp","Dade","Dawson","Decatur","DeKalb","Dodge","Dooly","Dougherty","Douglas","Early","Echols","Effingham","Elbert","Emanuel","Evans","Fannin","Fayette","Floyd","Forsyth","Franklin","Fulton","Gilmer","Glascock","Glynn","Gordon","Grady","Greene","Gwinnett","Habersham","Hall","Hancock","Haralson","Harris","Hart","Heard","Henry","Houston","Irwin","Jackson","Jasper","Jeff Davis","Jefferson","Jenkins","Johnson","Jones","Lamar","Lanier","Laurens","Lee","Liberty","Lincoln","Long","Lowndes","Lumpkin","Macon","Madison","Marion","McDuffie","McIntosh","Meriwether","Miller","Mitchell","Monroe","Montgomery","Morgan","Murray","Muscogee","Newton","Oconee","Oglethorpe","Paulding","Peach","Pickens","Pierce","Pike","Polk","Pulaski","Putnam","Quitman","Rabun","Randolph","Richmond","Rockdale","Schley","Screven","Seminole","Spalding","Stephens","Stewart","Sumter","Talbot","Taliaferro","Tattnall","Taylor","Telfair","Terrell","Thomas","Tift","Toombs","Towns","Treutlen","Troup","Turner","Twiggs","Union","Upson","Walker","Walton","Ware","Warren","Washington","Wayne","Webster","Wheeler","White","Whitfield","Wilcox","Wilkes","Wilkinson","Worth"],"Hawaii":["Hawaii","Honolulu","Kauai","Maui"],"Idaho":["Ada","Adams","Bannock","Bear Lake","Benewah","Bingham","Blaine","Boise","Bonner","Bonneville","Boundary","Butte","Camas","Canyon","Caribou","Cassia","Clark","Clearwater","Custer","Elmore","Franklin","Fremont","Gem","Gooding","Idaho","Jefferson","Jerome","Kootenai","Latah","Lemhi","Lewis","Lincoln","Madison","Minidoka","Nez Perce","Oneida","Owyhee","Payette","Power","Shoshone","Teton","Twin Falls","Valley","Washington"],"Illinois":["Adams","Alexander","Bond","Boone","Brown","Bureau","Calhoun","Carroll","Cass","Champaign","Christian","Clark","Clay","Clinton","Coles","Cook","Crawford","Cumberland","DeKalb","De Witt","Douglas","DuPage","Edgar","Edwards","Effingham","Fayette","Ford","Franklin","Fulton","Gallatin","Greene","Grundy","Hamilton","Hancock","Hardin","Henderson","Henry","Iroquois","Jackson","Jasper","Jefferson","Jersey","Jo Daviess","Johnson","Kane","Kankakee","Kendall","Knox","Lake","LaSalle","Lawrence","Lee","Livingston","Logan","McDonough","McHenry","McLean","Macon","Macoupin","Madison","Marion","Marshall","Mason","Massac","Menard","Mercer","Monroe","Montgomery","Morgan","Moultrie","Ogle","Peoria","Perry","Piatt","Pike","Pope","Pulaski","Randolph","Richland","Rock Island","St. Clair","Saline","Sangamon","Schuyler","Scott","Shelby","Stark","Stephenson","Tazewell","Union","Vermilion","Wabash","Warren","Washington","Wayne","White","Whiteside","Will","Williamson","Winnebago","Woodford"],"Indiana":["Adams","Allen","Bartholomew","Benton","Blackford","Boone","Brown","Carroll","Cass","Clark","Clay","Clinton","Crawford","Daviess","Dearborn","Decatur","DeKalb","Delaware","Dubois","Elkhart","Fayette","Floyd","Fountain","Franklin","Fulton","Gibson","Grant","Greene","Hamilton","Hancock","Harrison","Hendricks","Henry","Howard","Huntington","Jackson","Jasper","Jay","Jefferson","Jennings","Johnson","Knox","Kosciusko","LaGrange","Lake","LaPorte","Lawrence","Madison","Marshall","Martin","Miami","Monroe","Montgomery","Morgan","Newton","Noble","Ohio","Orange","Owen","Parke","Perry","Pike","Porter","Posey","Pulaski","Putnam","Randolph","Ripley","Rush","St. Joseph","Scott","Shelby","Spencer","Starke","Steuben","Sullivan","Switzerland","Tippecanoe","Tipton","Union","Vanderburgh","Vermillion","Vigo","Wabash","Warren","Warrick","Washington","Wayne","Wells","White","Whitley"],"Iowa":["Adair","Adams","Allamakee","Appanoose","Audubon","Benton","Black Hawk","Boone","Bremer","Buchanan","Buena Vista","Butler","Calhoun","Carroll","Cass","Cedar","Cerro Gordo","Cherokee","Chickasaw","Clarke","Clay","Clayton","Clinton","Crawford","Dallas","Davis","Decatur","Delaware","Des Moines","Dickinson","Dubuque","Emmet","Fayette","Floyd","Franklin","Fremont","Greene","Grundy","Guthrie","Hamilton","Hancock","Hardin","Harrison","Henry","Howard","Humboldt","Ida","Iowa","Jackson","Jasper","Jefferson","Johnson","Jones","Keokuk","Kossuth","Lee","Linn","Louisa","Lucas","Lyon","Madison","Mahaska","Marion","Marshall","Mills","Mitchell","Monona","Monroe","Montgomery","Muscatine","O'Brien","Osceola","Page","Palo Alto","Plymouth","Pocahontas","Polk","Pottawattamie","Poweshiek","Ringgold","Sac","Scott","Shelby","Sioux","Story","Tama","Taylor","Union","Van Buren","Wapello","Warren","Washington","Wayne","Webster","Winnebago","Winneshiek","Woodbury","Worth","Wright"],"Kansas":["Allen","Anderson","Atchison","Barber","Barton","Bourbon","Brown","Butler","Chase","Chautauqua","Cherokee","Cheyenne","Clark","Clay","Cloud","Coffey","Comanche","Cowley","Crawford","Decatur","Dickinson","Doniphan","Douglas","Edwards","Elk","Ellis","Ellsworth","Finney","Ford","Franklin","Geary","Gove","Graham","Grant","Gray","Greeley","Greenwood","Hamilton","Harper","Harvey","Haskell","Hodgeman","Jackson","Jefferson","Jewell","Johnson","Kearny","Kingman","Kiowa","Labette","Lane","Leavenworth","Lincoln","Linn","Logan","Lyon","McPherson","Marion","Marshall","Meade","Miami","Mitchell","Montgomery","Morris","Morton","Nemaha","Neosho","Ness","Norton","Osage","Osborne","Ottawa","Pawnee","Phillips","Pottawatomie","Pratt","Rawlins","Reno","Republic","Rice","Riley","Rooks","Rush","Russell","Saline","Scott","Sedgwick","Seward","Shawnee","Sheridan","Sherman","Smith","Stafford","Stanton","Stevens","Sumner","Thomas","Trego","Wabaunsee","Wallace","Washington","Wichita","Wilson","Woodson","Wyandotte"],"Kentucky":["Adair","Allen","Anderson","Ballard","Barren","Bath","Bell","Boone","Bourbon","Boyd","Boyle","Bracken","Breathitt","Breckinridge","Bullitt","Butler","Caldwell","Calloway","Campbell","Carlisle","Carroll","Carter","Casey","Christian","Clark","Clay","Clinton","Crittenden","Cumberland","Daviess","Edmonson","Elliott","Estill","Fayette","Fleming","Floyd","Franklin","Fulton","Gallatin","Garrard","Grant","Graves","Grayson","Green","Greenup","Hancock","Hardin","Harlan","Harrison","Hart","Henderson","Henry","Hickman","Hopkins","Jackson","Jefferson","Jessamine","Johnson","Kenton","Knott","Knox","LaRue","Laurel","Lawrence","Lee","Leslie","Letcher","Lewis","Lincoln","Livingston","Logan","Lyon","Madison","Magoffin","Marion","Marshall","Martin","Mason","Meade","Menifee","Mercer","Metcalfe","Monroe","Montgomery","Morgan","Muhlenberg","Nelson","Nicholas","Ohio","Oldham","Owen","Owsley","Pendleton","Perry","Pike","Powell","Pulaski","Robertson","Rockcastle","Rowan","Russell","Scott","Shelby","Simpson","Spencer","Taylor","Todd","Trigg","Trimble","Union","Warren","Washington","Wayne","Webster","Whitley","Wolfe","Woodford"],"Louisiana":["Acadia","Allen","Ascension","Assumption","Avoyelles","Beauregard","Bienville","Bossier","Caddo","Calcasieu","Caldwell","Cameron","Catahoula","Claiborne","Concordia","De Soto","East Baton Rouge","East Carroll","East Feliciana","Evangeline","Franklin","Grant","Iberia","Iberville","Jackson","Jefferson","Jefferson Davis","Lafayette","Lafourche","LaSalle","Lincoln","Livingston","Madison","Morehouse","Natchitoches","Orleans","Ouachita","Plaquemines","Pointe Coupee","Rapides","Red River","Richland","Sabine","St. Bernard","St. Charles","St. Helena","St. James","St. John the Baptist","St. Landry","St. Martin","St. Mary","St. Tammany","Tangipahoa","Tensas","Terrebonne","Union","Vermilion","Vernon","Washington","Webster","West Baton Rouge","West Carroll","West Feliciana","Winn"],"Maine":["Androscoggin","Aroostook","Cumberland","Franklin","Hancock","Kennebec","Knox","Lincoln","Oxford","Penobscot","Piscataquis","Sagadahoc","Somerset","Waldo","Washington","York"],"Maryland":["Allegany","Anne Arundel","Baltimore","Calvert","Caroline","Carroll","Cecil","Charles","Dorchester","Frederick","Garrett","Harford","Howard","Kent","Montgomery","Prince George's","Queen Anne's","St. Mary's","Somerset","Talbot","Washington","Wicomico","Worcester"],"Massachusetts":["Barnstable","Berkshire","Bristol","Dukes","Essex","Franklin","Hampden","Hampshire","Middlesex","Nantucket","Norfolk","Plymouth","Suffolk","Worcester"],"Michigan":["Alcona","Alger","Allegan","Alpena","Antrim","Arenac","Baraga","Barry","Bay","Benzie","Berrien","Branch","Calhoun","Cass","Charlevoix","Cheboygan","Chippewa","Clare","Clinton","Crawford","Delta","Dickinson","Eaton","Emmet","Genesee","Gladwin","Gogebic","Grand Traverse","Gratiot","Hillsdale","Houghton","Huron","Ingham","Ionia","Iosco","Iron","Isabella","Jackson","Kalamazoo","Kalkaska","Kent","Keweenaw","Lake","Lapeer","Leelanau","Lenawee","Livingston","Luce","Mackinac","Macomb","Manistee","Marquette","Mason","Mecosta","Menominee","Midland","Missaukee","Monroe","Montcalm","Montmorency","Muskegon","Newaygo","Oakland","Oceana","Ogemaw","Ontonagon","Osceola","Oscoda","Otsego","Ottawa","Presque Isle","Roscommon","Saginaw","St. Clair","St. Joseph","Sanilac","Schoolcraft","Shiawassee","Tuscola","Van Buren","Washtenaw","Wayne","Wexford"],"Minnesota":["Aitkin","Anoka","Becker","Beltrami","Benton","Big Stone","Blue Earth","Brown","Carlton","Carver","Cass","Chippewa","Chisago","Clay","Clearwater","Cook","Cottonwood","Crow Wing","Dakota","Dodge","Douglas","Faribault","Fillmore","Freeborn","Goodhue","Grant","Hennepin","Houston","Hubbard","Isanti","Itasca","Jackson","Kanabec","Kandiyohi","Kittson","Koochiching","Lac qui Parle","Lake","Lake of the Woods","Le Sueur","Lincoln","Lyon","McLeod","Mahnomen","Marshall","Martin","Meeker","Mille Lacs","Morrison","Mower","Murray","Nicollet","Nobles","Norman","Olmsted","Otter Tail","Pennington","Pine","Pipestone","Polk","Pope","Ramsey","Red Lake","Redwood","Renville","Rice","Rock","Roseau","St. Louis","Scott","Sherburne","Sibley","Stearns","Steele","Stevens","Swift","Todd","Traverse","Wabasha","Wadena","Waseca","Washington","Watonwan","Wilkin","Winona","Wright","Yellow Medicine"],"Mississippi":["Adams","Alcorn","Amite","Attala","Benton","Bolivar","Calhoun","Carroll","Chickasaw","Choctaw","Claiborne","Clarke","Clay","Coahoma","Copiah","Covington","DeSoto","Forrest","Franklin","George","Greene","Grenada","Hancock","Harrison","Hinds","Holmes","Humphreys","Issaquena","Itawamba","Jackson","Jasper","Jefferson","Jefferson Davis","Jones","Kemper","Lafayette","Lamar","Lauderdale","Lawrence","Leake","Lee","Leflore","Lincoln","Lowndes","Madison","Marion","Marshall","Monroe","Montgomery","Neshoba","Newton","Noxubee","Oktibbeha","Panola","Pearl River","Perry","Pike","Pontotoc","Prentiss","Quitman","Rankin","Scott","Sharkey","Simpson","Smith","Stone","Sunflower","Tallahatchie","Tate","Tippah","Tishomingo","Tunica","Union","Walthall","Warren","Washington","Wayne","Webster","Wilkinson","Winston","Yalobusha","Yazoo"],"Missouri":["Adair","Andrew","Atchison","Audrain","Barry","Barton","Bates","Benton","Bollinger","Boone","Buchanan","Butler","Caldwell","Callaway","Camden","Cape Girardeau","Carroll","Carter","Cass","Cedar","Chariton","Christian","Clark","Clay","Clinton","Cole","Cooper","Crawford","Dade","Dallas","Daviess","DeKalb","Dent","Douglas","Dunklin","Franklin","Gasconade","Gentry","Greene","Grundy","Harrison","Henry","Hickory","Holt","Howard","Howell","Iron","Jackson","Jasper","Jefferson","Johnson","Knox","Laclede","Lafayette","Lawrence","Lewis","Lincoln","Linn","Livingston","McDonald","Macon","Madison","Maries","Marion","Mercer","Miller","Mississippi","Moniteau","Monroe","Montgomery","Morgan","New Madrid","Newton","Nodaway","Oregon","Osage","Ozark","Pemiscot","Perry","Pettis","Phelps","Pike","Platte","Polk","Pulaski","Putnam","Ralls","Randolph","Ray","Reynolds","Ripley","St. Charles","St. Clair","St. Francois","St. Louis","Ste. Genevieve","Saline","Schuyler","Scotland","Scott","Shannon","Shelby","Stoddard","Stone","Sullivan","Taney","Texas","Vernon","Warren","Washington","Wayne","Webster","Worth","Wright"],"Montana":["Beaverhead","Big Horn","Blaine","Broadwater","Carbon","Carter","Cascade","Chouteau","Custer","Daniels","Dawson","Deer Lodge","Fallon","Fergus","Flathead","Gallatin","Garfield","Glacier","Golden Valley","Granite","Hill","Jefferson","Judith Basin","Lake","Lewis and Clark","Liberty","Lincoln","McCone","Madison","Meagher","Mineral","Missoula","Musselshell","Park","Petroleum","Phillips","Pondera","Powder River","Powell","Prairie","Ravalli","Richland","Roosevelt","Rosebud","Sanders","Sheridan","Silver Bow","Stillwater","Sweet Grass","Teton","Toole","Treasure","Valley","Wheatland","Wibaux","Yellowstone"],"Nebraska":["Adams","Antelope","Arthur","Banner","Blaine","Boone","Box Butte","Boyd","Brown","Buffalo","Burt","Butler","Cass","Cedar","Chase","Cherry","Cheyenne","Clay","Colfax","Cuming","Custer","Dakota","Dawes","Dawson","Deuel","Dixon","Dodge","Douglas","Dundy","Fillmore","Franklin","Frontier","Furnas","Gage","Garden","Garfield","Gosper","Grant","Greeley","Hall","Hamilton","Harlan","Hayes","Hitchcock","Holt","Hooker","Howard","Jefferson","Johnson","Kearney","Keith","Keya Paha","Kimball","Knox","Lancaster","Lincoln","Logan","Loup","McPherson","Madison","Merrick","Morrill","Nance","Nemaha","Nuckolls","Otoe","Pawnee","Perkins","Phelps","Pierce","Platte","Polk","Red Willow","Richardson","Rock","Saline","Sarpy","Saunders","Scotts Bluff","Seward","Sheridan","Sherman","Sioux","Stanton","Thayer","Thomas","Thurston","Valley","Washington","Wayne","Webster","Wheeler","York"],"Nevada":["Carson City","Churchill","Clark","Douglas","Elko","Esmeralda","Eureka","Humboldt","Lander","Lincoln","Lyon","Mineral","Nye","Pershing","Storey","Washoe","White Pine"],"New Hampshire":["Belknap","Carroll","Cheshire","Coos","Grafton","Hillsborough","Merrimack","Rockingham","Strafford","Sullivan"],"New Jersey":["Atlantic","Bergen","Burlington","Camden","Cape May","Cumberland","Essex","Gloucester","Hudson","Hunterdon","Mercer","Middlesex","Monmouth","Morris","Ocean","Passaic","Salem","Somerset","Sussex","Union","Warren"],"New Mexico":["Bernalillo","Catron","Chaves","Cibola","Colfax","Curry","De Baca","Dona Ana","Eddy","Grant","Guadalupe","Harding","Hidalgo","Lea","Lincoln","Los Alamos","Luna","McKinley","Mora","Otero","Quay","Rio Arriba","Roosevelt","Sandoval","San Juan","San Miguel","Santa Fe","Sierra","Socorro","Taos","Torrance","Union","Valencia"],"New York":["Albany","Allegany","Bronx","Broome","Cattaraugus","Cayuga","Chautauqua","Chemung","Chenango","Clinton","Columbia","Cortland","Delaware","Dutchess","Erie","Essex","Franklin","Fulton","Genesee","Greene","Hamilton","Herkimer","Jefferson","Kings","Lewis","Livingston","Madison","Monroe","Montgomery","Nassau","New York","Niagara","Oneida","Onondaga","Ontario","Orange","Orleans","Oswego","Otsego","Putnam","Queens","Rensselaer","Richmond","Rockland","St. Lawrence","Saratoga","Schenectady","Schoharie","Schuyler","Seneca","Steuben","Suffolk","Sullivan","Tioga","Tompkins","Ulster","Warren","Washington","Wayne","Westchester","Wyoming","Yates"],"North Carolina":["Alamance","Alexander","Alleghany","Anson","Ashe","Avery","Beaufort","Bertie","Bladen","Brunswick","Buncombe","Burke","Cabarrus","Caldwell","Camden","Carteret","Caswell","Catawba","Chatham","Cherokee","Chowan","Clay","Cleveland","Columbus","Craven","Cumberland","Currituck","Dare","Davidson","Davie","Duplin","Durham","Edgecombe","Forsyth","Franklin","Gaston","Gates","Graham","Granville","Greene","Guilford","Halifax","Harnett","Haywood","Henderson","Hertford","Hoke","Hyde","Iredell","Jackson","Johnston","Jones","Lee","Lenoir","Lincoln","McDowell","Macon","Madison","Martin","Mecklenburg","Mitchell","Montgomery","Moore","Nash","New Hanover","Northampton","Onslow","Orange","Pamlico","Pasquotank","Pender","Perquimans","Person","Pitt","Polk","Randolph","Richmond","Robeson","Rockingham","Rowan","Rutherford","Sampson","Scotland","Stanly","Stokes","Surry","Swain","Transylvania","Tyrrell","Union","Vance","Wake","Warren","Washington","Watauga","Wayne","Wilkes","Wilson","Yadkin","Yancey"],"North Dakota":["Adams","Barnes","Benson","Billings","Bottineau","Bowman","Burke","Burleigh","Cass","Cavalier","Dickey","Divide","Dunn","Eddy","Emmons","Foster","Golden Valley","Grand Forks","Grant","Griggs","Hettinger","Kidder","LaMoure","Logan","McHenry","McIntosh","McKenzie","McLean","Mercer","Morton","Mountrail","Nelson","Oliver","Pembina","Pierce","Ramsey","Ransom","Renville","Richland","Rolette","Sargent","Sheridan","Sioux","Slope","Stark","Steele","Stutsman","Towner","Traill","Walsh","Ward","Wells","Williams"],"Ohio":["Adams","Allen","Ashland","Ashtabula","Athens","Auglaize","Belmont","Brown","Butler","Carroll","Champaign","Clark","Clermont","Clinton","Columbiana","Coshocton","Crawford","Cuyahoga","Darke","Defiance","Delaware","Erie","Fairfield","Fayette","Franklin","Fulton","Gallia","Geauga","Greene","Guernsey","Hamilton","Hancock","Hardin","Harrison","Henry","Highland","Hocking","Holmes","Huron","Jackson","Jefferson","Knox","Lake","Lawrence","Licking","Logan","Lorain","Lucas","Madison","Mahoning","Marion","Medina","Meigs","Mercer","Miami","Monroe","Montgomery","Morgan","Morrow","Muskingum","Noble","Ottawa","Paulding","Perry","Pickaway","Pike","Portage","Preble","Putnam","Richland","Ross","Sandusky","Scioto","Seneca","Shelby","Stark","Summit","Trumbull","Tuscarawas","Union","Van Wert","Vinton","Warren","Washington","Wayne","Williams","Wood","Wyandot"],"Oklahoma":["Adair","Alfalfa","Atoka","Beaver","Beckham","Blaine","Bryan","Caddo","Canadian","Carter","Cherokee","Choctaw","Cimarron","Cleveland","Coal","Comanche","Cotton","Craig","Creek","Custer","Delaware","Dewey","Ellis","Garfield","Garvin","Grady","Grant","Greer","Harmon","Harper","Haskell","Hughes","Jackson","Jefferson","Johnston","Kay","Kingfisher","Kiowa","Latimer","Le Flore","Lincoln","Logan","Love","McClain","McCurtain","McIntosh","Major","Marshall","Mayes","Murray","Muskogee","Noble","Nowata","Okfuskee","Oklahoma","Okmulgee","Osage","Ottawa","Pawnee","Payne","Pittsburg","Pontotoc","Pottawatomie","Pushmataha","Roger Mills","Rogers","Seminole","Sequoyah","Stephens","Texas","Tillman","Tulsa","Wagoner","Washington","Washita","Woods","Woodward"],"Oregon":["Baker","Benton","Clackamas","Clatsop","Columbia","Coos","Crook","Curry","Deschutes","Douglas","Gilliam","Grant","Harney","Hood River","Jackson","Jefferson","Josephine","Klamath","Lake","Lane","Lincoln","Linn","Malheur","Marion","Morrow","Multnomah","Polk","Sherman","Tillamook","Umatilla","Union","Wallowa","Wasco","Washington","Wheeler","Yamhill"],"Pennsylvania":["Adams","Allegheny","Armstrong","Beaver","Bedford","Berks","Blair","Bradford","Bucks","Butler","Cambria","Cameron","Carbon","Centre","Chester","Clarion","Clearfield","Clinton","Columbia","Crawford","Cumberland","Dauphin","Delaware","Elk","Erie","Fayette","Forest","Franklin","Fulton","Greene","Huntingdon","Indiana","Jefferson","Juniata","Lackawanna","Lancaster","Lawrence","Lebanon","Lehigh","Luzerne","Lycoming","McKean","Mercer","Mifflin","Monroe","Montgomery","Montour","Northampton","Northumberland","Perry","Philadelphia","Pike","Potter","Schuylkill","Snyder","Somerset","Sullivan","Susquehanna","Tioga","Union","Venango","Warren","Washington","Wayne","Westmoreland","Wyoming","York"],"Rhode Island":["Bristol","Kent","Newport","Providence","Washington"],"South Carolina":["Abbeville","Aiken","Allendale","Anderson","Bamberg","Barnwell","Beaufort","Berkeley","Calhoun","Charleston","Cherokee","Chester","Chesterfield","Clarendon","Colleton","Darlington","Dillon","Dorchester","Edgefield","Fairfield","Florence","Georgetown","Greenville","Greenwood","Hampton","Horry","Jasper","Kershaw","Lancaster","Laurens","Lee","Lexington","McCormick","Marion","Marlboro","Newberry","Oconee","Orangeburg","Pickens","Richland","Saluda","Spartanburg","Sumter","Union","Williamsburg","York"],"South Dakota":["Aurora","Beadle","Bennett","Bon Homme","Brookings","Brown","Brule","Buffalo","Butte","Campbell","Charles Mix","Clark","Clay","Codington","Corson","Custer","Davison","Day","Deuel","Dewey","Douglas","Edmunds","Fall River","Faulk","Grant","Gregory","Haakon","Hamlin","Hand","Hanson","Harding","Hughes","Hutchinson","Hyde","Jackson","Jerauld","Jones","Kingsbury","Lake","Lawrence","Lincoln","Lyman","McCook","McPherson","Marshall","Meade","Mellette","Miner","Minnehaha","Moody","Pennington","Perkins","Potter","Roberts","Sanborn","Spink","Stanley","Sully","Todd","Tripp","Turner","Union","Walworth","Washabaugh","Washington","Wessington","Yankton","Ziebach"],"Tennessee":["Anderson","Bedford","Benton","Bledsoe","Blount","Bradley","Campbell","Cannon","Carroll","Carter","Cheatham","Chester","Claiborne","Clay","Cocke","Coffee","Crockett","Cumberland","Davidson","Decatur","DeKalb","Dickson","Dyer","Fayette","Fentress","Franklin","Gibson","Giles","Grainger","Greene","Grundy","Hamblen","Hamilton","Hancock","Hardeman","Hardin","Hawkins","Haywood","Henderson","Henry","Hickman","Houston","Humphreys","Jackson","Jefferson","Johnson","Knox","Lake","Lauderdale","Lawrence","Lewis","Lincoln","Loudon","McMinn","McNairy","Macon","Madison","Marion","Marshall","Maury","Meigs","Monroe","Montgomery","Moore","Morgan","Obion","Overton","Perry","Pickett","Polk","Putnam","Rhea","Roane","Robertson","Rutherford","Scott","Sequatchie","Sevier","Shelby","Smith","Stewart","Sullivan","Sumner","Tipton","Trousdale","Unicoi","Union","Van Buren","Warren","Washington","Wayne","Weakley","White","Williamson","Wilson"],"Texas":["Anderson","Andrews","Angelina","Aransas","Archer","Armstrong","Atascosa","Austin","Bailey","Bandera","Bastrop","Baylor","Bee","Bell","Bexar","Blanco","Borden","Bosque","Bowie","Brazoria","Brazos","Brewster","Briscoe","Brooks","Brown","Burleson","Burnet","Caldwell","Calhoun","Callahan","Cameron","Camp","Carson","Cass","Castro","Chambers","Cherokee","Childress","Clay","Cochran","Coke","Coleman","Collin","Collingsworth","Colorado","Comal","Comanche","Concho","Cooke","Coryell","Cottle","Crane","Crockett","Crosby","Culberson","Dallam","Dallas","Dawson","Deaf Smith","Delta","Denton","DeWitt","Dickens","Dimmit","Donley","Duval","Eastland","Ector","Edwards","Ellis","El Paso","Erath","Falls","Fannin","Fayette","Fisher","Floyd","Foard","Fort Bend","Franklin","Freestone","Frio","Gaines","Galveston","Garza","Gillespie","Glasscock","Goliad","Gonzales","Gray","Grayson","Gregg","Grimes","Guadalupe","Hale","Hall","Hamilton","Hansford","Hardeman","Hardin","Harris","Harrison","Hartley","Haskell","Hays","Hemphill","Henderson","Hidalgo","Hill","Hockley","Hood","Hopkins","Houston","Howard","Hudson","Hunt","Hutchinson","Irion","Jack","Jackson","Jasper","Jeff Davis","Jefferson","Jim Hogg","Jim Wells","Johnson","Jones","Karnes","Kaufman","Kendall","Kenedy","Kent","Kerr","Kimble","King","Kinney","Kleberg","Knox","Lamar","Lamb","Lampasas","La Salle","Lavaca","Lee","Leon","Liberty","Limestone","Lipscomb","Live Oak","Llano","Loving","Lubbock","Lynn","McCulloch","McLennan","McMullen","Madison","Marion","Martin","Mason","Matagorda","Maverick","Medina","Menard","Midland","Milam","Mills","Mitchell","Montague","Montgomery","Moore","Morris","Motley","Nacogdoches","Navarro","Newton","Nolan","Nueces","Ochiltree","Oldham","Orange","Palo Pinto","Panola","Parker","Parmer","Pecos","Polk","Potter","Presidio","Rains","Randolph","Reagan","Real","Red River","Reeves","Refugio","Roberts","Robertson","Rockwall","Runnels","Rusk","Sabine","San Augustine","San Jacinto","San Patricio","San Saba","Schleicher","Scurry","Shackelford","Shelby","Sherman","Smith","Somervell","Starr","Stephens","Sterling","Stonewall","Sutton","Swisher","Tarrant","Taylor","Terrell","Terry","Throckmorton","Titus","Tom Green","Travis","Trinity","Tyler","Upshur","Upton","Uvalde","Val Verde","Van Zandt","Victoria","Walker","Waller","Ward","Washington","Webb","Wharton","Wheeler","Wichita","Wilbarger","Willacy","Williamson","Wilson","Winkler","Wise","Wood","Yoakum","Young","Zapata","Zavala"],"Utah":["Beaver","Box Elder","Cache","Carbon","Daggett","Davis","Duchesne","Emery","Garfield","Grand","Iron","Juab","Kane","Millard","Morgan","Piute","Rich","Salt Lake","San Juan","Sanpete","Sevier","Summit","Tooele","Uintah","Utah","Wasatch","Washington","Wayne","Weber"],"Vermont":["Addison","Bennington","Caledonia","Chittenden","Essex","Franklin","Grand Isle","Lamoille","Orange","Orleans","Rutland","Washington","Windham","Windsor"],"Virginia":["Accomack","Albemarle","Alleghany","Amelia","Amherst","Appomattox","Arlington","Augusta","Bath","Bedford","Bland","Botetourt","Brunswick","Buchanan","Buckingham","Campbell","Caroline","Carroll","Charles City","Charlotte","Chesterfield","Clarke","Craig","Culpeper","Cumberland","Dickenson","Dinwiddie","Essex","Fairfax","Fauquier","Floyd","Fluvanna","Franklin","Frederick","Giles","Gloucester","Goochland","Grayson","Greene","Greensville","Halifax","Hanover","Henrico","Henry","Highland","Isle of Wight","James City","King and Queen","King George","King William","Lancaster","Lee","Loudoun","Louisa","Lunenburg","Madison","Mathews","Mecklenburg","Middlesex","Montgomery","Nelson","New Kent","Northampton","Northumberland","Nottoway","Orange","Page","Patrick","Pittsylvania","Powhatan","Prince Edward","Prince George","Prince William","Pulaski","Rappahannock","Richmond","Roanoke","Rockbridge","Rockingham","Russell","Scott","Shenandoah","Smyth","Southampton","Spotsylvania","Stafford","Surry","Sussex","Tazewell","Warren","Washington","Westmoreland","Wise","Wythe","York"],"Washington":["Adams","Asotin","Benton","Chelan","Clallam","Clark","Columbia","Cowlitz","Douglas","Ferry","Franklin","Garfield","Grant","Grays Harbor","Island","Jefferson","King","Kitsap","Kittitas","Klickitat","Lewis","Lincoln","Mason","Okanogan","Pacific","Pend Oreille","Pierce","San Juan","Skagit","Skamania","Snohomish","Spokane","Stevens","Thurston","Wahkiakum","Walla Walla","Whatcom","Whitman","Yakima"],"West Virginia":["Barbour","Berkeley","Boone","Braxton","Brooke","Cabell","Calhoun","Clay","Doddridge","Fayette","Gilmer","Grant","Greenbrier","Hampshire","Hancock","Hardy","Harrison","Jackson","Jefferson","Kanawha","Lewis","Lincoln","Logan","McDowell","Marion","Marshall","Mason","Mercer","Mineral","Mingo","Monongalia","Monroe","Morgan","Nicholas","Ohio","Pendleton","Pleasants","Pocahontas","Preston","Putnam","Raleigh","Randolph","Ritchie","Roane","Summers","Taylor","Tucker","Tyler","Upshur","Wayne","Webster","Wetzel","Wirt","Wood","Wyoming"],"Wisconsin":["Adams","Ashland","Barron","Bayfield","Brown","Buffalo","Burnett","Calumet","Chippewa","Clark","Columbia","Crawford","Dane","Dodge","Door","Douglas","Dunn","Eau Claire","Florence","Fond du Lac","Forest","Grant","Green","Green Lake","Iowa","Iron","Jackson","Jefferson","Juneau","Kenosha","Kewaunee","La Crosse","Lafayette","Langlade","Lincoln","Manitowoc","Marathon","Marinette","Marquette","Menominee","Milwaukee","Monroe","Oconto","Oneida","Outagamie","Ozaukee","Pepin","Pierce","Polk","Portage","Price","Racine","Richland","Rock","Rusk","St. Croix","Sauk","Sawyer","Shawano","Sheboygan","Taylor","Trempealeau","Vernon","Vilas","Walworth","Washburn","Washington","Waukesha","Waupaca","Waushara","Winnebago","Wood"],"Wyoming":["Albany","Big Horn","Campbell","Carbon","Converse","Crook","Fremont","Goshen","Hot Springs","Johnson","Laramie","Lincoln","Natrona","Niobrara","Park","Platte","Sheridan","Sublette","Sweetwater","Teton","Uinta","Washakie","Weston"]};
 </script>
 <script>
+// Payment card icons (inline data URIs for reliable display)
+const PAYMENT_ICONS = {
+  visa: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzgwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDc4MCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMF82Mjc4XzEyNTgzMykiPgo8cGF0aCBkPSJNNzgwIDBIMFY1MDBINzgwVjBaIiBmaWxsPSIjMTQzNENCIi8+CjxwYXRoIGQ9Ik00ODkuODIzIDE0My4xMTFDNDQyLjk4OCAxNDMuMTExIDQwMS4xMzQgMTY3LjM5MyA0MDEuMTM0IDIxMi4yNTZDNDAxLjEzNCAyNjMuNzA2IDQ3NS4zNjQgMjY3LjI1OSA0NzUuMzY0IDI5My4xMDZDNDc1LjM2NCAzMDMuOTg5IDQ2Mi44OTUgMzEzLjczMSA0NDEuNiAzMTMuNzMxQzQxMS4zNzcgMzEzLjczMSAzODguNzg5IDMwMC4xMTkgMzg4Ljc4OSAzMDAuMTE5TDM3OS4xMjMgMzQ1LjM5MUMzNzkuMTIzIDM0NS4zOTEgNDA1LjE0NSAzNTYuODg5IDQzOS42OTIgMzU2Ljg4OUM0OTAuODk4IDM1Ni44ODkgNTMxLjE5IDMzMS40MTUgNTMxLjE5IDI4NS43ODRDNTMxLjE5IDIzMS40MTkgNDU2LjY1MiAyMjcuOTcxIDQ1Ni42NTIgMjAzLjk4MUM0NTYuNjUyIDE5NS40NTUgNDY2Ljg4NyAxODYuMTE0IDQ4OC4xMjIgMTg2LjExNEM1MTIuMDgxIDE4Ni4xMTQgNTMxLjYyOCAxOTYuMDE0IDUzMS42MjggMTk2LjAxNEw1NDEuMDg3IDE1Mi4yODlDNTQxLjA4NyAxNTIuMjg5IDUxOS44MTggMTQzLjExMSA0ODkuODIzIDE0My4xMTFaTTYxLjMyOTQgMTQ2LjQxMUw2MC4xOTUzIDE1My4wMTFDNjAuMTk1MyAxNTMuMDExIDc5Ljg5ODggMTU2LjYxOCA5Ny42NDUgMTYzLjgxNEMxMjAuNDk1IDE3Mi4wNjQgMTIyLjEyMiAxNzYuODY4IDEyNS45NzEgMTkxLjc4NkwxNjcuOTA1IDM1My40ODZIMjI0LjExOEwzMTAuNzE5IDE0Ni40MTFIMjU0LjYzNUwxOTguOTg5IDI4Ny4yMDJMMTc2LjI4MiAxNjcuODYxQzE3NC4xOTkgMTU0LjIwMyAxNjMuNjUxIDE0Ni40MTEgMTUwLjc0IDE0Ni40MTFINjEuMzI5NFpNMzMzLjI3MSAxNDYuNDExTDI4OS4yNzUgMzUzLjQ4NkgzNDIuNzU2TDM4Ni41OTggMTQ2LjQxMUgzMzMuMjcxWk02MzEuNTU0IDE0Ni40MTFDNjE4LjY1OCAxNDYuNDExIDYxMS44MjUgMTUzLjMxOCA2MDYuODExIDE2NS4zODZMNTI4LjQ1OCAzNTMuNDg2SDU4NC41NDJMNTk1LjM5MyAzMjIuMTM2SDY2My43Mkw2NzAuMzE4IDM1My40ODZINzE5LjgwNUw2NzYuNjMzIDE0Ni40MTFINjMxLjU1NFpNNjM4Ljg0OCAyMDIuMzU2TDY1NS40NzMgMjgwLjA2MUg2MTAuOTM1TDYzOC44NDggMjAyLjM1NloiIGZpbGw9IndoaXRlIi8+CjwvZz4KPGRlZnM+CjxjbGlwUGF0aCBpZD0iY2xpcDBfNjI3OF8xMjU4MzMiPgo8cmVjdCB3aWR0aD0iNzgwIiBoZWlnaHQ9IjUwMCIgZmlsbD0id2hpdGUiLz4KPC9jbGlwUGF0aD4KPC9kZWZzPgo8L3N2Zz4K",
+  mastercard: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzgwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDc4MCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMF82Mjc4XzEyNTgyNSkiPgo8cGF0aCBkPSJNNzgwIDBIMFY1MDBINzgwVjBaIiBmaWxsPSIjMjUzNzQ3Ii8+CjxwYXRoIGQ9Ik0yMTEuMDUzIDQ2Ny4wNDVWNDM4LjEwOUMyMTEuMDUzIDQyNy4wNDEgMjA0LjMxMSA0MTkuNzkzIDE5Mi43MzYgNDE5Ljc5M0MxODYuOTQ5IDQxOS43OTMgMTgwLjY1NyA0MjEuNzAzIDE3Ni4zMyA0MjcuOTk2QzE3Mi45NTkgNDIyLjcxNSAxNjguMTI3IDQxOS43OTMgMTYwLjg3OSA0MTkuNzkzQzE1Ni4wNDcgNDE5Ljc5MyAxNTEuMjE1IDQyMS4yNTQgMTQ3LjM5NSA0MjYuNTM1VjQyMC43NDhIMTM3LjI4MVY0NjcuMDQ1SDE0Ny4zOTVWNDQxLjQ4MUMxNDcuMzk1IDQzMy4yNzggMTUxLjcyMSA0MjkuNDAxIDE1OC40NjMgNDI5LjQwMUMxNjUuMjA1IDQyOS40MDEgMTY4LjU3NyA0MzMuNzI3IDE2OC41NzcgNDQxLjQ4MVY0NjcuMDQ1SDE3OC42OVY0NDEuNDgxQzE3OC42OSA0MzMuMjc4IDE4My41MjIgNDI5LjQwMSAxODkuNzU5IDQyOS40MDFDMTk2LjUwMSA0MjkuNDAxIDE5OS44NzIgNDMzLjcyNyAxOTkuODcyIDQ0MS40ODFWNDY3LjA0NUgyMTEuMDUzWk0zNjEuMDY4IDQyMC43NDhIMzQ0LjY2MlY0MDYuNzU4SDMzNC41NDlWNDIwLjc0OEgzMjUuMzkxVjQyOS45MDZIMzM0LjU0OVY0NTEuMTQ1QzMzNC41NDkgNDYxLjc2NCAzMzguODc1IDQ2OCAzNTAuNDQ5IDQ2OEMzNTQuNzc2IDQ2OCAzNTkuNjA4IDQ2Ni41MzkgMzYyLjk3OSA0NjQuNjI5TDM2MC4wNTcgNDU1LjkyQzM1Ny4xMzUgNDU3LjgzMSAzNTMuNzY0IDQ1OC4zMzYgMzUxLjM0OCA0NTguMzM2QzM0Ni41MTYgNDU4LjMzNiAzNDQuNjA2IDQ1NS40MTUgMzQ0LjYwNiA0NTAuNjM5VjQyOS45MDZIMzYxLjAxMlY0MjAuNzQ4SDM2MS4wNjhaTTQ0Ni45MiA0MTkuNzM3QzQ0MS4xMzMgNDE5LjczNyA0MzcuMjU2IDQyMi42NTggNDM0Ljg0IDQyNi40NzlWNDIwLjY5Mkg0MjQuNzI3VjQ2Ni45ODlINDM0Ljg0VjQ0MC45MTlDNDM0Ljg0IDQzMy4yMjEgNDM4LjIxMSA0MjguODM5IDQ0NC41MDQgNDI4LjgzOUM0NDYuNDE0IDQyOC44MzkgNDQ4LjgzIDQyOS4zNDUgNDUwLjc5NyA0MjkuNzk0TDQ1My43MTggNDIwLjEzQzQ1MS42OTYgNDE5LjczNyA0NDguODMgNDE5LjczNyA0NDYuOTIgNDE5LjczN1pNMzE3LjE4NyA0MjQuNTY5QzMxMi4zNTYgNDIxLjE5OCAzMDUuNjEzIDQxOS43MzcgMjk4LjM2NSA0MTkuNzM3QzI4Ni43OTEgNDE5LjczNyAyNzkuMDk0IDQyNS41MjQgMjc5LjA5NCA0MzQuNjgyQzI3OS4wOTQgNDQyLjM4IDI4NC44ODEgNDQ2Ljc2MiAyOTQuOTk0IDQ0OC4xNjdMMjk5LjgyNiA0NDguNjcyQzMwNS4xMDggNDQ5LjYyOCAzMDguMDI5IDQ1MS4wODggMzA4LjAyOSA0NTMuNTA0QzMwOC4wMjkgNDU2Ljg3NSAzMDQuMTUyIDQ1OS4yOTEgMjk3LjQxIDQ1OS4yOTFDMjkwLjY2OCA0NTkuMjkxIDI4NS4zMyA0NTYuODc1IDI4MS45NTkgNDU0LjQ1OUwyNzcuMTI3IDQ2Mi4xNTdDMjgyLjQwOSA0NjYuMDM0IDI4OS42NTcgNDY3Ljk0NCAyOTYuOTA0IDQ2Ny45NDRDMzEwLjM4OSA0NjcuOTQ0IDMxOC4xNDMgNDYxLjY1MSAzMTguMTQzIDQ1Mi45OTlDMzE4LjE0MyA0NDQuNzk2IDMxMS44NSA0NDAuNDY5IDMwMi4yNDIgNDM5LjAwOEwyOTcuNDEgNDM4LjUwM0MyOTMuMDg0IDQzNy45OTcgMjg5LjcxMyA0MzcuMDQyIDI4OS43MTMgNDM0LjE3NkMyODkuNzEzIDQzMC44MDUgMjkzLjA4NCA0MjguODk1IDI5OC40MjEgNDI4Ljg5NUMzMDQuMjA5IDQyOC44OTUgMzA5Ljk5NiA0MzEuMzExIDMxMi45MTcgNDMyLjc3MkwzMTcuMTg3IDQyNC41NjlaTTU4Ni4yNiA0MTkuNzM3QzU4MC40NzMgNDE5LjczNyA1NzYuNTk2IDQyMi42NTggNTc0LjE4IDQyNi40NzlWNDIwLjY5Mkg1NjQuMDY3VjQ2Ni45ODlINTc0LjE4VjQ0MC45MTlDNTc0LjE4IDQzMy4yMjEgNTc3LjU1MSA0MjguODM5IDU4My44NDQgNDI4LjgzOUM1ODUuNzU0IDQyOC44MzkgNTg4LjE3IDQyOS4zNDUgNTkwLjEzNyA0MjkuNzk0TDU5My4wNTkgNDIwLjI0MkM1OTEuMDkyIDQxOS43MzcgNTg4LjIyNyA0MTkuNzM3IDU4Ni4yNiA0MTkuNzM3Wk00NTcuMDMzIDQ0My44OTdDNDU3LjAzMyA0NTcuODg3IDQ2Ni42OTcgNDY4IDQ4MS42NDMgNDY4QzQ4OC4zODUgNDY4IDQ5My4yMTcgNDY2LjUzOSA0OTguMDQ5IDQ2Mi43MTlMNDkzLjIxNyA0NTQuNTE2QzQ4OS4zNCA0NTcuNDM3IDQ4NS41MTkgNDU4Ljg0MiA0ODEuMTM3IDQ1OC44NDJDNDcyLjkzNCA0NTguODQyIDQ2Ny4xNDcgNDUzLjA1NSA0NjcuMTQ3IDQ0My44OTdDNDY3LjE0NyA0MzUuMTg4IDQ3Mi45MzQgNDI5LjQwMSA0ODEuMTM3IDQyOC45NTFDNDg1LjQ2MyA0MjguOTUxIDQ4OS4zNCA0MzAuNDEyIDQ5My4yMTcgNDMzLjI3OEw0OTguMDQ5IDQyNS4wNzRDNDkzLjIxNyA0MjEuMTk4IDQ4OC4zODUgNDE5Ljc5MyA0ODEuNjQzIDQxOS43OTNDNDY2LjY5NyA0MTkuNzM3IDQ1Ny4wMzMgNDI5LjkwNiA0NTcuMDMzIDQ0My44OTdaTTU1MC41ODIgNDQzLjg5N1Y0MjAuNzQ4SDU0MC40NjlWNDI2LjUzNUM1MzcuMDk4IDQyMi4yMDkgNTMyLjI2NiA0MTkuNzkzIDUyNS45NzMgNDE5Ljc5M0M1MTIuOTM4IDQxOS43OTMgNTAyLjgyNSA0MjkuOTA2IDUwMi44MjUgNDQzLjg5N0M1MDIuODI1IDQ1Ny44ODcgNTEyLjkzOCA0NjggNTI1Ljk3MyA0NjhDNTMyLjcxNSA0NjggNTM3LjU0NyA0NjUuNTg0IDU0MC40NjkgNDYxLjI1OFY0NjcuMDQ1SDU1MC41ODJWNDQzLjg5N1pNNTEzLjQ0NCA0NDMuODk3QzUxMy40NDQgNDM1LjY5MyA1MTguNzI1IDQyOC45NTEgNTI3LjQzNCA0MjguOTUxQzUzNS42MzcgNDI4Ljk1MSA1NDEuNDI0IDQzNS4yNDQgNTQxLjQyNCA0NDMuODk3QzU0MS40MjQgNDUyLjEgNTM1LjYzNyA0NTguODQyIDUyNy40MzQgNDU4Ljg0MkM1MTguNzgxIDQ1OC4zMzYgNTEzLjQ0NCA0NTIuMDQzIDUxMy40NDQgNDQzLjg5N1pNMzkyLjQyIDQxOS43MzdDMzc4LjkzNSA0MTkuNzM3IDM2OS4yNzEgNDI5LjQwMSAzNjkuMjcxIDQ0My44NEMzNjkuMjcxIDQ1OC4zMzYgMzc4LjkzNSA0NjcuOTQ0IDM5Mi45MjYgNDY3Ljk0NEMzOTkuNjY4IDQ2Ny45NDQgNDA2LjQxIDQ2Ni4wMzQgNDExLjc0OCA0NjEuNjUxTDQwNi45MTYgNDU0LjQwM0M0MDMuMDM5IDQ1Ny4zMjUgMzk4LjIwNyA0NTkuMjM1IDM5My40MzEgNDU5LjIzNUMzODcuMTM5IDQ1OS4yMzUgMzgwLjkwMiA0NTYuMzE0IDM3OS40NDEgNDQ4LjE2N0g0MTMuNjU4QzQxMy42NTggNDQ2LjcwNiA0MTMuNjU4IDQ0NS43NTEgNDEzLjY1OCA0NDQuMjlDNDE0LjEwOCA0MjkuNDAxIDQwNS4zOTkgNDE5LjczNyAzOTIuNDIgNDE5LjczN1pNMzkyLjQyIDQyOC40NDZDMzk4LjcxMyA0MjguNDQ2IDQwMy4wMzkgNDMyLjMyMiA0MDMuOTk0IDQzOS41MTRIMzc5Ljg5MUMzODAuODQ2IDQzMy4yNzggMzg1LjE3MiA0MjguNDQ2IDM5Mi40MiA0MjguNDQ2Wk02NDMuNjgyIDQ0My44OTdWNDAyLjQzMkg2MzMuNTY4VjQyNi41MzVDNjMwLjE5NyA0MjIuMjA5IDYyNS4zNjUgNDE5Ljc5MyA2MTkuMDczIDQxOS43OTNDNjA2LjAzNyA0MTkuNzkzIDU5NS45MjQgNDI5LjkwNiA1OTUuOTI0IDQ0My44OTdDNTk1LjkyNCA0NTcuODg3IDYwNi4wMzcgNDY4IDYxOS4wNzMgNDY4QzYyNS44MTUgNDY4IDYzMC42NDcgNDY1LjU4NCA2MzMuNTY4IDQ2MS4yNThWNDY3LjA0NUg2NDMuNjgyVjQ0My44OTdaTTYwNi41NDMgNDQzLjg5N0M2MDYuNTQzIDQzNS42OTMgNjExLjgyNSA0MjguOTUxIDYyMC41MzMgNDI4Ljk1MUM2MjguNzM2IDQyOC45NTEgNjM0LjUyNCA0MzUuMjQ0IDYzNC41MjQgNDQzLjg5N0M2MzQuNTI0IDQ1Mi4xIDYyOC43MzYgNDU4Ljg0MiA2MjAuNTMzIDQ1OC44NDJDNjExLjgyNSA0NTguMzM2IDYwNi41NDMgNDUyLjA0MyA2MDYuNTQzIDQ0My44OTdaTTI2Ny45NjkgNDQzLjg5N1Y0MjAuNzQ4SDI1Ny44NTVWNDI2LjUzNUMyNTQuNDg0IDQyMi4yMDkgMjQ5LjY1MiA0MTkuNzkzIDI0My4zNiA0MTkuNzkzQzIzMC4zMjUgNDE5Ljc5MyAyMjAuMjExIDQyOS45MDYgMjIwLjIxMSA0NDMuODk3QzIyMC4yMTEgNDU3Ljg4NyAyMzAuMzI1IDQ2OCAyNDMuMzYgNDY4QzI1MC4xMDIgNDY4IDI1NC45MzQgNDY1LjU4NCAyNTcuODU1IDQ2MS4yNThWNDY3LjA0NUgyNjcuOTY5VjQ0My44OTdaTTIzMC4zODEgNDQzLjg5N0MyMzAuMzgxIDQzNS42OTMgMjM1LjY2MiA0MjguOTUxIDI0NC4zNzEgNDI4Ljk1MUMyNTIuNTc0IDQyOC45NTEgMjU4LjM2MSA0MzUuMjQ0IDI1OC4zNjEgNDQzLjg5N0MyNTguMzYxIDQ1Mi4xIDI1Mi41NzQgNDU4Ljg0MiAyNDQuMzcxIDQ1OC44NDJDMjM1LjY2MiA0NTguMzM2IDIzMC4zODEgNDUyLjA0MyAyMzAuMzgxIDQ0My44OTdaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNNDY1LjczOCA2OS4xMzg3SDMxMy44MTJWMzQyLjA4OEg0NjUuNzM4VjY5LjEzODdaIiBmaWxsPSIjRkY1QTAwIi8+CjxwYXRoIGQ9Ik0zMjMuOTI2IDIwNS42MTNDMzIzLjkyNiAxNTAuMTU4IDM0OS45OTYgMTAwLjk0IDM5MCA2OS4xMzg3QzM2MC41NTkgNDUuOTkwMiAzMjMuNDIgMzIgMjgyLjkxIDMyQzE4Ni45NDUgMzIgMTA5LjI5NyAxMDkuNjQ4IDEwOS4yOTcgMjA1LjYxM0MxMDkuMjk3IDMwMS41NzggMTg2Ljk0NSAzNzkuMjI3IDI4Mi45MSAzNzkuMjI3QzMyMy40MiAzNzkuMjI3IDM2MC41NTkgMzY1LjIzNyAzOTAgMzQyLjA4OEMzNDkuOTQgMzEwLjczNyAzMjMuOTI2IDI2MS4wNjkgMzIzLjkyNiAyMDUuNjEzWiIgZmlsbD0iI0VCMDAxQiIvPgo8cGF0aCBkPSJNNjcwLjcxMSAyMDUuNjEzQzY3MC43MTEgMzAxLjU3OCA1OTMuMDYyIDM3OS4yMjcgNDk3LjA5OCAzNzkuMjI3QzQ1Ni41ODggMzc5LjIyNyA0MTkuNDQ5IDM2NS4yMzcgMzkwLjAwOCAzNDIuMDg4QzQzMC41MTggMzEwLjIzMSA0NTYuMDgyIDI2MS4wNjkgNDU2LjA4MiAyMDUuNjEzQzQ1Ni4wODIgMTUwLjE1OCA0MzAuMDEyIDEwMC45NCAzOTAuMDA4IDY5LjEzODdDNDE5LjM5MyA0NS45OTAyIDQ1Ni41MzIgMzIgNDk3LjA0MSAzMkM1OTMuMDYyIDMyIDY3MC43MTEgMTEwLjE1NCA2NzAuNzExIDIwNS42MTNaIiBmaWxsPSIjRjc5RTFCIi8+CjwvZz4KPGRlZnM+CjxjbGlwUGF0aCBpZD0iY2xpcDBfNjI3OF8xMjU4MjUiPgo8cmVjdCB3aWR0aD0iNzgwIiBoZWlnaHQ9IjUwMCIgZmlsbD0id2hpdGUiLz4KPC9jbGlwUGF0aD4KPC9kZWZzPgo8L3N2Zz4K",
+  amex: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzgwIiBoZWlnaHQ9IjUwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNzgwIDUwMCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgNzgwIDUwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNzgwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzI1NTdENiIvPjxwYXRoIGQ9Im0wLjI1MyAyMzUuNjloMzcuNDQxbDguNDQyLTE5LjUxaDE4LjlsOC40MiAxOS41MWg3My42Njh2LTE0LjkxNWw2LjU3NiAxNC45OGgzOC4yNDNsNi41NzYtMTUuMjAydjE1LjEzOGgxODMuMDhsLTAuMDg1LTMyLjAyNmgzLjU0MmMyLjQ3OSAwLjA4MyAzLjIwNCAwLjMwMiAzLjIwNCA0LjIyNnYyNy44aDk0LjY4OXYtNy40NTVjNy42MzkgMy45MiAxOS41MTggNy40NTUgMzUuMTQ4IDcuNDU1aDM5LjgzNmw4LjUyNS0xOS41MWgxOC45bDguMzM3IDE5LjUxaDc2Ljc2NXYtMTguNTMybDExLjYyNiAxOC41MzJoNjEuNTE1di0xMjIuNTFoLTYwLjg4djE0LjQ2OGwtOC41MjItMTQuNDY4aC02Mi40NzF2MTQuNDY4bC03LjgyOC0xNC40NjhoLTg0LjM4Yy0xNC4xMjMgMC0yNi41MzkgMS44ODktMzYuNTY5IDcuMTUzdi03LjE1M2gtNTguMjI5djcuMTUzYy02LjM4My01LjQyNi0xNS4wNzktNy4xNTMtMjQuNzUtNy4xNTNoLTIxMi43NGwtMTQuMjc0IDMxLjY0MS0xNC42NTktMzEuNjQxaC02Ny4wMDV2MTQuNDY4bC03LjM2Mi0xNC40NjhoLTU3LjE0NWwtMjYuNTM5IDU4LjI0NnY2NC4yNjFoM2UtM3ptMjM2LjM0LTE3LjY3aC0yMi40NjRsLTAuMDgzLTY4Ljc5NC0zMS43NzUgNjguNzkzaC0xOS4yNGwtMzEuODU4LTY4Ljg1NHY2OC44NTRoLTQ0LjU3bC04LjQyLTE5LjU5MmgtNDUuNjI3bC04LjUwNSAxOS41OTJoLTIzLjgwMWwzOS4yNDEtODcuODM3aDMyLjU1OWwzNy4yNjkgODMuMTY0di04My4xNjRoMzUuNzY2bDI4LjY3OCA1OS41ODcgMjYuMzQ0LTU5LjU4N2gzNi40ODVsMWUtMyA4Ny44Mzh6bS0xNjUuOS0zNy44MjNsLTE0Ljk5OC0zNS4wMTctMTQuOTE1IDM1LjAxN2gyOS45MTN6bTI1NS4zIDM3LjgyMWgtNzMuMjAzdi04Ny44MzdoNzMuMjAzdjE4LjI5MWgtNTEuMjg5djE1LjgzM2g1MC4wNnYxOC4wMDVoLTUwLjA2MXYxNy41NDJoNTEuMjg5bDFlLTMgMTguMTY2em0xMDMuMTYtNjQuMThjMCAxNC4wMDQtOS43NTUgMjEuMjQtMTUuNDM5IDIzLjQxMiA0Ljc5NCAxLjc0OCA4Ljg5MSA0LjgzOCAxMC44NCA3LjM5NyAzLjA5NCA0LjM2OSAzLjYyOCA4LjI3MSAzLjYyOCAxNi4xMTZ2MTcuMjU1aC0yMi4xMDRsLTAuMDgzLTExLjA3N2MwLTUuMjg1IDAuNTI4LTEyLjg4Ni0zLjQ1OC0xNy4xMTItMy4yMDItMy4wOS04LjA4My0zLjc2LTE1Ljk3My0zLjc2aC0yMy41MjN2MzEuOTVoLTIxLjkxNHYtODcuODM4aDUwLjQwMWMxMS4xOTkgMCAxOS40NTEgMC4yODMgMjYuNTM1IDQuMjA3IDYuOTMzIDMuOTI0IDExLjA5IDkuNjUyIDExLjA5IDE5LjQ1em0tMjcuNjk5IDEzLjA0MmMtMy4wMTMgMS43NTItNi41NzMgMS44MS0xMC44NDEgMS44MWgtMjYuNjJ2LTE5LjUxaDI2Ljk4MmMzLjgxOCAwIDcuODA0IDAuMTY0IDEwLjM5MyAxLjU4NCAyLjg0MiAxLjI4IDQuNjAxIDQuMDAzIDQuNjAxIDcuNzY1IDAgMy44NC0xLjY3NCA2LjkyOS00LjUxNSA4LjM1MXptNjIuODQ0IDUxLjEzOGgtMjIuMzU4di04Ny44MzdoMjIuMzU4djg3LjgzN3ptMjU5LjU2IDBoLTMxLjA1M2wtNDEuNTM1LTY1LjkyN3Y2NS45MjdoLTQ0LjYyOGwtOC41MjctMTkuNTkyaC00NS41MjFsLTguMjcxIDE5LjU5MmgtMjUuNjQ4Yy0xMC42NDkgMC0yNC4xMzgtMi4yNTctMzEuNzczLTkuNzE1LTcuNzAxLTcuNDU4LTExLjcwOC0xNy41Ni0xMS43MDgtMzMuNTMzIDAtMTMuMDI3IDIuMzk1LTI0LjkzNiAxMS44MTItMzQuMzQ3IDcuMDg1LTcuMDEgMTguMTgtMTAuMjQyIDMzLjI4LTEwLjI0MmgyMS4yMTV2MTguODIxaC0yMC43NzFjLTcuOTk3IDAtMTIuNTE0IDEuMTQtMTYuODYyIDUuMjAzLTMuNzM1IDMuNjk5LTYuMjk4IDEwLjY5LTYuMjk4IDE5Ljg5NyAwIDkuNDEgMS45NTEgMTYuMTk2IDYuMDIzIDIwLjYyOCAzLjM3MyAzLjQ3NiA5LjUwNiA0LjUzIDE1LjI3MiA0LjUzaDkuODQybDMwLjg4NC02OS4wNzZoMzIuODM1bDM3LjEwMiA4My4wODF2LTgzLjA4aDMzLjM2NmwzOC41MTkgNjEuMTc0di02MS4xNzRoMjIuNDQ1djg3LjgzM3ptLTEzMy4yLTM3LjgybC0xNS4xNjUtMzUuMDE3LTE1LjA4MSAzNS4wMTdoMzAuMjQ2em0xODkuMDQgMTc4LjA4Yy01LjMyMiA3LjQ1Ny0xNS42OTQgMTEuMjM4LTI5LjczNiAxMS4yMzhoLTQyLjMxOXYtMTguODRoNDIuMTQ3YzQuMTgxIDAgNy4xMDYtMC41MjcgOC44NjgtMi4xNzUgMS42NjUtMS40NzQgMi42MDUtMy41NTQgMi41OTEtNS43MjkgMC0yLjU2MS0xLjA2NC00LjU5My0yLjY3Ny01LjgxMS0xLjU5LTEuMzQyLTMuOTA0LTEuOTUtNy43MjItMS45NS0yMC41NzQtMC42Ny00Ni4yNDQgMC42MDgtNDYuMjQ0LTI3LjE5NCAwLTEyLjc0MiA4LjQ0My0yNi4xNTYgMzEuNDM5LTI2LjE1Nmg0My42NDl2LTE3LjQ3OWgtNDAuNTU3Yy0xMi4yMzcgMC0yMS4xMjkgMi44MS0yNy40MjUgNy4xNzR2LTcuMTc1aC01OS45ODVjLTkuNTk1IDAtMjAuODU0IDIuMjc5LTI2LjE3OSA3LjE3NXYtNy4xNzVoLTEwNy4xMnY3LjE3NWMtOC41MjQtNS44OTItMjIuOTA4LTcuMTc1LTI5LjU0OS03LjE3NWgtNzAuNjU2djcuMTc1Yy02Ljc0NS02LjI1OC0yMS43NDItNy4xNzUtMzAuODg2LTcuMTc1aC03OS4wNzdsLTE4LjA5NCAxOC43NjQtMTYuOTQ5LTE4Ljc2NGgtMTE4LjEzdjEyMi41OWgxMTUuOWwxOC42NDYtMTkuMDYyIDE3LjU2NSAxOS4wNjIgNzEuNDQyIDAuMDYxdi0yOC44MzhoNy4wMjFjOS40NzkgMC4xNCAyMC42Ni0wLjIyOCAzMC41MjMtNC4zMTJ2MzMuMDg1aDU4LjkyOHYtMzEuOTUyaDIuODQyYzMuNjI4IDAgMy45ODUgMC4xNDQgMy45ODUgMy42MTV2MjguMzMzaDE3OS4wMWMxMS4zNjQgMCAyMy4yNDQtMi43ODYgMjkuODI0LTcuODQ1djcuODQ1aDU2Ljc4YzExLjgxNSAwIDIzLjM1NC0xLjU4NyAzMi4xMzQtNS42NDlsMmUtMyAtMjIuODR6bS0zNTQuOTQtNDcuMTU1YzAgMjQuNDA2LTE5LjAwNSAyOS40NDUtMzguMTU5IDI5LjQ0NWgtMjcuMzQzdjI5LjQ2OWgtNDIuNTkxbC0yNi45ODQtMjkuMDg2LTI4LjA0MiAyOS4wODZoLTg2LjgwMnYtODcuODU5aDg4LjEzNWwyNi45NjEgMjguNzk5IDI3Ljg3NS0yOC43OTloNzAuMDIxYzE3LjM4OSAwIDM2LjkyOSA0LjYxMyAzNi45MjkgMjguOTQ1em0tMTc0LjIyIDQwLjQzNGgtNTMuODc4di0xNy40OGg0OC4xMXYtMTcuOTI2aC00OC4xMXYtMTUuOTc0aDU0LjkzOWwyMy45NjkgMjUuNjA0LTI1LjAzIDI1Ljc3NnptODYuODEgMTAuMDZsLTMzLjY0NC0zNS43ODkgMzMuNjQ0LTM0LjY1djcwLjQzOXptNDkuNzU3LTM5LjA2NmgtMjguMzE4di0yMi4zNzRoMjguNTcyYzcuOTEyIDAgMTMuNDA0IDMuMDkgMTMuNDA0IDEwLjc3MiAwIDcuNTk5LTUuMjM4IDExLjYwMi0xMy42NTggMTEuNjAyem0xNDguMzYtNDAuMzczaDczLjEzOHYxOC4xN2gtNTEuMzE1djE1Ljk3M2g1MC4wNjJ2MTcuOTI2aC01MC4wNjJ2MTcuNDhsNTEuMzE0IDAuMDh2MTguMjNoLTczLjEzOWwyZS0zIC04Ny44NTl6bS0yOC4xMTkgNDcuMDI5YzQuODc4IDEuNzI1IDguODY1IDQuODE2IDEwLjczNCA3LjM3NSAzLjA5NSA0LjI5MSAzLjU0MiA4LjI5NCAzLjYzMSAxNi4wMzd2MTcuNDE4aC0yMi4wMDJ2LTEwLjk5MmMwLTUuMjg2IDAuNTMxLTEzLjExMi0zLjU0Mi0xNy4xOTgtMy4yMDEtMy4xNDctOC4wODMtMy44OTktMTYuMDc2LTMuODk5aC0yMy40MnYzMi4wOWgtMjIuMDJ2LTg3Ljg1OWg1MC41OTRjMTEuMDkzIDAgMTkuMTczIDAuNDcgMjYuMzY2IDQuMTQ2IDYuOTE1IDQuMDA0IDExLjI2NiA5LjQ4NyAxMS4yNjYgMTkuNTExLTFlLTMgMTQuMDIyLTkuNzY0IDIxLjE3OC0xNS41MzEgMjMuMzcxem0tMTIuMzg1LTExLjEwN2MtMi45MzIgMS42NjctNi41NTYgMS44MTEtMTAuODE4IDEuODExaC0yNi42MjJ2LTE5LjczMmgyNi45ODJjMy45MDIgMCA3LjgwNyAwLjA4IDEwLjQ1OCAxLjU4NyAyLjg0IDEuNDIzIDQuNTM4IDQuMTQ2IDQuNTM4IDcuOTAzIDAgMy43NTgtMS42OTkgNi43ODYtNC41MzggOC40MzF6bTE5Ny44MiA1LjU5N2M0LjI3IDQuMjI5IDYuNTU0IDkuNTcxIDYuNTU0IDE4LjYxMyAwIDE4LjktMTIuMzIyIDI3LjcyMy0zNC40MjUgMjcuNzIzaC00Mi42OHYtMTguODRoNDIuNTFjNC4xNTcgMCA3LjEwNC0wLjUyNSA4Ljk1LTIuMTc1IDEuNTA4LTEuMzU4IDIuNTg5LTMuMzMzIDIuNTg5LTUuNzI5IDAtMi41NjEtMS4xNy00LjU5Mi0yLjY3NS01LjgxMS0xLjY3NS0xLjM0LTMuOTg2LTEuOTQ5LTcuODAzLTEuOTQ5LTIwLjQ5My0wLjY3LTQ2LjE1NyAwLjYwOS00Ni4xNTctMjcuMTkyIDAtMTIuNzQ0IDguMzU1LTI2LjE1OCAzMS4zMy0yNi4xNThoNDMuOTMydjE4LjdoLTQwLjE5OGMtMy45ODQgMC02LjU3NSAwLjE0NS04Ljc3OSAxLjU4Ny0yLjQgMS40MjItMy4yOSAzLjUzNC0zLjI5IDYuMzE5IDAgMy4zMTQgMi4wMzcgNS41NyA0Ljc5NSA2LjU0NiAyLjMxMSAwLjc3IDQuNzk1IDAuOTk1IDguNTI2IDAuOTk1bDExLjc5NyAwLjMwNmMxMS44OTUgMC4yNzYgMjAuMDYxIDIuMjQ4IDI1LjAyNCA3LjA2NXptODYuOTU1LTIzLjUyaC0zOS45MzhjLTMuOTg2IDAtNi42MzggMC4xNDQtOC44NjcgMS41ODctMi4zMTIgMS40MjMtMy4yMDIgMy41MzQtMy4yMDIgNi4zMjIgMCAzLjMxNCAxLjk1MSA1LjU2OCA0Ljc5MSA2LjU0NCAyLjMxMiAwLjc3MSA0Ljc5NSAwLjk5NiA4LjQ0NCAwLjk5NmwxMS44NzggMC4zMDRjMTEuOTgzIDAuMjg0IDE5Ljk4MiAyLjI1OCAyNC44NiA3LjA3MiAwLjg5MSAwLjY3IDEuNDIyIDEuNDIyIDIuMDMzIDIuMTc1di0yNWgxZS0zeiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg0K",
+  discover: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSI3ODAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNzgwIDUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik01NC45OTIgMEMwIDAgMCAwIDAgMHYwQzAgMCAwIDAgMCA1MDFoNjcwLjAxNkM3NTUuMzczIDUwMSA3ODAgNDc2LjM3IDc4MCA0NDUuOTk2VjBDMCAwIDc1NS4zODEgMCA3MjUuMDA4IDBINTQuOTkyeiIgZmlsbD0iIzRENEQ0RCIvPjxwYXRoIGQ9Ik0zMjcuMTUyIDE2MS44OTNjOC44MzcgMCAxNi4yNDggMS43ODQgMjUuMjY4IDYuMDl2MjIuNzUxYy04LjU0NC03Ljg2My0xNS45NTUtMTEuMTU0LTI1Ljc1Ni0xMS4xNTQtMTkuMjY0IDAtMzQuNDE0IDE1LjAxNS0zNC40MTQgMzQuMDUgMCAyMC4wNzUgMTQuNjgxIDM0LjE5NiAzNS4zNyAzNC4xOTYgOS4zMTIgMCAxNi41ODYtMy4xMiAyNC44LTEwLjg1N3YyMi43NjNjLTkuMzQxIDQuMTQtMTYuOTExIDUuNzc2LTI1Ljc1NiA1Ljc3Ni0zMS4yNzggMC01NS41ODItMjIuNTk2LTU1LjU4Mi01MS43MzcgMC0yOC44MjYgMjQuOTUxLTUxLjg3OCA1Ni4wNy01MS44Nzh6bS05Ny4xMTMuNjI3YzExLjU0NiAwIDIyLjExIDMuNzIgMzAuOTQzIDEwLjk5NGwtMTAuNzQ4IDEzLjI0OGMtNS4zNS01LjY0Ni0xMC40MS04LjAyOC0xNi41NjQtOC4wMjgtOC44NTMgMC0xNS4zIDQuNzQ1LTE1LjMgMTAuOTg5IDAgNS4zNTQgMy42MTkgOC4xODggMTUuOTQ0IDEyLjQ4MiAyMy4zNjUgOC4wNDQgMzAuMjkgMTUuMTc2IDMwLjI5IDMwLjkyNiAwIDE5LjE5My0xNC45NzYgMzIuNTUzLTM2LjMyIDMyLjU1My0xNS42MyAwLTI2Ljk5NC01Ljc5NS0zNi40NTgtMTguODcybDEzLjI2OC0xMi4wM2M0LjczIDguNjEgMTIuNjIyIDEzLjIyMiAyMi40MiAxMy4yMjIgOS4xNjMgMCAxNS45NDctNS45NTIgMTUuOTQ3LTEzLjk4NCAwLTQuMTY0LTIuMDU1LTcuNzM0LTYuMTU4LTEwLjI1OC0yLjA2Ni0xLjE5NS02LjE1OC0yLjk3Ny0xNC4yLTUuNjQ3LTE5LjI5MS02LjUzOC0yNS45MS0xMy41MjctMjUuOTEtMjcuMTg1IDAtMTYuMjI1IDE0LjIxNC0yOC40MSAzMi44NDYtMjguNDF6bTIzNC43MjMgMS43MjhoMjIuNDM3bDI4LjA4NCA2Ni41OTIgMjguNDQ2LTY2LjU5MmgyMi4yNjdsLTQ1LjQ5NCAxMDEuNjg2aC0xMS4wNTNsLTQ0LjY4Ny0xMDEuNjg2em0tMzk3LjM0OC4xNTJoMzAuMTVjMzMuMzEyIDAgNTYuNTM0IDIwLjM4MiA1Ni41MzQgNDkuNjQxIDAgMTQuNTktNy4xMDQgMjguNjk2LTE5LjExOCAzOC4wNTctMTAuMTA4IDcuOTAxLTIxLjYyNiAxMS40NDUtMzcuNTc0IDExLjQ0NUg2Ny40MTRWMTY0LjR6bTk2LjEzNSAwaDIwLjU0djk5LjE0M2gtMjAuNTRWMTY0LjR6bTQxMS43MzQgMGg1OC4yNTJ2MTYuOEg1OTUuODF2MjIuMDA1aDM2LjMzNnYxNi43OTFoLTM2LjMzNnYyNi43NjJoMzcuNzI2djE2Ljc4NWgtNTguMjUyVjE2NC40em03MS44NTggMGgzMC40NTVjMjMuNjkgMCAzNy4yNjUgMTAuNzEgMzcuMjY1IDI5LjI3MiAwIDE1LjE4LTguNTE0IDI1LjE0LTIzLjk4NiAyOC4xMDVsMzMuMTQ4IDQxLjc2NmgtMjUuMjZsLTI4LjQyOS0zOS44MjhoLTIuNjc4djM5LjgyOGgtMjAuNTE1VjE2NC40em0yMC41MTUgMTUuNjE2djMwLjAyNWg2LjAwMmMxMy4xMTcgMCAyMC4wNjktNS4zNjIgMjAuMDY5LTE1LjMyOCAwLTkuNjQ4LTYuOTU0LTE0LjY5Ny0xOS43NDUtMTQuNjk3aC02LjMyNnpNODcuOTQgMTgxLjE5OXY2NS41NTloNS41MTJjMTMuMjczIDAgMjEuNjU2LTIuMzk0IDI4LjExLTcuODggNy4xMDMtNS45NTUgMTEuMzc2LTE1LjQ2NSAxMS4zNzYtMjQuOTggMC05LjQ5OS00LjI3My0xOC43MjUtMTEuMzc2LTI0LjY4MS02Ljc4NS01Ljc4LTE0LjgzNy04LjAxOC0yOC4xMS04LjAxOEg4Ny45NHoiIGZpbGw9IiNGRkYiLz48cGF0aCBkPSJNNDE1LjEzIDE2MS4yMTNjMzAuOTQxIDAgNTYuMDIyIDIzLjU4IDU2LjAyMiA1Mi43MDl2LjAzM2MwIDI5LjEzLTI1LjA4MSA1Mi43NDItNTYuMDIxIDUyLjc0MnMtNTYuMDIyLTIzLjYxMy01Ni4wMjItNTIuNzQydi0uMDMzYzAtMjkuMTMgMjUuMDgyLTUyLjcxIDU2LjAyMi01Mi43MXpNNzc5Ljk4MyAyODguMzZjLTI2LjA1IDE4LjMzLTIyMS4wNzcgMTQ5LjM0LTU1OC43NTQgMjEyLjYyM0g3MjQuOTljMzAuMzY1IDAgNTQuOTkyLTAgNTQuOTkyLTBWMHoiIGZpbGw9IiNGNDcyMTYiLz48L2c+PC9zdmc+Cg=="
+};
+</script>
+<script>
 
 const S = {
   step:1,
@@ -1447,17 +1522,19 @@ const S = {
   // Assets & equity (exact amounts)
   assetAmount:0,
   homeValue:0, homeMortgage:0,
+  ownsRealEstate:'',
   carValue:0,  carLoan:0,
   firstName:'', lastName:'', email:'', phone:'',
   filingStatus:'',
   bankBalance:0, investmentsAmount:0,
   state:'', county:'', householdSize:'', vehiclesOwned:'',
   monthlyIncome:0,
+  additionalIncome:0,
   paymentPlan:'full',
   caseNum:'', leadId:''
 };
 
-const TOTAL_STEPS = 17;
+const TOTAL_STEPS = 19;
 const STORAGE_KEY = 'sympletax_portal_state_v1';
 
 function saveLocalState(){
@@ -1504,12 +1581,22 @@ function captureFormToState(){
     } else if(step === 7){
       const el = document.getElementById('irsPlanMonthly');
       if(el){ const r = el.value.replace(/[^0-9]/g,''); S.irsPlanMonthlyAmount = parseInt(r) || 0; }
-    } else if(step === 9){
+    } else if(step === 10){
       const bb = document.getElementById('bankBalance');
       const inv = document.getElementById('investments');
       if(bb){ const r = bb.value.replace(/[^0-9]/g,''); S.bankBalance = parseInt(r) || 0; }
       if(inv){ const r = inv.value.replace(/[^0-9]/g,''); S.investmentsAmount = parseInt(r) || 0; }
-    } else if(step === 10){
+    } else if(step === 11){
+      const grossEl = document.getElementById('monthlyGross');
+      const addlEl = document.getElementById('additionalIncome');
+      if(grossEl){ const r = grossEl.value.replace(/[^0-9]/g,''); S.monthlyIncome = parseInt(r) || 0; }
+      if(addlEl){ const r = addlEl.value.replace(/[^0-9]/g,''); S.additionalIncome = parseInt(r) || 0; }
+    } else if(step === 12){
+      const hv = document.getElementById('homeValue');
+      const hm = document.getElementById('homeMortgage');
+      if(hv){ const r = hv.value.replace(/[^0-9]/g,''); S.homeValue = parseInt(r) || 0; }
+      if(hm){ const r = hm.value.replace(/[^0-9]/g,''); S.homeMortgage = parseInt(r) || 0; }
+    } else if(step === 13){
       const st = document.getElementById('stateSelect');
       const co = document.getElementById('countyInput');
       if(st) S.state = st.value || '';
@@ -1538,7 +1625,7 @@ function normalizeLoadedState(){
   [
     'debtAmount','irsPlanMonthlyAmount','bankBalance','investmentsAmount',
     'assetAmount','homeValue','homeMortgage','carValue','carLoan',
-    'monthlyIncome',
+    'monthlyIncome','additionalIncome',
     'expHousing','expFood','expClothing','expPersonalCare','expHousehold','expOther','expCarPayment','expGas','expInsuranceMaintenance','expUtilities','expMedical',
     'expHealthInsurance','expChildcare','expOtherTax','expOtherObligations'
   ].forEach(k=>{ S[k] = parseInt(S[k],10) || 0; });
@@ -1555,7 +1642,12 @@ const INC_MID = {under30:22500,s30to50:40000,s50to75:62500,s75to100:87500,s100to
 const DEBT_RANGE_MID = {under_5k:2500, '5k_10k':7500, '10k_25k':17500, '25k_50k':37500, '50k_75k':62500, '75k_plus':100000};
 
 const debt  = ()=> S.debtAmount || (DEBT_RANGE_MID[S.debtRange] || 25000);
-const inc   = ()=> (S.monthlyIncome && S.monthlyIncome > 0) ? (S.monthlyIncome * 12) : (INC_MID[S.income] || 55000);
+const inc   = ()=> {
+  const gross = S.monthlyIncome || 0;
+  const addl = S.additionalIncome || 0;
+  const total = gross + addl;
+  return total > 0 ? (total * 12) : (INC_MID[S.income] || 55000);
+};
 const exp   = ()=> {
   const total = (S.expHousing||0)+(S.expFood||0)+(S.expClothing||0)+(S.expPersonalCare||0)+(S.expHousehold||0)+(S.expCarPayment||0)+(S.expGas||0)+(S.expInsuranceMaintenance||0)+(S.expUtilities||0)+(S.expMedical||0)+(S.expOther||0)+(S.expHealthInsurance||0)+(S.expChildcare||0)+(S.expOtherTax||0)+(S.expOtherObligations||0);
   return total || 2500;
@@ -1842,19 +1934,39 @@ function s5(){
   `;
 }
 
-// ── S6: IRS Balance (how much you owe) ─────────────
+// ── S6: IRS Balance + Where You Fall ─────────────
 function s6(){
-  const displayVal = S.debtAmount ? S.debtAmount.toLocaleString() : '';
+  const amt = S.debtAmount || 0;
+  const displayVal = amt ? amt.toLocaleString() : '';
+  const maxBar = 100000;
+  const pct = Math.min(amt / maxBar, 1) * 100;
+  const dotLeft = Math.max(2, Math.min(98, pct));
+  let summaryMsg = 'This is well within the range we resolve every day.';
+  if (amt >= 75000) summaryMsg = 'We regularly help clients with balances in this range.';
+  else if (amt >= 10000) summaryMsg = 'This is in the typical range we help clients with.';
   return `
     <div class="eyebrow"><div class="eyebrow-dot"></div>Tax Balance</div>
-    <h1 class="hed">Do you know roughly how much you owe the IRS?</h1>
-    <p class="sub">A ballpark figure works — we'll confirm the exact amount when we pull your transcripts.</p>
-    <div class="field" style="margin-bottom:24px">
-      <label>Estimated balance owed</label>
-      <div class="debt-input-wrap">
+    <h1 class="hed">Do you know roughly how much you owe?</h1>
+    <p class="sub">Don't worry if you're not sure — we pull your IRS transcripts to get the real number. This just helps us start.</p>
+    <div class="irs-balance-card">
+      <label>IRS balance</label>
+      <div class="debt-input-wrap" style="margin-bottom:0">
         <span class="debt-prefix">$</span>
-        <input id="debtAmount2" class="debt-input" type="text" inputmode="numeric" placeholder="e.g. 7,500" value="${displayVal}" oninput="formatDebtInput(this)" onkeydown="if(event.key==='Enter')saveDebtConfirmAndGo()">
+        <input id="debtAmount2" class="debt-input" type="text" inputmode="numeric" placeholder="e.g. 3,500" value="${displayVal}" oninput="formatDebtInput(this);render()" onkeydown="if(event.key==='Enter')saveDebtConfirmAndGo()">
       </div>
+    </div>
+    <div class="where-you-fall">
+      <span class="where-you-fall-lbl">Where you fall</span>
+      <div class="where-you-fall-bar">
+        <div class="where-you-fall-fill" style="width:${pct}%"></div>
+        <div class="where-you-fall-dot" style="left:${dotLeft}%"></div>
+      </div>
+      <div class="where-you-fall-labels">
+        <span>$0</span>
+        <span class="where-you-fall-mid">Most clients: $10k–$75k</span>
+        <span>$100k+</span>
+      </div>
+      <p class="where-you-fall-summary">Your estimated total: <strong>$${amt ? amt.toLocaleString() : '0'}</strong>. ${summaryMsg}</p>
     </div>
     <button class="cta teal" onclick="saveDebtConfirmAndGo()">
       Continue
@@ -2030,6 +2142,105 @@ function s10(){
   `;
 }
 
+// ── S10a: Monthly Income (after bank) ───────────────────
+function s10_income(){
+  const name = S.firstName ? S.firstName.trim() : '';
+  const heading = name ? name + ", how much do you earn each month?" : "How much do you earn each month?";
+  const grossDisp = S.monthlyIncome ? S.monthlyIncome.toLocaleString() : '';
+  const addlDisp = S.additionalIncome ? S.additionalIncome.toLocaleString() : '';
+  const totalMo = (S.monthlyIncome || 0) + (S.additionalIncome || 0);
+  const liability = debt();
+  const arrowIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+  return `
+    <div class="eyebrow"><div class="eyebrow-dot"></div>Income</div>
+    <h1 class="hed">${heading}</h1>
+    <p class="sub">Your total pay before taxes and deductions. The IRS uses this to calculate what you can afford.</p>
+    <div class="field" style="margin-bottom:24px">
+      <div class="section-with-icon">
+        <span class="sicon bank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M3 10h18"/><path d="M5 6l7-3 7 3"/><path d="M4 10v11"/><path d="M20 10v11"/><path d="M8 14v3"/><path d="M12 14v3"/><path d="M16 14v3"/></svg>
+        </span>
+        Monthly gross income
+      </div>
+      <div class="debt-input-wrap">
+        <span class="debt-prefix">$</span>
+        <input id="monthlyGross" class="debt-input" type="text" inputmode="numeric" placeholder="e.g. 10,000" value="${grossDisp}" oninput="formatMonthlyGrossInput(this);render()" onkeydown="if(event.key==='Enter')document.getElementById('additionalIncome')?.focus()">
+      </div>
+    </div>
+    <div class="field" style="margin-bottom:24px">
+      <div class="section-with-icon">
+        <span class="sicon invest">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </span>
+        Any additional income? <span style="font-weight:400;color:var(--muted);text-transform:none;font-size:14px">(optional)</span>
+      </div>
+      <p class="sub" style="margin:-8px 0 12px 0;font-size:13px">Side jobs, rental income, Social Security, etc.</p>
+      <div class="debt-input-wrap">
+        <span class="debt-prefix">$</span>
+        <input id="additionalIncome" class="debt-input" type="text" inputmode="numeric" placeholder="0" value="${addlDisp}" oninput="formatAdditionalIncomeInput(this);render()" onkeydown="if(event.key==='Enter')saveIncomeAndGo()">
+      </div>
+    </div>
+    ${totalMo > 0 ? `
+    <div class="income-summary-box">
+      <div class="income-summary-icon">${arrowIcon}</div>
+      <div>With <strong>$${totalMo.toLocaleString()}/mo income</strong> and a <strong>$${liability.toLocaleString()} liability</strong>, the IRS will look at what you can afford each month. That's what we'll figure out in the expenses section.</div>
+    </div>
+    ` : ''}
+    <button class="cta teal" onclick="saveIncomeAndGo()">
+      Continue
+      <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <button class="back-btn" onclick="go(10)">&larr; Back</button>
+  `;
+}
+
+// ── S10b: Real Estate (after bank, after income) ────────────────────────
+function s10_realestate(){
+  const homeValDisp = S.homeValue ? S.homeValue.toLocaleString() : '';
+  const mortgageDisp = S.homeMortgage ? S.homeMortgage.toLocaleString() : '';
+  const showDetails = S.ownsRealEstate === 'yes';
+  const peopleIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>';
+  const houseIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>';
+  return `
+    <div class="eyebrow"><div class="eyebrow-dot"></div>Assets</div>
+    <h1 class="hed">Do you own any real estate?</h1>
+    <p class="sub">Your home, rental property, or land.</p>
+    <p class="sub" style="margin-bottom:20px">Do you own any property?</p>
+    <div class="btn-grid col2 realestate-yesno" style="margin-bottom:20px">
+      <button type="button" class="gbtn${S.ownsRealEstate==='yes'?' sel':''}" onclick="S.ownsRealEstate='yes';document.querySelectorAll('.realestate-yesno .gbtn').forEach(b=>b.classList.remove('sel'));this.classList.add('sel');S.homeValue=S.homeValue||0;S.homeMortgage=S.homeMortgage||0;render()">Yes</button>
+      <button type="button" class="gbtn${S.ownsRealEstate==='no'?' sel':''}" onclick="S.ownsRealEstate='no';document.querySelectorAll('.realestate-yesno .gbtn').forEach(b=>b.classList.remove('sel'));this.classList.add('sel');S.homeValue=0;S.homeMortgage=0;render()">No</button>
+    </div>
+    <div class="realestate-notice">
+      ${peopleIcon}
+      <span>Owning property doesn't disqualify you — the IRS allows reasonable equity.</span>
+    </div>
+    ${showDetails ? `
+    <div class="property-details-card">
+      <div class="property-details-title">${houseIcon} Property details</div>
+      <div class="field" style="margin-bottom:20px">
+        <label>Roughly, what is it worth?</label>
+        <div class="debt-input-wrap">
+          <span class="debt-prefix">$</span>
+          <input id="homeValue" class="debt-input" type="text" inputmode="numeric" placeholder="Estimated value" value="${homeValDisp}" oninput="formatPropertyValue(this)" onkeydown="if(event.key==='Enter')document.getElementById('homeMortgage')?.focus()">
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>How much do you still owe on it?</label>
+        <div class="debt-input-wrap">
+          <span class="debt-prefix">$</span>
+          <input id="homeMortgage" class="debt-input" type="text" inputmode="numeric" placeholder="Mortgage balance" value="${mortgageDisp}" oninput="formatPropertyMortgage(this)" onkeydown="if(event.key==='Enter')saveRealEstateAndGo()">
+        </div>
+      </div>
+    </div>
+    ` : ''}
+    <button class="cta teal" onclick="saveRealEstateAndGo()">
+      Continue
+      <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <button class="back-btn" onclick="go(11)">&larr; Back</button>
+  `;
+}
+
 // ── S11: Location (State, County, Household, Vehicles) ───
 function s11(){
   const name = S.firstName ? S.firstName.trim() : '';
@@ -2088,7 +2299,7 @@ function s11(){
       Continue
       <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
-    <button class="back-btn" onclick="go(10)">&larr; Back</button>
+    <button class="back-btn" onclick="go(12)">&larr; Back</button>
   `;
 }
 
@@ -2160,7 +2371,7 @@ function s12(){
     </div>
 
     <div class="btn-row" style="margin-top:24px">
-      <button class="back-btn" onclick="go(11)">&larr; Back</button>
+      <button class="back-btn" onclick="go(13)">&larr; Back</button>
       <button class="cta teal" onclick="saveFinancialsAndGo()">Continue</button>
     </div>
   `;
@@ -2198,7 +2409,7 @@ function s13_obligations(){
     ${mkOblig('expOtherObligations','Any other monthly obligations','other',iconOther)}
 
     <div class="btn-row" style="margin-top:24px">
-      <button class="back-btn" onclick="go(12)">&larr; Back</button>
+      <button class="back-btn" onclick="go(14)">&larr; Back</button>
       <button class="cta teal" onclick="saveObligationsAndGo()">
         Continue
         <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -2349,7 +2560,7 @@ function s14(){
       </table>
     </div>
 
-    <button class="cta teal" onclick="go(16)">
+    <button class="cta teal" onclick="go(17)">
       Looks good — continue
       <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
@@ -2446,10 +2657,10 @@ function s15(){
     <p class="sec-lbl" style="margin-bottom:8px">Payment Details</p>
     <div class="payment-icons">
       <span class="payment-icons-label">We accept</span>
-      <div class="payment-icon" title="Visa" aria-hidden="true"><img src="assets/payment-icons/visa.svg" alt="Visa" width="48" height="24"></div>
-      <div class="payment-icon" title="Mastercard" aria-hidden="true"><img src="assets/payment-icons/mastercard.svg" alt="Mastercard" width="48" height="24"></div>
-      <div class="payment-icon" title="American Express" aria-hidden="true"><img src="assets/payment-icons/amex.svg" alt="American Express" width="48" height="24"></div>
-      <div class="payment-icon" title="Discover" aria-hidden="true"><img src="assets/payment-icons/discover.svg" alt="Discover" width="48" height="24"></div>
+      <div class="payment-icon" title="Visa" aria-hidden="true"><img src="${PAYMENT_ICONS.visa}" alt="Visa" width="48" height="24"></div>
+      <div class="payment-icon" title="Mastercard" aria-hidden="true"><img src="${PAYMENT_ICONS.mastercard}" alt="Mastercard" width="48" height="24"></div>
+      <div class="payment-icon" title="American Express" aria-hidden="true"><img src="${PAYMENT_ICONS.amex}" alt="American Express" width="48" height="24"></div>
+      <div class="payment-icon" title="Discover" aria-hidden="true"><img src="${PAYMENT_ICONS.discover}" alt="Discover" width="48" height="24"></div>
     </div>
     <p class="sub" style="font-size:12px;color:var(--muted);margin-bottom:12px">or checkout using a credit card</p>
     <div class="fields" id="cardFields">
@@ -2478,10 +2689,10 @@ function s15(){
       <div class="titem"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>256-bit SSL</div>
       <div class="titem"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>PCI Compliant</div>
       <div class="titem payment-icons-inline">
-        <img src="assets/payment-icons/visa.svg" alt="Visa" class="payment-icon-sm" title="Visa" width="32" height="20">
-        <img src="assets/payment-icons/mastercard.svg" alt="Mastercard" class="payment-icon-sm" title="Mastercard" width="32" height="20">
-        <img src="assets/payment-icons/amex.svg" alt="American Express" class="payment-icon-sm" title="Amex" width="32" height="20">
-        <img src="assets/payment-icons/discover.svg" alt="Discover" class="payment-icon-sm" title="Discover" width="32" height="20">
+        <img src="${PAYMENT_ICONS.visa}" alt="Visa" class="payment-icon-sm" title="Visa" width="32" height="20">
+        <img src="${PAYMENT_ICONS.mastercard}" alt="Mastercard" class="payment-icon-sm" title="Mastercard" width="32" height="20">
+        <img src="${PAYMENT_ICONS.amex}" alt="American Express" class="payment-icon-sm" title="Amex" width="32" height="20">
+        <img src="${PAYMENT_ICONS.discover}" alt="Discover" class="payment-icon-sm" title="Discover" width="32" height="20">
       </div>
     </div>
 
@@ -2520,7 +2731,7 @@ function s16(){
   `;
 }
 
-const STEPS = {1:s1,2:s2,3:s3,4:s4,5:s5,6:s6,7:s7,8:s8,9:s9,10:s10,11:s11,12:s12,13:s13_obligations,14:s13,15:s14,16:s15,17:s16};
+const STEPS = {1:s1,2:s2,3:s3,4:s4,5:s5,6:s6,7:s7,8:s8,9:s9,10:s10,11:s10_income,12:s10_realestate,13:s11,14:s12,15:s13_obligations,16:s13,17:s14,18:s15,19:s16};
 
 // ══════════════════════════════════════════
 //  HELPERS
@@ -2960,13 +3171,63 @@ function formatInvestmentsInput(el){
   else el.value = '';
   debouncedSave();
 }
+function formatMonthlyGrossInput(el){
+  const raw = el.value.replace(/[^0-9]/g,'');
+  S.monthlyIncome = parseInt(raw) || 0;
+  if(raw) el.value = parseInt(raw).toLocaleString();
+  else el.value = '';
+  debouncedSave();
+}
+function formatAdditionalIncomeInput(el){
+  const raw = el.value.replace(/[^0-9]/g,'');
+  S.additionalIncome = parseInt(raw) || 0;
+  if(raw) el.value = parseInt(raw).toLocaleString();
+  else el.value = '';
+  debouncedSave();
+}
+function saveIncomeAndGo(){
+  const grossEl = document.getElementById('monthlyGross');
+  const addlEl = document.getElementById('additionalIncome');
+  if(grossEl){ const raw = grossEl.value.replace(/[^0-9]/g,''); S.monthlyIncome = parseInt(raw) || 0; }
+  if(addlEl){ const raw = addlEl.value.replace(/[^0-9]/g,''); S.additionalIncome = parseInt(raw) || 0; }
+  if(!S.monthlyIncome && !S.additionalIncome){ alert('Please enter your monthly income.'); return; }
+  go(12);
+}
+
 function saveBankAndGo(){
   const el = document.getElementById('bankBalance');
-  if(el){
-    const raw = el.value.replace(/[^0-9]/g,'');
-    S.bankBalance = parseInt(raw) || 0;
-  }
+  const invEl = document.getElementById('investments');
+  if(el){ const raw = el.value.replace(/[^0-9]/g,''); S.bankBalance = parseInt(raw) || 0; }
+  if(invEl){ const raw = invEl.value.replace(/[^0-9]/g,''); S.investmentsAmount = parseInt(raw) || 0; }
   go(11);
+}
+
+function formatPropertyValue(el){
+  const raw = el.value.replace(/[^0-9]/g,'');
+  S.homeValue = parseInt(raw) || 0;
+  if(raw) el.value = parseInt(raw).toLocaleString();
+  else el.value = '';
+  debouncedSave();
+}
+function formatPropertyMortgage(el){
+  const raw = el.value.replace(/[^0-9]/g,'');
+  S.homeMortgage = parseInt(raw) || 0;
+  if(raw) el.value = parseInt(raw).toLocaleString();
+  else el.value = '';
+  debouncedSave();
+}
+function saveRealEstateAndGo(){
+  if(S.ownsRealEstate === 'yes'){
+    const hv = document.getElementById('homeValue');
+    const hm = document.getElementById('homeMortgage');
+    if(hv){ const raw = hv.value.replace(/[^0-9]/g,''); S.homeValue = parseInt(raw) || 0; }
+    if(hm){ const raw = hm.value.replace(/[^0-9]/g,''); S.homeMortgage = parseInt(raw) || 0; }
+  } else {
+    S.homeValue = 0;
+    S.homeMortgage = 0;
+  }
+  if(!S.ownsRealEstate){ alert('Please select Yes or No.'); return; }
+  go(13);
 }
 
 function onStateChange(val){
@@ -2982,7 +3243,7 @@ function saveLocationAndGo(){
   if(!S.county){ alert('Please enter or select your county.'); return; }
   if(!S.householdSize){ alert('Please select your household size.'); return; }
   if(!S.vehiclesOwned){ alert('Please select how many vehicles you own.'); return; }
-  go(12);
+  go(14);
 }
 
 function saveDebtAndGo(){
@@ -3015,10 +3276,12 @@ function updateExpTotal(){
 function saveFinancialsAndGo(){
   const totalExp = (S.expHousing||0)+(S.expFood||0)+(S.expClothing||0)+(S.expPersonalCare||0)+(S.expHousehold||0)+(S.expCarPayment||0)+(S.expGas||0)+(S.expInsuranceMaintenance||0)+(S.expUtilities||0)+(S.expMedical||0)+(S.expOther||0);
   if(totalExp === 0){ alert('Please enter your monthly living expenses.'); return; }
-  go(13);
+  capture();
+  go(15);
 }
 function saveObligationsAndGo(){
-  go(14);
+  capture();
+  go(16);
 }
 
 function formatPhone(el){
@@ -3117,11 +3380,16 @@ async function submitLeadAndPayment(stripePaymentId){
       federal_years: S.federalYears,
       state_years: S.stateYears,
       income: S.income,
+      monthly_income: S.monthlyIncome,
+      additional_income: S.additionalIncome,
       on_irs_plan: S.onIRSPlan,
       irs_plan_monthly: S.onIRSPlan==='yes' ? S.irsPlanMonthlyAmount : null,
       filing_status: S.filingStatus,
       bank_balance: S.bankBalance,
       investments: S.investmentsAmount,
+      owns_real_estate: S.ownsRealEstate,
+      home_value: S.homeValue,
+      home_mortgage: S.homeMortgage,
       state: S.state,
       county: S.county,
       household_size: S.householdSize,
@@ -3173,13 +3441,13 @@ async function submitLeadAndPayment(stripePaymentId){
 
     S.caseNum = leadResult.lead.case_number;
     S.leadId = leadResult.lead.id;
-    S.step = 17;
+    S.step = 19;
     render();
 
   } catch (error) {
     console.error('Submission error:', error);
     S.caseNum = 'ST-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 9000) + 1000);
-    S.step = 17;
+    S.step = 19;
     render();
   }
 }
@@ -3203,11 +3471,16 @@ async function savePartialLead(){
       federal_years: S.federalYears,
       state_years: S.stateYears,
       income: S.income,
+      monthly_income: S.monthlyIncome,
+      additional_income: S.additionalIncome,
       on_irs_plan: S.onIRSPlan,
       irs_plan_monthly: S.onIRSPlan==='yes' ? S.irsPlanMonthlyAmount : null,
       filing_status: S.filingStatus,
       bank_balance: S.bankBalance,
       investments: S.investmentsAmount,
+      owns_real_estate: S.ownsRealEstate,
+      home_value: S.homeValue,
+      home_mortgage: S.homeMortgage,
       state: S.state,
       county: S.county,
       household_size: S.householdSize,
@@ -3235,10 +3508,14 @@ async function savePartialLead(){
 // ══════════════════════════════════════════
 function afterRender(){
   if(S.step===1){ const el=document.getElementById('debtAmount'); if(el){ el.focus(); } }
-  if(S.step===12 && !S.irsAutoFilled) autofillIRS();
-  if(S.step===14) runAnalysis();
-  if(S.step===15) startTicker();
-  if(S.step===16) initStripe();
+  if(S.step===6){ const el=document.getElementById('debtAmount2'); if(el){ el.focus(); } }
+  if(S.step===10){ const el=document.getElementById('bankBalance'); if(el){ el.focus(); } }
+  if(S.step===11){ const el=document.getElementById('monthlyGross'); if(el){ el.focus(); } }
+  if(S.step===12 && S.ownsRealEstate==='yes'){ const el=document.getElementById('homeValue'); if(el){ el.focus(); } }
+  if(S.step===14 && !S.irsAutoFilled) autofillIRS();
+  if(S.step===16) runAnalysis();
+  if(S.step===17) startTicker();
+  if(S.step===18) initStripe();
 }
 
 function initStripe(){
@@ -3284,7 +3561,7 @@ function runAnalysis(){
       if(c) c.classList.add('active');
       i++; setTimeout(tick,950);
     } else {
-      setTimeout(()=>go(15),500);
+      setTimeout(()=>go(17),500);
     }
   })();
 }
