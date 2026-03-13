@@ -1537,7 +1537,7 @@ const S = {
   caseNum:'', leadId:''
 };
 
-const TOTAL_STEPS = 19;
+const TOTAL_STEPS = 20;
 const STORAGE_KEY = 'sympletax_portal_state_v1';
 
 // Stress-test backdoor: fill placeholder data and jump to payment (use ?stress=1 in URL)
@@ -1545,7 +1545,7 @@ function fillStressTestData(){
   const params = new URLSearchParams(window.location.search);
   const emailOverride = params.get('email');
   Object.assign(S, {
-    step: 18,
+    step: 19,
     debtAmount: 25000, debtRange: '10k_25k',
     debtType: 'federal', taxType: 'personal', activeCollections: 'no',
     irsNotice: 'cp14', taxSituation: 'back_taxes',
@@ -1555,6 +1555,7 @@ function fillStressTestData(){
     bankBalance: 5000, investmentsAmount: 0,
     monthlyIncome: 4500, additionalIncome: 0,
     ownsRealEstate: 'no', homeValue: 0, homeMortgage: 0,
+    carValue: 15000, carLoan: 8000, equity: 0,
     state: 'California', county: 'Los Angeles',
     householdSize: '2', vehiclesOwned: '1',
     expHousing: 1800, expFood: 600, expClothing: 150, expPersonalCare: 80, expHousehold: 120, expOther: 200,
@@ -1633,6 +1634,13 @@ function captureFormToState(){
       if(hv){ const r = hv.value.replace(/[^0-9]/g,''); S.homeValue = parseInt(r) || 0; }
       if(hm){ const r = hm.value.replace(/[^0-9]/g,''); S.homeMortgage = parseInt(r) || 0; }
     } else if(step === 13){
+      const cv = document.getElementById('carValue');
+      const cl = document.getElementById('carLoan');
+      const eq = document.getElementById('equityInput');
+      if(cv){ const r = cv.value.replace(/[^0-9]/g,''); S.carValue = parseInt(r) || 0; }
+      if(cl){ const r = cl.value.replace(/[^0-9]/g,''); S.carLoan = parseInt(r) || 0; }
+      if(eq){ const r = eq.value.replace(/[^0-9]/g,''); S.equity = parseInt(r) || 0; }
+    } else if(step === 14){
       const st = document.getElementById('stateSelect');
       const co = document.getElementById('countyInput');
       if(st) S.state = st.value || '';
@@ -1660,7 +1668,7 @@ function normalizeLoadedState(){
   // ensure numeric fields are numbers (not strings)
   [
     'debtAmount','irsPlanMonthlyAmount','bankBalance','investmentsAmount',
-    'assetAmount','homeValue','homeMortgage','carValue','carLoan',
+    'assetAmount','homeValue','homeMortgage','carValue','carLoan','equity',
     'monthlyIncome','additionalIncome',
     'expHousing','expFood','expClothing','expPersonalCare','expHousehold','expOther','expCarPayment','expGas','expInsuranceMaintenance','expUtilities','expMedical',
     'expHealthInsurance','expChildcare','expOtherTax','expOtherObligations'
@@ -1697,7 +1705,8 @@ const asset = ()=> S.assetAmount || 0;
 const eq    = ()=> {
   const home = Math.max((S.homeValue||0)-(S.homeMortgage||0), 0);
   const car  = Math.max((S.carValue||0)-(S.carLoan||0), 0);
-  return home + car;
+  const other = Number(S.equity) || 0;
+  return home + car + other;
 };
 
 const rcp     = ()=> Math.max((inc()/12 - exp())*0.55, 0);
@@ -2273,6 +2282,57 @@ function s10_realestate(){
   `;
 }
 
+// ── S10c: Assets & Liabilities (Car Value, Car Loan, Equity) - after real estate ──
+function s10_assets_liabilities(){
+  const carValDisp = S.carValue ? S.carValue.toLocaleString() : '';
+  const carLoanDisp = S.carLoan ? S.carLoan.toLocaleString() : '';
+  const equityDisp = S.equity ? S.equity.toLocaleString() : '';
+  const carIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M5 17h14v-5H5v5zM5 12l2-4h10l2 4"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg>';
+  return `
+    <div class="eyebrow"><div class="eyebrow-dot"></div>Assets &amp; Liabilities</div>
+    <h1 class="hed">Vehicles and other equity</h1>
+    <p class="sub">Include the value of cars you own and any other equity (e.g. business, other assets).</p>
+    <div class="field" style="margin-bottom:20px">
+      <div class="section-with-icon">
+        <span class="sicon">${carIcon}</span>
+        Car value
+      </div>
+      <div class="debt-input-wrap">
+        <span class="debt-prefix">$</span>
+        <input id="carValue" class="debt-input" type="text" inputmode="numeric" placeholder="0" value="${carValDisp}" oninput="formatAssetsInput(this,'carValue')" onkeydown="if(event.key==='Enter')document.getElementById('carLoan')?.focus()">
+      </div>
+    </div>
+    <div class="field" style="margin-bottom:20px">
+      <div class="section-with-icon">
+        <span class="sicon">${carIcon}</span>
+        Car loan balance
+      </div>
+      <div class="debt-input-wrap">
+        <span class="debt-prefix">$</span>
+        <input id="carLoan" class="debt-input" type="text" inputmode="numeric" placeholder="0" value="${carLoanDisp}" oninput="formatAssetsInput(this,'carLoan')" onkeydown="if(event.key==='Enter')document.getElementById('equityInput')?.focus()">
+      </div>
+    </div>
+    <div class="field" style="margin-bottom:28px">
+      <div class="section-with-icon">
+        <span class="sicon invest">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </span>
+        Other equity <span style="font-weight:400;color:var(--muted);text-transform:none;font-size:14px">(optional)</span>
+      </div>
+      <p class="sub" style="margin:-8px 0 12px 0;font-size:13px">Equity in other assets: business, rental property, etc.</p>
+      <div class="debt-input-wrap">
+        <span class="debt-prefix">$</span>
+        <input id="equityInput" class="debt-input" type="text" inputmode="numeric" placeholder="0" value="${equityDisp}" oninput="formatAssetsInput(this,'equity')" onkeydown="if(event.key==='Enter')saveAssetsAndGo()">
+      </div>
+    </div>
+    <button class="cta teal" onclick="saveAssetsAndGo()">
+      Continue
+      <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <button class="back-btn" onclick="go(12)">&larr; Back</button>
+  `;
+}
+
 // ── S11: Location (State, County, Household, Vehicles) ───
 function s11(){
   const name = S.firstName ? S.firstName.trim() : '';
@@ -2331,7 +2391,7 @@ function s11(){
       Continue
       <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
-    <button class="back-btn" onclick="go(12)">&larr; Back</button>
+    <button class="back-btn" onclick="go(13)">&larr; Back</button>
   `;
 }
 
@@ -2403,7 +2463,7 @@ function s12(){
     </div>
 
     <div class="btn-row" style="margin-top:24px">
-      <button class="back-btn" onclick="go(13)">&larr; Back</button>
+      <button class="back-btn" onclick="go(14)">&larr; Back</button>
       <button class="cta teal" onclick="saveFinancialsAndGo()">Continue</button>
     </div>
   `;
@@ -2441,7 +2501,7 @@ function s13_obligations(){
     ${mkOblig('expOtherObligations','Any other monthly obligations','other',iconOther)}
 
     <div class="btn-row" style="margin-top:24px">
-      <button class="back-btn" onclick="go(14)">&larr; Back</button>
+      <button class="back-btn" onclick="go(15)">&larr; Back</button>
       <button class="cta teal" onclick="saveObligationsAndGo()">
         Continue
         <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -2592,12 +2652,12 @@ function s14(){
     </table>
     </div>
 
-    <button class="cta teal" onclick="go(18)">
+    <button class="cta teal" onclick="go(19)">
       Looks good — continue
         <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
     <div class="btn-row">
-      <button class="back-btn" onclick="go(15)">&larr; Back</button>
+      <button class="back-btn" onclick="go(16)">&larr; Back</button>
     </div>
   `;
 }
@@ -2764,7 +2824,7 @@ function s16(){
   `;
 }
 
-const STEPS = {1:s1,2:s2,3:s3,4:s4,5:s5,6:s6,7:s7,8:s8,9:s9,10:s10,11:s10_income,12:s10_realestate,13:s11,14:s12,15:s13_obligations,16:s13,17:s14,18:s15,19:s16};
+const STEPS = {1:s1,2:s2,3:s3,4:s4,5:s5,6:s6,7:s7,8:s8,9:s9,10:s10,11:s10_income,12:s10_realestate,13:s10_assets_liabilities,14:s11,15:s12,16:s13_obligations,17:s13,18:s14,19:s15,20:s16};
 
 // ══════════════════════════════════════════
 //  HELPERS
@@ -3265,6 +3325,22 @@ function formatPropertyMortgage(el){
   else el.value = '';
   debouncedSave();
 }
+function formatAssetsInput(el, key){
+  const raw = el.value.replace(/[^0-9]/g,'');
+  S[key] = parseInt(raw) || 0;
+  if(raw) el.value = parseInt(raw).toLocaleString();
+  else el.value = '';
+  debouncedSave();
+}
+function saveAssetsAndGo(){
+  const cv = document.getElementById('carValue');
+  const cl = document.getElementById('carLoan');
+  const eq = document.getElementById('equityInput');
+  if(cv){ const raw = cv.value.replace(/[^0-9]/g,''); S.carValue = parseInt(raw) || 0; }
+  if(cl){ const raw = cl.value.replace(/[^0-9]/g,''); S.carLoan = parseInt(raw) || 0; }
+  if(eq){ const raw = eq.value.replace(/[^0-9]/g,''); S.equity = parseInt(raw) || 0; }
+  go(14);
+}
 function saveRealEstateAndGo(){
   if(S.ownsRealEstate === 'yes'){
     const hv = document.getElementById('homeValue');
@@ -3292,7 +3368,7 @@ function saveLocationAndGo(){
   if(!S.county){ alert('Please enter or select your county.'); return; }
   if(!S.householdSize){ alert('Please select your household size.'); return; }
   if(!S.vehiclesOwned){ alert('Please select how many vehicles you own.'); return; }
-  go(14);
+  go(15);
 }
 
 function saveDebtAndGo(){
@@ -3327,12 +3403,12 @@ function saveFinancialsAndGo(){
   if(totalExp === 0){ alert('Please enter your monthly living expenses.'); return; }
   captureFormToState();
   saveLocalState();
-  go(15);
+  go(16);
 }
 function saveObligationsAndGo(){
   captureFormToState();
   saveLocalState();
-  go(16);
+  go(17);
 }
 
 function formatPhone(el){
@@ -3351,7 +3427,7 @@ async function processDemoPayment(){
   document.getElementById('proc').style.display='block';
   try {
     await submitLeadAndPayment('demo-' + Date.now());
-    go(19);
+    go(20);
   } catch(err){
     console.error('Demo payment error:', err);
     document.getElementById('proc').style.display='none';
@@ -3531,13 +3607,13 @@ async function submitLeadAndPayment(stripePaymentId){
 
     S.caseNum = leadResult.lead.case_number;
     S.leadId = leadResult.lead.id;
-    S.step = 19;
+    S.step = 20;
     render();
 
   } catch (error) {
     console.error('Submission error:', error);
     S.caseNum = 'ST-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 9000) + 1000);
-    S.step = 19;
+    S.step = 20;
     render();
   }
 }
@@ -3602,10 +3678,10 @@ function afterRender(){
   if(S.step===10){ const el=document.getElementById('bankBalance'); if(el){ el.focus(); } }
   if(S.step===11){ const el=document.getElementById('monthlyGross'); if(el){ el.focus(); } }
   if(S.step===12 && S.ownsRealEstate==='yes'){ const el=document.getElementById('homeValue'); if(el){ el.focus(); } }
-  if(S.step===14 && !S.irsAutoFilled) autofillIRS();
-  if(S.step===16) runAnalysis();
-  if(S.step===17) startTicker();
-  if(S.step===18) initStripe();
+  if(S.step===15 && !S.irsAutoFilled) autofillIRS();
+  if(S.step===17) runAnalysis();
+  if(S.step===18) startTicker();
+  if(S.step===19) initStripe();
 }
 
 function initStripe(){
@@ -3651,7 +3727,7 @@ function runAnalysis(){
       if(c) c.classList.add('active');
       i++; setTimeout(tick,950);
     } else {
-      setTimeout(()=>go(17),500);
+      setTimeout(()=>go(18),500);
     }
   })();
 }
