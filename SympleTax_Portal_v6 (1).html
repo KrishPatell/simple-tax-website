@@ -70,15 +70,6 @@ body {
 .hdr-phone-icon svg { width: 14px; height: 14px; }
 .hdr-phone-number { display: none; }
 .hdr-phone-call { display: inline; }
-/* Stress-test backdoor: key icon (dev/testing only) */
-.stress-key {
-  width: 32px; height: 32px; padding: 0; border: none; border-radius: 8px;
-  background: rgba(0,180,176,.1); color: var(--teal); cursor: pointer;
-  display: flex; align-items: center; justify-content: center; opacity: .5;
-  transition: opacity .2s; margin-left: 8px;
-}
-.stress-key:hover { opacity: .85; }
-.stress-key svg { width: 16px; height: 16px; }
 
 /* ─── PROGRESS BAR (portal only) ───────── */
 .prog-wrap {
@@ -1310,9 +1301,6 @@ footer p { font-size: 12px; color: rgba(255,255,255,.25); }
 <header class="hdr">
   <a class="logo" href="#"><span class="l1">Symple</span><span class="l2">Tax</span></a>
   <div class="hdr-right">
-    <button type="button" class="stress-key" id="stressKeyBtn" title="Stress test: skip to payment" aria-label="Stress test">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-    </button>
     <div class="hdr-secure">
       <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       Secure & Encrypted
@@ -1430,9 +1418,9 @@ footer p { font-size: 12px; color: rgba(255,255,255,.25); }
   <!-- CEO MESSAGE -->
   <section class="ceo-section">
     <div class="ceo-inner">
-      <div class="ceo-label">A Message from Our CEO</div>
+        <div class="ceo-label">A Message from Our CEO</div>
       <div class="ceo-quote-mark">&ldquo;</div>
-      <p class="ceo-quote">For more than a decade, my team and I have been working to make tax relief more affordable, more transparent, and easier for everyday taxpayers to navigate. Today, we're proud to offer a solution that gives you a faster, clearer path to resolving your tax issues. We hope this experience helps you move forward with confidence — we're honored to be part of that journey.</p>
+        <p class="ceo-quote">For more than a decade, my team and I have been working to make tax relief more affordable, more transparent, and easier for everyday taxpayers to navigate. Today, we're proud to offer a solution that gives you a faster, clearer path to resolving your tax issues. We hope this experience helps you move forward with confidence — we're honored to be part of that journey.</p>
       <div class="ceo-sig-row">
         <div class="ceo-avatar">AA</div>
         <div class="ceo-content">
@@ -1451,21 +1439,21 @@ footer p { font-size: 12px; color: rgba(255,255,255,.25); }
         <div class="hiw-step">
           <div class="hiw-num-wrap"><div class="hiw-num">1</div></div>
           <div class="hiw-step-content">
-            <div class="hiw-step-title">Answer a few questions</div>
+          <div class="hiw-step-title">Answer a few questions</div>
             <div class="hiw-step-desc">Tell us about your tax situation — an estimate is all we need to get started. Takes about 10 minutes.</div>
           </div>
         </div>
         <div class="hiw-step">
           <div class="hiw-num-wrap"><div class="hiw-num">2</div></div>
           <div class="hiw-step-content">
-            <div class="hiw-step-title">We analyze your case</div>
+          <div class="hiw-step-title">We analyze your case</div>
             <div class="hiw-step-desc">We identify every IRS relief program you qualify for and calculate your settlement range based on your specific situation.</div>
           </div>
         </div>
         <div class="hiw-step">
           <div class="hiw-num-wrap"><div class="hiw-num">3</div></div>
           <div class="hiw-step-content">
-            <div class="hiw-step-title">Get your personalized plan</div>
+          <div class="hiw-step-title">Get your personalized plan</div>
             <div class="hiw-step-desc">See your resolution options, choose a path, and enroll — all online in minutes. No office visits required.</div>
           </div>
         </div>
@@ -1552,7 +1540,7 @@ const S = {
 const TOTAL_STEPS = 19;
 const STORAGE_KEY = 'sympletax_portal_state_v1';
 
-// Stress-test backdoor: fill placeholder data and jump to payment (use ?stress=1 or click key icon)
+// Stress-test backdoor: fill placeholder data and jump to payment (use ?stress=1 in URL)
 function fillStressTestData(){
   const params = new URLSearchParams(window.location.search);
   const emailOverride = params.get('email');
@@ -2006,7 +1994,7 @@ function s6(){
       <div class="debt-input-wrap" style="margin-bottom:0">
         <span class="debt-prefix">$</span>
         <input id="debtAmount2" class="debt-input" type="text" inputmode="numeric" placeholder="e.g. 3,500" value="${displayVal}" oninput="formatDebtInput(this)" onkeydown="if(event.key==='Enter')saveDebtConfirmAndGo()">
-      </div>
+    </div>
     </div>
     <div class="where-you-fall">
       <span class="where-you-fall-lbl">Where you fall</span>
@@ -2211,7 +2199,7 @@ function s10_income(){
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M3 10h18"/><path d="M5 6l7-3 7 3"/><path d="M4 10v11"/><path d="M20 10v11"/><path d="M8 14v3"/><path d="M12 14v3"/><path d="M16 14v3"/></svg>
         </span>
         Monthly gross income
-      </div>
+    </div>
       <div class="debt-input-wrap">
         <span class="debt-prefix">$</span>
         <input id="monthlyGross" class="debt-input" type="text" inputmode="numeric" placeholder="e.g. 10,000" value="${grossDisp}" oninput="formatMonthlyGrossInput(this)" onkeydown="if(event.key==='Enter')document.getElementById('additionalIncome')?.focus()">
@@ -2301,7 +2289,7 @@ function s11(){
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </span>
         State
-      </div>
+    </div>
       <select id="stateSelect" class="field-select" onchange="onStateChange(this.value)">
         <option value="">Select state</option>
         ${stateOpts}
@@ -2545,7 +2533,7 @@ function s14(){
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           Edit
         </button>
-      </div>
+    </div>
       <div class="snap-row"><span class="snap-row-lbl">Monthly income</span><span class="snap-row-val">${fmt(monthlyInc)}</span></div>
       <div class="snap-row"><span class="snap-row-lbl">Monthly expenses</span><span class="snap-row-val">-${fmt(monthlyExp)}</span></div>
       <div class="snap-disposable">
@@ -2595,19 +2583,19 @@ function s14(){
         <div class="snap-disposable-desc">if you don't take action</div>
       </div>
       <table class="cow-table" style="margin-top:16px">
-        <thead><tr><th>If you wait</th><th>Penalties added</th><th style="text-align:right">New balance</th></tr></thead>
-        <tbody>
-          <tr><td>3 months</td><td style="color:var(--gold);font-weight:600">+${fmt(m3)}</td><td class="amt">${fmt(d+m3)}</td></tr>
-          <tr><td>6 months</td><td style="color:var(--red);font-weight:600">+${fmt(m6)}</td><td class="amt">${fmt(d+m6)}</td></tr>
-          <tr><td>12 months</td><td style="color:#991B1B;font-weight:600">+${fmt(m12)}</td><td class="amt" style="color:#991B1B">${fmt(d+m12)}</td></tr>
-        </tbody>
-      </table>
+      <thead><tr><th>If you wait</th><th>Penalties added</th><th style="text-align:right">New balance</th></tr></thead>
+      <tbody>
+        <tr><td>3 months</td><td style="color:var(--gold);font-weight:600">+${fmt(m3)}</td><td class="amt">${fmt(d+m3)}</td></tr>
+        <tr><td>6 months</td><td style="color:var(--red);font-weight:600">+${fmt(m6)}</td><td class="amt">${fmt(d+m6)}</td></tr>
+        <tr><td>12 months</td><td style="color:#991B1B;font-weight:600">+${fmt(m12)}</td><td class="amt" style="color:#991B1B">${fmt(d+m12)}</td></tr>
+      </tbody>
+    </table>
     </div>
 
     <button class="cta teal" onclick="go(18)">
       Looks good — continue
-      <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </button>
+        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
     <div class="btn-row">
       <button class="back-btn" onclick="go(15)">&larr; Back</button>
     </div>
@@ -2633,7 +2621,7 @@ function s15(){
         <div>
           <div class="activate-includes-title">IRS Authorization</div>
           <div class="activate-includes-desc">Power of Attorney (Form 8821) filed on your behalf</div>
-        </div>
+    </div>
       </div>
       <div class="activate-includes-item">
         <div class="activate-includes-check">&check;</div>
@@ -3392,7 +3380,7 @@ async function processPayment(){
     const amount = S.paymentPlan==='monthly' ? 89 : 129;
     const intentRes = await fetch(`${API_BASE}/create-payment-intent`, {
       method:'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: API_BASE === SUPABASE_FUNCTIONS_URL ? supabaseFetchHeaders() : { 'Content-Type': 'application/json' },
       body: JSON.stringify({ amount, plan: S.paymentPlan, email: S.email, name: `${S.firstName} ${S.lastName}` })
     });
     if(!intentRes.ok) throw new Error('Could not initialize payment');
@@ -3438,12 +3426,16 @@ async function processPayment(){
 // ══════════════════════════════════════════
 
 const SUPABASE_FUNCTIONS_URL = 'https://pmjtjmoekakaguovyndq.supabase.co/functions/v1';
-// URL bypass options: ?supabase=1 (force Supabase), ?demo=1 (test card hint + skip payment)
+// Anon key required for Edge Function auth (safe to expose). Get from: Supabase Dashboard → Project Settings → API → anon public
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBtanRqbW9la2FrYWd1b3Z5bmRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzMDQ0NzQsImV4cCI6MjA4ODg4MDQ3NH0.SPY-9I78yUH0DSdLpWIxaZRHTQvJugIP12dySezO6KA';
+// Tip: for local testing against Supabase, open `?supabase=1` to bypass localhost API.
 const USE_SUPABASE = new URLSearchParams(window.location.search).get('supabase') === '1';
+// Demo mode: ?demo=1 — shows test card hint + "skip payment" link to bypass Stripe when testing
 const DEMO_MODE = window.location.search.includes('demo=1');
 const API_BASE = (window.location.hostname === 'localhost' && !USE_SUPABASE)
   ? 'http://localhost:3000'
   : SUPABASE_FUNCTIONS_URL;
+function supabaseFetchHeaders(){ return { 'Content-Type': 'application/json', 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }; }
 
 // ── Stripe ──────────────────────────────────
 const STRIPE_PK = 'pk_test_51TAHlXH225E6WTMYL8oyROJRdYGsrlWNlfqXJqLI5oT4KRs6Yfy3OrBjMQ6S2U06kvrWeGB85qJb4v4YFWWwQ2cm00Ucwo5qN2';
@@ -3510,7 +3502,7 @@ async function submitLeadAndPayment(stripePaymentId){
     if (API_BASE === SUPABASE_FUNCTIONS_URL) {
       const res = await fetch(`${API_BASE}/submit-lead`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: supabaseFetchHeaders(),
         body: JSON.stringify({ leadData, payment })
       });
       if (!res.ok) {
@@ -3519,20 +3511,20 @@ async function submitLeadAndPayment(stripePaymentId){
       }
       leadResult = await res.json();
     } else {
-      const leadResponse = await fetch(`${API_BASE}/leads`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(leadData)
-      });
-      if (!leadResponse.ok) {
-        const err = await leadResponse.json();
-        throw new Error(err.error || 'Failed to submit lead');
-      }
+    const leadResponse = await fetch(`${API_BASE}/leads`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(leadData)
+    });
+    if (!leadResponse.ok) {
+      const err = await leadResponse.json();
+      throw new Error(err.error || 'Failed to submit lead');
+    }
       leadResult = await leadResponse.json();
-      S.leadId = leadResult.lead.id;
+    S.leadId = leadResult.lead.id;
       await fetch(`${API_BASE}/leads/${S.leadId}/payment`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payment)
       });
     }
@@ -3593,7 +3585,7 @@ async function savePartialLead(){
     const url = API_BASE === SUPABASE_FUNCTIONS_URL ? `${API_BASE}/submit-lead` : `${API_BASE}/leads`;
     await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: API_BASE === SUPABASE_FUNCTIONS_URL ? supabaseFetchHeaders() : { 'Content-Type': 'application/json' },
       body: JSON.stringify(API_BASE === SUPABASE_FUNCTIONS_URL ? { leadData } : leadData)
     });
   } catch (error) {
@@ -3700,8 +3692,6 @@ if(S.step > 1){
   startPortal();
 }
 
-// Stress-test key: click to skip to payment with placeholder data
-document.getElementById('stressKeyBtn')?.addEventListener('click', fillStressTestData);
 
 // Persist form state before refresh/close so user never loses progress
 function persistBeforeUnload(){
