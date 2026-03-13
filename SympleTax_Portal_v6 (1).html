@@ -2736,6 +2736,32 @@ function s15(){
       </div>
     </div>
 
+    <p class="sec-lbl" style="margin-bottom:12px">Billing Information</p>
+    <div id="billingSection" class="fields" style="margin-bottom:22px">
+      <div class="field">
+        <label>Full Name</label>
+        <input id="billingName" placeholder="Full name as it appears on card / account" value="${(S.firstName||'')+' '+(S.lastName||'')}">
+      </div>
+      <div class="field">
+        <label>Country or Region</label>
+        <select id="billingCountry" style="height:50px;padding:0 16px;border:1.5px solid var(--line);border-radius:12px;font-family:'Inter',sans-serif;font-size:15px;font-weight:500;color:var(--navy);background:var(--white);outline:none;appearance:none;background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height%3D%2216%22 viewBox=%220 0 24 24%22 fill%3D%22none%22 stroke%3D%22%236B7A99%22 stroke-width%3D%222%22><path d=%22M6 9l6 6 6-6%22/></svg>');background-repeat:no-repeat;background-position:right 14px center;cursor:pointer;transition:border-color .2s,box-shadow .2s" onfocus="this.style.borderColor='var(--teal)';this.style.boxShadow='0 0 0 4px rgba(0,180,176,.1)'" onblur="this.style.borderColor='var(--line)';this.style.boxShadow='none'">
+          <option value="US" selected>🇺🇸 United States</option>
+          <option value="CA">🇨🇦 Canada</option>
+          <option value="GB">🇬🇧 United Kingdom</option>
+          <option value="AU">🇦🇺 Australia</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Billing Address</label>
+        <input id="billingAddress" placeholder="Street address">
+      </div>
+      <div class="field-row">
+        <div class="field"><label>City</label><input id="billingCity" placeholder="City"></div>
+        <div class="field"><label>State / ZIP</label><input id="billingStateZip" placeholder="State, ZIP"></div>
+      </div>
+    </div>
+
     <p class="sec-lbl" style="margin-bottom:8px">Payment Details</p>
     <div class="payment-icons">
       <span class="payment-icons-label">We accept</span>
@@ -3428,6 +3454,16 @@ async function processPayment(){
     if(errDiv){ errDiv.style.display='block'; errDiv.textContent='Payment form is still loading. Please wait.'; }
     return;
   }
+  // Validate billing fields
+  const billingName = document.getElementById('billingName')?.value.trim() || '';
+  const billingAddress = document.getElementById('billingAddress')?.value.trim() || '';
+  const billingCity = document.getElementById('billingCity')?.value.trim() || '';
+  const billingStateZip = document.getElementById('billingStateZip')?.value.trim() || '';
+  const billingCountry = document.getElementById('billingCountry')?.value || 'US';
+  if(!billingName){ const e=document.getElementById('billingName'); e.focus(); e.style.borderColor='var(--red)'; return; }
+  if(!billingAddress){ const e=document.getElementById('billingAddress'); e.focus(); e.style.borderColor='var(--red)'; return; }
+
+  document.getElementById('billingSection')?.style.setProperty('display','none');
   document.querySelector('.payment-element-wrap')?.style.setProperty('display','none');
   document.getElementById('payBtn').style.display='none';
   document.querySelector('.back-btn')?.style.setProperty('display','none');
@@ -3441,7 +3477,15 @@ async function processPayment(){
         return_url: returnUrl,
         receipt_email: S.email || undefined,
         payment_method_data: {
-          billing_details: { name: `${S.firstName||''} ${S.lastName||''}`.trim() || 'Customer', email: S.email || undefined }
+          billing_details: {
+            name: billingName || `${S.firstName||''} ${S.lastName||''}`.trim() || 'Customer',
+            email: S.email || undefined,
+            address: {
+              line1: billingAddress,
+              city: billingCity,
+              country: billingCountry
+            }
+          }
         }
       }
     });
