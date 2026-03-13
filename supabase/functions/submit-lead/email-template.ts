@@ -15,19 +15,38 @@ export interface LeadEmailData {
   federal_years: number[];
   state_years: number[];
   income: string;
+  monthly_income: number;
+  additional_income: number;
   on_irs_plan: string;
   irs_plan_monthly: number | null;
   filing_status: string;
+  owns_real_estate: string;
+  home_value: number;
+  home_mortgage: number;
   bank_balance: number;
   investments: number;
   state: string;
   county: string;
   household_size: string;
   vehicles_owned: string;
+  exp_housing: number;
+  exp_food: number;
+  exp_clothing: number;
+  exp_personal_care: number;
+  exp_household: number;
+  exp_other: number;
+  exp_car_payment: number;
+  exp_gas: number;
+  exp_insurance_maintenance: number;
+  exp_utilities: number;
+  exp_medical: number;
   exp_health_insurance: number;
   exp_childcare: number;
   exp_other_tax: number;
   exp_other_obligations: number;
+  car_value: number;
+  car_loan: number;
+  equity: number;
   payment_plan: string;
   pre_estimated_debt: number;
   pre_estimated_settlement: number;
@@ -97,6 +116,8 @@ export function buildLeadEmailHtml(data: LeadEmailData, recipientType: 'user' | 
         <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
           <tr><td colspan="2" style="padding:12px 0 8px;border-bottom:2px solid #00B4B0;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0F1F45;">Financial Information</td></tr>
           <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;width:140px;">Income Range</td><td style="padding:10px 0;font-size:14px;">${fmtStr(data.income)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Monthly Income</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.monthly_income)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Additional Income</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.additional_income)}</td></tr>
           <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">On IRS Plan</td><td style="padding:10px 0;font-size:14px;">${fmtStr(data.on_irs_plan)}</td></tr>
           <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">IRS Plan Monthly</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.irs_plan_monthly)}</td></tr>
           <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Filing Status</td><td style="padding:10px 0;font-size:14px;">${fmtStr(data.filing_status)}</td></tr>
@@ -109,6 +130,35 @@ export function buildLeadEmailHtml(data: LeadEmailData, recipientType: 'user' | 
         </table>
 
         <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+          <tr><td colspan="2" style="padding:12px 0 8px;border-bottom:2px solid #00B4B0;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0F1F45;">Detailed Expenses</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;width:140px;">Housing</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.exp_housing)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Food</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.exp_food)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Clothing</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.exp_clothing)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Personal Care</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.exp_personal_care)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Household</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.exp_household)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Other Expenses</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.exp_other)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Car Payment</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.exp_car_payment)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Gas</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.exp_gas)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Insurance & Maintenance</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.exp_insurance_maintenance)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Utilities</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.exp_utilities)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Medical</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.exp_medical)}</td></tr>
+        </table>
+
+        <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+          <tr><td colspan="2" style="padding:12px 0 8px;border-bottom:2px solid #00B4B0;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0F1F45;">Assets & Liabilities</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;width:140px;">Car Value</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.car_value)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Car Loan</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.car_loan)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Equity</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.equity)}</td></tr>
+        </table>
+
+        <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+          <tr><td colspan="2" style="padding:12px 0 8px;border-bottom:2px solid #00B4B0;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0F1F45;">Real Estate</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;width:140px;">Owns Real Estate</td><td style="padding:10px 0;font-size:14px;">${fmtStr(data.owns_real_estate)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Home Value</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.home_value)}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">Home Mortgage</td><td style="padding:10px 0;font-size:14px;">${fmtNum(data.home_mortgage)}</td></tr>
+        </table>
+
+        <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
           <tr><td colspan="2" style="padding:12px 0 8px;border-bottom:2px solid #00B4B0;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0F1F45;">Location & Household</td></tr>
           <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;width:140px;">State</td><td style="padding:10px 0;font-size:14px;">${fmtStr(data.state)}</td></tr>
           <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;">County</td><td style="padding:10px 0;font-size:14px;">${fmtStr(data.county)}</td></tr>
@@ -118,7 +168,7 @@ export function buildLeadEmailHtml(data: LeadEmailData, recipientType: 'user' | 
 
         <table style="width:100%;border-collapse:collapse;">
           <tr><td colspan="2" style="padding:12px 0 8px;border-bottom:2px solid #00B4B0;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0F1F45;">Payment</td></tr>
-          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;width:140px;">Plan</td><td style="padding:10px 0;font-size:14px;font-weight:600;">${data.payment_plan === 'full' ? 'Pay in Full ($129)' : '2 Payments ($89 × 2)'}</td></tr>
+          <tr><td style="padding:10px 0;font-size:13px;color:#8895AE;width:140px;">Plan</td><td style="padding:10px 0;font-size:14px;font-weight:600;">${data.payment_plan === 'monthly' ? '2 Payments ($89 × 2)' : 'Pay in Full ($129)'}</td></tr>
         </table>
 
         ${recipientType === 'user' ? `

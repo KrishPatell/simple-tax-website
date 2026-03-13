@@ -43,11 +43,22 @@ Deno.serve(async (req) => {
     const preSettlement = Number(leadData.pre_estimated_settlement) || 0
     const preSavings = Number(leadData.pre_estimated_savings) || 0
     const expenses =
+      (Number(leadData.exp_housing) || 0) +
+      (Number(leadData.exp_food) || 0) +
+      (Number(leadData.exp_clothing) || 0) +
+      (Number(leadData.exp_personal_care) || 0) +
+      (Number(leadData.exp_household) || 0) +
+      (Number(leadData.exp_other) || 0) +
+      (Number(leadData.exp_car_payment) || 0) +
+      (Number(leadData.exp_gas) || 0) +
+      (Number(leadData.exp_insurance_maintenance) || 0) +
+      (Number(leadData.exp_utilities) || 0) +
+      (Number(leadData.exp_medical) || 0) +
       (Number(leadData.exp_health_insurance) || 0) +
       (Number(leadData.exp_childcare) || 0) +
       (Number(leadData.exp_other_tax) || 0) +
       (Number(leadData.exp_other_obligations) || 0)
-    const assets = (Number(leadData.bank_balance) || 0) + (Number(leadData.investments) || 0)
+    const assets = (Number(leadData.bank_balance) || 0) + (Number(leadData.investments) || 0) + (Number(leadData.car_value) || 0)
 
     const dbRow = {
       first_name: leadData.first_name || '',
@@ -113,6 +124,8 @@ Deno.serve(async (req) => {
       federal_years: Array.isArray(leadData.federal_years) ? leadData.federal_years : [],
       state_years: Array.isArray(leadData.state_years) ? leadData.state_years : [],
       income: String(leadData.income || ''),
+      monthly_income: Number(leadData.monthly_income) || 0,
+      additional_income: Number(leadData.additional_income) || 0,
       on_irs_plan: String(leadData.on_irs_plan || ''),
       irs_plan_monthly: leadData.irs_plan_monthly ?? null,
       filing_status: String(leadData.filing_status || ''),
@@ -126,6 +139,23 @@ Deno.serve(async (req) => {
       exp_childcare: Number(leadData.exp_childcare) || 0,
       exp_other_tax: Number(leadData.exp_other_tax) || 0,
       exp_other_obligations: Number(leadData.exp_other_obligations) || 0,
+      owns_real_estate: String(leadData.owns_real_estate || ''),
+      home_value: Number(leadData.home_value) || 0,
+      home_mortgage: Number(leadData.home_mortgage) || 0,
+      exp_housing: Number(leadData.exp_housing) || 0,
+      exp_food: Number(leadData.exp_food) || 0,
+      exp_clothing: Number(leadData.exp_clothing) || 0,
+      exp_personal_care: Number(leadData.exp_personal_care) || 0,
+      exp_household: Number(leadData.exp_household) || 0,
+      exp_other: Number(leadData.exp_other) || 0,
+      exp_car_payment: Number(leadData.exp_car_payment) || 0,
+      exp_gas: Number(leadData.exp_gas) || 0,
+      exp_insurance_maintenance: Number(leadData.exp_insurance_maintenance) || 0,
+      exp_utilities: Number(leadData.exp_utilities) || 0,
+      exp_medical: Number(leadData.exp_medical) || 0,
+      car_value: Number(leadData.car_value) || 0,
+      car_loan: Number(leadData.car_loan) || 0,
+      equity: Number(leadData.equity) || 0,
       payment_plan: String(leadData.payment_plan || 'full'),
       pre_estimated_debt: Number(leadData.pre_estimated_debt) || 0,
       pre_estimated_settlement: Number(leadData.pre_estimated_settlement) || 0,
