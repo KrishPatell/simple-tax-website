@@ -1,8 +1,5 @@
 // Supabase Edge Function: create-payment-intent
-// Creates Stripe PaymentIntent for SympleTax portal
-
-// Stripe in Supabase Edge Functions: use deno target (and no-check for compatibility)
-import Stripe from 'https://esm.sh/stripe@11.2.0?target=deno&no-check'
+// Creates Stripe PaymentIntent via REST API (no Stripe SDK - avoids Deno.runMicrotasks error)
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -23,18 +20,38 @@ Deno.serve(async (req) => {
       )
     }
 
-    const stripe = new Stripe(stripeSecretKey, { apiVersion: '2023-10-16' })
     const { amount, plan, email, name } = await req.json()
+    const amountCents = ((amount || 129) * 100) | 0
 
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: (amount || 129) * 100,
+    const body = new URLSearchParams({
+      amount: String(amountCents),
       currency: 'usd',
-      automatic_payment_methods: { enabled: true },
-      metadata: { plan: plan || 'full', email: email || '', name: name || '' },
+      'automatic_payment_methods[enabled]': 'true',
+      'metadata[plan]': plan || 'full',
+      'metadata[email]': email || '',
+      'metadata[name]': name || '',
     })
 
+    const res = await fetch('https://api.stripe.com/v1/payment_intents', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${stripeSecretKey}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: body.toString(),
+    })
+
+    const data = await res.json()
+    if (data.error) {
+      console.error('Stripe API error:', data.error)
+      return new Response(
+        JSON.stringify({ error: data.error.message || 'Payment failed' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
     return new Response(
-      JSON.stringify({ clientSecret: paymentIntent.client_secret }),
+      JSON.stringify({ clientSecret: data.client_secret }),
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     )
   } catch (err) {
