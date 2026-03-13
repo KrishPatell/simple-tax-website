@@ -1715,8 +1715,8 @@ const savings = ()=> Math.max(debt()-oic(), 0);
 const daily   = ()=> debt()*0.000822;
 const fmt     = n => '$'+Math.round(n).toLocaleString();
 const pct     = (s,d)=> Math.round(s/d*100);
-const planPrice = ()=> S.paymentPlan==='monthly' ? 89 : 129;
-const planLabel = ()=> S.paymentPlan==='monthly' ? '$89/mo x 2' : '$129';
+const planPrice = ()=> S.paymentPlan==='monthly' ? 79 : 99;
+const planLabel = ()=> S.paymentPlan==='monthly' ? '$79/mo x 2' : '$99';
 
 const PORTAL_TESTIMONIALS = [
   { text: 'I was drowning in back taxes from a failed business. SympleTax got the IRS off my back and cut my balance by more than half.', author: 'Derek Nguyen', loc: 'Phoenix, AZ' },
@@ -2667,8 +2667,8 @@ function s15(){
   const d=debt();
   const isFull = S.paymentPlan==='full';
   const isMonthly = S.paymentPlan==='monthly';
-  const todayAmt = isFull ? '$129' : '$89';
-  const todayLabel = isFull ? '$129.00' : '$89.00';
+  const todayAmt = isFull ? '$99' : '$79';
+  const todayLabel = isFull ? '$99.00' : '$79.00';
 
   return `
     <div class="eyebrow"><div class="eyebrow-dot"></div>Activate Your Case</div>
@@ -2717,19 +2717,19 @@ function s15(){
     <div class="plan-cards">
       <div class="plan-card${isFull?' sel':''}" onclick="selectPlan('full')">
         <div class="plan-card-badge">Best Value</div>
-        <div class="plan-card-price">$129</div>
+        <div class="plan-card-price">$99</div>
         <div class="plan-card-label">One-time payment</div>
         <div class="plan-radio"></div>
       </div>
       <div class="plan-card${isMonthly?' sel':''}" onclick="selectPlan('monthly')">
-        <div class="plan-card-price">$89 &times; 2</div>
-        <div class="plan-card-label">Total: $178. Split 2 weeks apart.</div>
+        <div class="plan-card-price">$79 &times; 2</div>
+        <div class="plan-card-label">Total: $158. Split 2 weeks apart.</div>
         <div class="plan-radio"></div>
       </div>
     </div>
 
     <div class="pay-sum" style="margin-bottom:20px">
-      <div class="pay-row"><span class="pk">Case Activation Fee</span><span class="pv" id="feeDisplay">${isFull?'$129.00':'$89.00/mo &times; 2'}</span></div>
+      <div class="pay-row"><span class="pk">Case Activation Fee</span><span class="pv" id="feeDisplay">${isFull?'$99.00':'$79.00/mo &times; 2'}</span></div>
       <div class="pay-row"><span class="pk">Total Due Today</span><span class="pv" id="totalDisplay">${todayLabel}</span></div>
     </div>
 
@@ -3453,7 +3453,7 @@ async function processPayment(){
 
   try {
     // Create PaymentIntent on backend
-    const amount = S.paymentPlan==='monthly' ? 89 : 129;
+    const amount = S.paymentPlan==='monthly' ? 79 : 99;
     const intentRes = await fetch(`${API_BASE}/create-payment-intent`, {
       method:'POST',
       headers: API_BASE === SUPABASE_FUNCTIONS_URL ? supabaseFetchHeaders() : { 'Content-Type': 'application/json' },
@@ -3571,7 +3571,7 @@ async function submitLeadAndPayment(stripePaymentId){
       pre_estimated_savings: Math.round(savings())
     };
 
-    const paymentAmount = S.paymentPlan === 'monthly' ? 89 : 129;
+    const paymentAmount = S.paymentPlan === 'monthly' ? 79 : 99;
     const payment = { amount: paymentAmount, plan: S.paymentPlan, stripe_payment_id: stripePaymentId || null };
 
     let leadResult;

@@ -23,7 +23,7 @@ router.post('/create-intent', async (req, res) => {
       amount: Math.round(amount * 100), // cents
       currency: 'usd',
       receipt_email: email || undefined,
-      description: `SympleTax Case Activation — ${plan === 'monthly' ? '$89/mo x 2' : '$129 one-time'}`,
+      description: `SympleTax Case Activation — ${plan === 'monthly' ? '$79/mo x 2' : '$99 one-time'}`,
       metadata: { plan, name: name || '' }
     });
 

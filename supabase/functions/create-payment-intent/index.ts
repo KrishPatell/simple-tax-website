@@ -21,7 +21,7 @@ Deno.serve(async (req) => {
     }
 
     const { amount, plan, email, name } = await req.json()
-    const amountCents = ((amount || 129) * 100) | 0
+    const amountCents = ((amount || 99) * 100) | 0
 
     const body = new URLSearchParams({
       amount: String(amountCents),

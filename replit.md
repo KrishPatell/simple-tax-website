@@ -19,7 +19,7 @@ Interactive lead intake form for SympleTax tax relief services. Single-page HTML
 8. Financial details (expenses, savings, equity)
 9. Analysis animation
 10. Detailed cost of waiting breakdown
-11. Results + payment plan selection ($129 one-time or $89/mo x 2)
+11. Results + payment plan selection ($99 one-time or $79/mo x 2)
 12. Success / confirmation
 
 ## Key Features
@@ -27,7 +27,7 @@ Interactive lead intake form for SympleTax tax relief services. Single-page HTML
 - Landing page with customer reviews and confidentiality statement
 - Inline cost-of-waiting calculator after situation selection
 - Federal/State split tax year selection
-- Two payment plan options ($129 or $89x2)
+- Two payment plan options ($99 or $79x2)
 - Progress bar tracking
 - Animated analysis step
 - Live daily accrual ticker on cost-of-waiting page
