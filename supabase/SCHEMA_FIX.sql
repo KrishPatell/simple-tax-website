@@ -24,6 +24,8 @@ CREATE TABLE IF NOT EXISTS leads (
   estimated_savings INTEGER,
   case_number TEXT UNIQUE,
   payment_plan TEXT DEFAULT 'full',
+  payment_method TEXT,
+  ach_account_type TEXT,
   payment_status TEXT DEFAULT 'pending',
   payment_amount INTEGER,
   payment_date TIMESTAMPTZ,
@@ -71,6 +73,8 @@ CREATE TABLE IF NOT EXISTS payments (
   lead_id UUID REFERENCES leads(id) ON DELETE CASCADE,
   amount INTEGER NOT NULL,
   plan TEXT NOT NULL,
+  payment_method TEXT,
+  ach_account_type TEXT,
   status TEXT DEFAULT 'completed',
   stripe_payment_id TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()

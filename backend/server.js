@@ -13,8 +13,10 @@ const PORT = process.env.PORT || 3002;
 app.use(cors({
   origin: [
     'http://localhost:3000',
+    'http://localhost:3002',
     'http://localhost:5500',
     'http://127.0.0.1:3000',
+    'http://127.0.0.1:3002',
     'http://127.0.0.1:5500',
     'https://sympletax.com',
     'https://www.sympletax.com',

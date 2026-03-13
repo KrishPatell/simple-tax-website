@@ -707,7 +707,7 @@ footer p { font-size:12px; color:rgba(255,255,255,.3); }
 
 <!-- HEADER -->
 <header class="hdr">
-  <a class="logo" href="#"><img src="assets/sympletax-logo.png" alt="SympleTax"></a>
+  <a class="logo" href="#"><span class="l1">Symple</span><span class="l2">Tax</span></a>
   <div class="hdr-right">
     <div class="hdr-secure">
       <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -1654,92 +1654,116 @@ function processPayment(){
   }
   S.paymentMethod = _payTab;
   S.achAcctType = _achAcctType;
-  document.getElementById('payBtn').style.display='none';
-  document.querySelector('.back-btn').style.display='none';
+  const payBtn = document.getElementById('payBtn');
+  const backBtn = document.querySelector('.back-btn');
+  payBtn.style.display='none';
+  backBtn.style.display='none';
   document.getElementById('proc').style.display='block';
+  payBtn.disabled = true; // prevent double-submit
 
-  // Submit lead to backend and process payment
-  submitLeadAndPayment();
+  // Submit lead to backend and process payment (async)
+  processPaymentAsync();
+}
+
+let _submitting = false;
+async function processPaymentAsync(){
+  if(_submitting) return;
+  _submitting = true;
+  const payBtn = document.getElementById('payBtn');
+  const backBtn = document.querySelector('.back-btn');
+  const proc = document.getElementById('proc');
+  const cardFields = document.getElementById('cardFields');
+  const achFields = document.getElementById('achFields');
+  const isCard = _payTab === 'card';
+  try {
+    await submitLeadAndPayment();
+    S.step = 12;
+    render();
+  } catch(err){
+    console.error('Submission error:', err);
+    proc.style.display = 'none';
+    payBtn.style.display = 'flex';
+    backBtn.style.display = 'flex';
+    payBtn.disabled = false;
+    cardFields.style.display = isCard ? '' : 'none';
+    achFields.style.display = isCard ? 'none' : '';
+    alert(err.message || 'Something went wrong. Please try again.');
+  } finally {
+    _submitting = false;
+  }
 }
 
 // ══════════════════════════════════════════
 //  BACKEND API INTEGRATION
 // ══════════════════════════════════════════
 
-const API_BASE = window.location.hostname === 'localhost' 
-  ? 'http://localhost:3001/api' 
+// Backend runs on 3002; use same-origin /api when served from backend
+const API_BASE = (window.location.hostname === 'localhost' && window.location.port !== '3002')
+  ? 'http://localhost:3002/api'
   : '/api';
 
 async function submitLeadAndPayment(){
-  try {
-    // Prepare lead data
-    const leadData = {
-      first_name: S.firstName,
-      last_name: S.lastName,
-      email: S.email,
-      phone: S.phone,
-      debt_range: S.debtRange,
-      debt_type: S.debtType,
-      irs_notice: S.irsNotice,
-      tax_situation: S.taxSituation,
-      federal_years: S.federalYears,
-      state_years: S.stateYears,
-      income: S.income,
-      expenses: S.expenses,
-      assets: S.assets,
-      equity: S.equity,
-      payment_plan: S.paymentPlan,
-      payment_method: S.paymentMethod || 'card',
-      ach_account_type: S.achAcctType || null,
-      source: 'portal'
-    };
+  const leadData = {
+    first_name: S.firstName,
+    last_name: S.lastName,
+    email: S.email,
+    phone: S.phone,
+    debt_range: S.debtRange,
+    debt_type: S.debtType,
+    irs_notice: S.irsNotice,
+    tax_situation: S.taxSituation,
+    federal_years: S.federalYears,
+    state_years: S.stateYears,
+    income: S.income,
+    expenses: S.expenses,
+    assets: S.assets,
+    equity: S.equity,
+    payment_plan: S.paymentPlan,
+    payment_method: S.paymentMethod || 'card',
+    ach_account_type: S.achAcctType || null,
+    source: 'portal'
+  };
 
-    console.log('Submitting lead...', leadData);
+  const leadResponse = await fetch(`${API_BASE}/leads`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(leadData)
+  });
 
-    // Submit lead
-    const leadResponse = await fetch(`${API_BASE}/leads`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(leadData)
-    });
-
-    if (!leadResponse.ok) {
+  if (!leadResponse.ok) {
+    let errMsg = 'Failed to submit lead';
+    try {
       const err = await leadResponse.json();
-      throw new Error(err.error || 'Failed to submit lead');
-    }
+      errMsg = err.error || err.message || errMsg;
+    } catch (_) {}
+    throw new Error(errMsg);
+  }
 
-    const leadResult = await leadResponse.json();
-    console.log('Lead created:', leadResult);
+  const leadResult = await leadResponse.json();
+  S.caseNum = leadResult.lead.case_number;
+  S.leadId = leadResult.lead.id;
 
-    // Store case number from backend
-    S.caseNum = leadResult.lead.case_number;
-    S.leadId = leadResult.lead.id;
+  const paymentAmount = S.paymentPlan === 'monthly' ? 79 : 99;
+  const paymentPayload = {
+    amount: paymentAmount,
+    plan: S.paymentPlan,
+    payment_method: S.paymentMethod || 'card',
+    ach_account_type: S.achAcctType || null
+  };
 
-    // Record payment
-    const paymentAmount = S.paymentPlan === 'monthly' ? 79 : 99;
-    const paymentResponse = await fetch(`${API_BASE}/leads/${S.leadId}/payment`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        amount: paymentAmount,
-        plan: S.paymentPlan
-      })
-    });
+  const paymentResponse = await fetch(`${API_BASE}/leads/${S.leadId}/payment`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(paymentPayload)
+  });
 
-    if (!paymentResponse.ok) {
-      console.warn('Payment recording failed, but lead was saved');
-    }
-
-    // Move to success screen
-    S.step = 12;
-    render();
-
-  } catch (error) {
-    console.error('Submission error:', error);
-    // Still show success even if API fails - generate local case number
-    S.caseNum = 'ST-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 9000) + 1000);
-    S.step = 12;
-    render();
+  if (!paymentResponse.ok) {
+    let errMsg = 'Lead saved but payment recording failed. Please contact support.';
+    try {
+      const err = await paymentResponse.json();
+      errMsg = err.error || err.message || errMsg;
+    } catch (_) {}
+    throw new Error(errMsg);
   }
 }
 

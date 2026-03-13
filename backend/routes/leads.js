@@ -127,6 +127,8 @@ router.post('/', async (req, res) => {
       estimated_savings: estimatedSavings,
       case_number: caseNumber,
       payment_plan: data.payment_plan || 'full',
+      payment_method: data.payment_method || null,
+      ach_account_type: data.ach_account_type || null,
       status: 'new',
       source: data.source || 'portal',
       ip_address: req.ip || req.connection.remoteAddress,
@@ -187,7 +189,7 @@ router.post('/', async (req, res) => {
 router.post('/:id/payment', async (req, res) => {
   try {
     const { id } = req.params;
-    const { amount, plan, stripe_payment_id } = req.body;
+    const { amount, plan, stripe_payment_id, payment_method, ach_account_type } = req.body;
 
     if (!amount || !plan) {
       return res.status(400).json({ 
@@ -209,22 +211,30 @@ router.post('/:id/payment', async (req, res) => {
     const lead = leads[0];
 
     // Update lead with payment info
-    const updatedLead = await update('leads', id, {
+    const updateData = {
       payment_status: 'paid',
       payment_plan: plan,
       payment_amount: amount,
       payment_date: new Date().toISOString(),
       status: 'active'
-    });
+    };
+    if (payment_method) updateData.payment_method = payment_method;
+    if (ach_account_type) updateData.ach_account_type = ach_account_type;
+
+    await update('leads', id, updateData);
 
     // Record payment
-    await insert('payments', {
+    const paymentRecord = {
       lead_id: id,
       amount: amount,
       plan: plan,
       status: 'completed',
       stripe_payment_id: stripe_payment_id || null
-    });
+    };
+    if (payment_method) paymentRecord.payment_method = payment_method;
+    if (ach_account_type) paymentRecord.ach_account_type = ach_account_type;
+
+    await insert('payments', paymentRecord);
 
     // Send payment notification email
     sendPaymentEmail(
