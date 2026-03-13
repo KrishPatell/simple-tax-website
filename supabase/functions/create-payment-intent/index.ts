@@ -26,11 +26,13 @@ Deno.serve(async (req) => {
     const body = new URLSearchParams({
       amount: String(amountCents),
       currency: 'usd',
-      'automatic_payment_methods[enabled]': 'true',
+      'payment_method_types[]': 'card',
       'metadata[plan]': plan || 'full',
       'metadata[email]': email || '',
       'metadata[name]': name || '',
     })
+    // Also allow ACH (us_bank_account)
+    body.append('payment_method_types[]', 'us_bank_account')
 
     const res = await fetch('https://api.stripe.com/v1/payment_intents', {
       method: 'POST',

@@ -38,9 +38,7 @@ app.post('/create-payment-intent', async (req, res) => {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount * 100, // Convert dollars to cents
       currency: 'usd',
-      automatic_payment_methods: {
-        enabled: true,
-      },
+      payment_method_types: ['card', 'us_bank_account'],
       metadata: {
         integration_check: 'accept_a_payment',
       },
