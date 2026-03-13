@@ -1,7 +1,8 @@
 // Supabase Edge Function: create-payment-intent
 // Creates Stripe PaymentIntent for SympleTax portal
 
-import Stripe from 'https://esm.sh/stripe@14.21.0?target=deno'
+// Stripe in Supabase Edge Functions: use deno target (and no-check for compatibility)
+import Stripe from 'https://esm.sh/stripe@11.2.0?target=deno&no-check'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
