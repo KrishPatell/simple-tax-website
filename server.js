@@ -94,6 +94,12 @@ app.post('/leads/:id/payment', async (req, res) => {
   }
 });
 
+// Explicit favicon route for reliable deployment (Vercel, etc.)
+app.get('/favicon.png', (req, res) => {
+  res.setHeader('Cache-Control', 'public, max-age=86400');
+  res.sendFile(path.join(__dirname, 'favicon.png'));
+});
+
 // Serve the HTML file for root
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'SympleTax_Portal_v6 (1).html'));
