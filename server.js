@@ -94,10 +94,16 @@ app.post('/leads/:id/payment', async (req, res) => {
   }
 });
 
-// Explicit favicon route for reliable deployment (Vercel, etc.)
+// Favicon routes - Chrome requests favicon.ico first, caches aggressively
+const faviconPath = path.join(__dirname, 'favicon.png');
+app.get('/favicon.ico', (req, res) => {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Content-Type', 'image/png');
+  res.sendFile(faviconPath);
+});
 app.get('/favicon.png', (req, res) => {
-  res.setHeader('Cache-Control', 'public, max-age=86400');
-  res.sendFile(path.join(__dirname, 'favicon.png'));
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.sendFile(faviconPath);
 });
 
 // Serve the HTML file for root
