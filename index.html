@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+// Force favicon on all browsers/devices
+(function() {
+  var link = document.createElement('link');
+  link.type = 'image/png';
+  link.rel = 'icon';
+  link.href = '/favicon.png?v=3';
+  document.head.appendChild(link);
+  
+  // Also set apple-touch-icon
+  var appleLink = document.createElement('link');
+  appleLink.type = 'image/png';
+  appleLink.rel = 'apple-touch-icon';
+  appleLink.href = '/favicon.png?v=3';
+  document.head.appendChild(appleLink);
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SympleTax — Resolve Your Tax Debt 100% Online</title>
