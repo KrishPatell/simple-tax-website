@@ -170,19 +170,33 @@
       display: none;
       min-height: 100vh;
       padding-top: 62px;
+      background: var(--off);
     }
-    .form-page.active { display: grid; grid-template-columns: 1fr 360px; }
+    .form-page.active {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 62px 24px 80px;
+    }
+    .form-layout {
+      display: grid;
+      grid-template-columns: 1fr 316px;
+      gap: 24px;
+      max-width: 1020px;
+      width: 100%;
+      align-items: start;
+    }
 
     /* ─── FORM COL ─── */
     .form-col {
-      padding: 40px 48px 80px;
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      padding: 36px 40px 48px;
       min-width: 0;
-      display: flex; flex-direction: column;
-      align-items: center;
     }
     .form-inner {
       width: 100%;
-      max-width: 600px;
     }
 
     /* ─── STEPPER ─── */
@@ -420,79 +434,81 @@
     .btn-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(15,31,69,.35); }
     .btn-submit:disabled { opacity: .45; cursor: not-allowed; transform: none; }
 
-    /* ─── DARK SIDEBAR ─── */
+    /* ─── SIDEBAR ─── */
     .form-sidebar {
-      background: var(--navy);
-      padding: 36px 26px;
-      display: flex; flex-direction: column; gap: 20px;
-      position: sticky; top: 62px;
-      height: calc(100vh - 62px); overflow-y: auto;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px 20px;
+      display: flex; flex-direction: column; gap: 16px;
+      position: sticky; top: 82px;
+      height: fit-content;
     }
 
-    .sb-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-    .sb-logo-text { font-family:'Outfit',sans-serif; font-size:18px; font-weight:800; color:white; letter-spacing:-.3px; }
+    .sb-logo { display: flex; align-items: center; gap: 8px; }
+    .sb-logo-text { font-family:'Outfit',sans-serif; font-size:17px; font-weight:800; color:var(--navy); letter-spacing:-.3px; }
     .sb-logo-text em { color:var(--teal); font-style:normal; }
 
     /* Contextual tip card */
     .sb-tip {
-      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
-      border-radius: 14px; padding: 16px;
-      transition: all .4s ease;
+      background: var(--off); border: 1px solid var(--line);
+      border-radius: 12px; padding: 14px;
+      transition: opacity .3s ease;
     }
     .sb-tip-icon {
-      width: 38px; height: 38px; border-radius: 10px;
-      background: rgba(0,180,176,.2);
+      width: 34px; height: 34px; border-radius: 9px;
+      background: rgba(0,180,176,.12);
       display: flex; align-items: center; justify-content: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
-    .sb-tip-icon svg { width: 19px; height: 19px; color: var(--teal); }
-    .sb-tip-title { font-size: 14px; font-weight: 700; color: white; margin-bottom: 6px; line-height: 1.3; }
-    .sb-tip-body { font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.6; }
+    .sb-tip-icon svg { width: 17px; height: 17px; color: var(--teal); }
+    .sb-tip-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 5px; line-height: 1.3; }
+    .sb-tip-body { font-size: 12px; color: var(--body); line-height: 1.6; }
     .sb-tip-highlight { color: var(--teal); font-weight: 700; }
 
     /* Trust badges */
     .sb-trust { }
-    .sb-trust-label { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.35); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 14px; }
-    .sb-badges { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .sb-trust-label { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1.1px; margin-bottom: 10px; }
+    .sb-badges { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .sb-badge {
-      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
-      border-radius: 10px; padding: 12px 14px; text-align: center;
+      background: var(--off); border: 1px solid var(--line);
+      border-radius: 10px; padding: 10px 12px; text-align: center;
     }
-    .sb-badge-val { font-family:'Outfit',sans-serif; font-size: 18px; font-weight: 800; color: white; margin-bottom: 2px; }
-    .sb-badge-lbl { font-size: 10px; color: rgba(255,255,255,.5); font-weight: 500; line-height: 1.4; }
+    .sb-badge-val { font-family:'Outfit',sans-serif; font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 2px; }
+    .sb-badge-lbl { font-size: 10px; color: var(--muted); font-weight: 500; line-height: 1.3; }
     .sb-badge.accent .sb-badge-val { color: var(--teal); }
 
     /* Testimonial */
     .sb-testimonial {
-      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
-      border-radius: 14px; padding: 16px;
+      background: var(--off); border: 1px solid var(--line);
+      border-radius: 12px; padding: 14px;
     }
-    .sb-test-stars { display:flex; gap:3px; margin-bottom:10px; }
-    .sb-test-star { color: var(--amber); font-size: 13px; }
-    .sb-test-text { font-size: 13px; color: rgba(255,255,255,.8); line-height: 1.6; font-style: italic; margin-bottom: 14px; }
-    .sb-test-author { display: flex; align-items: center; gap: 10px; }
+    .sb-test-stars { display:flex; gap:3px; margin-bottom:8px; }
+    .sb-test-star { color: var(--amber); font-size: 12px; }
+    .sb-test-text { font-size: 12px; color: var(--body); line-height: 1.6; font-style: italic; margin-bottom: 12px; }
+    .sb-test-author { display: flex; align-items: center; gap: 8px; }
     .sb-test-av {
-      width: 32px; height: 32px; border-radius: 50%;
+      width: 30px; height: 30px; border-radius: 50%;
       background: linear-gradient(135deg, var(--teal), #0084B0);
       display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 800; color: white;
+      font-size: 11px; font-weight: 800; color: white; flex-shrink: 0;
     }
-    .sb-test-name { font-size: 13px; font-weight: 700; color: rgba(255,255,255,.75); }
+    .sb-test-name { font-size: 12px; font-weight: 700; color: var(--navy); }
     .sb-test-saved { font-size: 11px; color: var(--teal); font-weight: 600; margin-top: 1px; }
 
     /* Accreditations */
-    .sb-creds { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .sb-creds { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .sb-cred {
-      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
-      border-radius: 8px; padding: 7px 12px;
-      font-size: 11px; font-weight: 800; color: rgba(255,255,255,.75);
-      letter-spacing: .5px;
+      background: var(--off); border: 1px solid var(--line);
+      border-radius: 7px; padding: 5px 10px;
+      font-size: 11px; font-weight: 700; color: var(--body);
+      letter-spacing: .3px;
     }
 
     /* ─── THANK YOU ─── */
     .ty-page {
       display: none; min-height: 100vh; padding-top: 62px;
-      background: linear-gradient(160deg, #F5F7FC 0%, #FFFFFF 60%);
+      background: var(--off);
     }
     .ty-page.active { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 52px 24px; }
 
@@ -680,17 +696,18 @@
       .hero { grid-template-columns: 1fr; }
       .hero-right { display: none; }
       .hero-left { padding: 48px 32px; }
-      .form-page.active { grid-template-columns: 1fr; }
+      .form-page.active { padding: 62px 16px 60px; }
+      .form-layout { grid-template-columns: 1fr; gap: 0; }
       .form-sidebar { display: none; }
-      .form-col { padding: 24px 24px 80px; align-items: stretch; }
-      .form-inner { max-width: 100%; }
+      .form-col { padding: 24px 24px 40px; border-radius: 12px; }
       .stepper { display: none; }
     }
     @media (max-width: 600px) {
       .hdr { padding: 0 16px; }
       .hdr-phone { display: none; }
       .hero-left { padding: 36px 20px; }
-      .form-col { padding: 20px 16px 80px; }
+      .form-page.active { padding: 62px 12px 60px; }
+      .form-col { padding: 20px 18px 36px; }
       .support-bar { padding: 12px 18px; }
       .options-grid.two-col { grid-template-columns: 1fr; }
       .call-state { padding: 22px 18px; }
@@ -801,6 +818,7 @@
 
 <!-- ─── FORM PAGE ─── -->
 <div class="form-page" id="form-page">
+  <div class="form-layout">
   <div class="form-col">
     <div class="form-inner">
 
@@ -875,6 +893,7 @@
       </div>
     </div>
   </aside>
+  </div><!-- /.form-layout -->
 </div>
 
 <!-- ─── THANK YOU ─── -->
@@ -974,7 +993,7 @@
 
 <script>
 // ─── STATE ───
-const S = {
+const S_DEFAULTS = {
   step: 1,
   prompted: [],
   unfiledYears: '',
@@ -984,6 +1003,27 @@ const S = {
   bankruptcy: '',
   firstName: '', lastName: '', email: '', phone: '', agreed: false,
 };
+
+const S = Object.assign({}, S_DEFAULTS);
+
+// Load saved state from localStorage
+(function loadState() {
+  try {
+    const saved = localStorage.getItem('sx_form');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      Object.assign(S, parsed);
+    }
+  } catch(e) {}
+})();
+
+function saveState() {
+  try { localStorage.setItem('sx_form', JSON.stringify(S)); } catch(e) {}
+}
+
+function clearState() {
+  try { localStorage.removeItem('sx_form'); } catch(e) {}
+}
 
 // ─── STEP DEFINITIONS ───
 const STEPS = [
@@ -1199,7 +1239,6 @@ function pick(el, key, val, isCheck) {
     const idx = S[key].indexOf(val);
     if (idx === -1) { S[key].push(val); el.classList.add('selected'); }
     else { S[key].splice(idx, 1); el.classList.remove('selected'); }
-    // Update indicator
     const ind = el.querySelector('.ind-check');
     if (ind) { ind.style.opacity = el.classList.contains('selected') ? '1' : '0'; ind.style.transform = el.classList.contains('selected') ? 'scale(1)' : 'scale(0)'; }
   } else {
@@ -1212,9 +1251,9 @@ function pick(el, key, val, isCheck) {
     el.classList.add('selected');
     const dot = el.querySelector('.ind-dot');
     if (dot) dot.style.transform = 'scale(1)';
-    // Auto-advance radio
     setTimeout(goNext, 280);
   }
+  saveState();
   const btn = document.getElementById('btn-next');
   if (btn) {
     const v = S[key];
@@ -1231,6 +1270,7 @@ function goNext() {
     if (Array.isArray(v) ? v.length === 0 : v === '') return;
   }
   S.step++;
+  saveState();
   animateIn('right');
   renderStep();
 }
@@ -1242,6 +1282,7 @@ function goBack() {
     return;
   }
   S.step--;
+  saveState();
   animateIn('left');
   renderStep();
 }
@@ -1274,18 +1315,18 @@ function renderContact() {
       <div class="field-row">
         <div class="field">
           <label>First name</label>
-          <input id="f-first" type="text" placeholder="John" value="${S.firstName}" oninput="S.firstName=this.value">
+          <input id="f-first" type="text" placeholder="John" value="${S.firstName}" oninput="S.firstName=this.value;saveState()">
           <span class="field-err">Required</span>
         </div>
         <div class="field">
           <label>Last name</label>
-          <input id="f-last" type="text" placeholder="Smith" value="${S.lastName}" oninput="S.lastName=this.value">
+          <input id="f-last" type="text" placeholder="Smith" value="${S.lastName}" oninput="S.lastName=this.value;saveState()">
           <span class="field-err">Required</span>
         </div>
       </div>
       <div class="field">
         <label>Email address</label>
-        <input id="f-email" type="email" placeholder="you@example.com" value="${S.email}" oninput="S.email=this.value">
+        <input id="f-email" type="email" placeholder="you@example.com" value="${S.email}" oninput="S.email=this.value;saveState()">
         <span class="field-err" id="email-err">Valid email required</span>
       </div>
       <div class="field">
@@ -1325,6 +1366,7 @@ function toggleTerms() {
   S.agreed = !S.agreed;
   const box = document.getElementById('t-box');
   if (box) box.classList.toggle('on', S.agreed);
+  saveState();
 }
 
 function fmtPhone(el) {
@@ -1333,6 +1375,7 @@ function fmtPhone(el) {
   if (v.length >= 7) el.value = `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
   else if (v.length >= 4) el.value = `(${v.slice(0,3)}) ${v.slice(3)}`;
   else if (v.length) el.value = `(${v}`;
+  saveState();
 }
 
 function validEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
@@ -1365,6 +1408,7 @@ function submitForm() {
 }
 
 function showThankYou() {
+  clearState(); // wipe saved form on success
   document.getElementById('form-page').classList.remove('active');
   const ty = document.getElementById('ty-page');
   ty.classList.add('active');
