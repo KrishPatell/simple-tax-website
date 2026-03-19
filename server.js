@@ -162,8 +162,8 @@ app.get('/missed-call', (req, res) => {
     <div class="ty-success-ring">
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>
     </div>
-    <h2 class="ty-h">We tried to call you,<br>but you didn't pick up.</h2>
-    <p class="ty-sub">No worries — pick a time below and we'll call you when it's convenient for you.</p>
+    <h2 class="ty-h">If it's not a good time right now,<br>schedule a call below.</h2>
+    <p class="ty-sub">A SympleTax specialist is standing by — pick a time that works for you and we'll call you exactly then.</p>
     <div class="sched-card">
       <div class="sched-header">
         <div class="sched-icon">
