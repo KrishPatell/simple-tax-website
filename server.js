@@ -111,9 +111,14 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'SympleTax_Portal_v6 (1).html'));
 });
 
-// Get Started page
+// Free Consultation page (formerly Get Started)
+app.get('/free-consultation', (req, res) => {
+  res.sendFile(path.join(__dirname, 'free-consultation.html'));
+});
+
+// Legacy redirect — /get-started → /free-consultation
 app.get('/get-started', (req, res) => {
-  res.sendFile(path.join(__dirname, 'get-started.html'));
+  res.redirect(301, '/free-consultation');
 });
 
 // Serve static files

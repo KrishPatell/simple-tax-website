@@ -543,8 +543,6 @@
       height: 220px;
     }
     .sb-testimonial {
-      position: absolute;
-      top: 0; left: 0; right: 0;
       background: var(--off); border: 1px solid var(--line);
       border-radius: 12px; padding: 14px;
       transition: opacity 0.6s ease, transform 0.6s ease;
@@ -552,13 +550,13 @@
     .sb-test-active {
       opacity: 1;
       transform: translateY(0);
-      z-index: 2;
     }
     .sb-testimonial:not(.sb-test-active) {
+      position: absolute;
+      top: 0; left: 0; right: 0;
       opacity: 0;
       transform: translateY(12px);
       pointer-events: none;
-      z-index: 1;
     }
     .sb-test-stars { display:flex; gap:3px; margin-bottom:8px; color: #F59E0B !important; }
     .sb-test-star { color: #F59E0B !important; font-size: 12px; }
@@ -1002,7 +1000,7 @@
 
     <!-- Review -->
     <div class="hr-review">
-      <span class="hr-rev-stars">★★★★★</span>
+      <span class="hr-rev-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
       <p class="hr-rev-text">"I can finally breathe again. They handled everything — I didn't have to talk to the IRS once."</p>
       <div class="hr-rev-author">
         <div class="hr-rev-avatar">JR</div>
@@ -1024,17 +1022,17 @@
       <div class="reviews-label">What Our Clients Say</div>
       <div class="reviews-grid">
         <div class="review-card">
-          <div class="review-stars">★★★★★</div>
+          <div class="review-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
           <div class="review-text">I owed over $45,000 to the IRS and thought there was no way out. SympleTax helped me settle for a fraction of what I owed. The process was easy and completely online.</div>
           <div class="review-author">Michael R. <span>— Dallas, TX</span></div>
         </div>
         <div class="review-card">
-          <div class="review-stars">★★★★★</div>
+          <div class="review-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
           <div class="review-text">Professional, fast, and actually affordable. My case manager kept me updated the whole way through. I finally feel like I can breathe again.</div>
           <div class="review-author">Sarah T. <span>— Miami, FL</span></div>
         </div>
         <div class="review-card">
-          <div class="review-stars">★★★★★</div>
+          <div class="review-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
           <div class="review-text">I was getting wage garnishment notices and didn't know what to do. SympleTax stopped the garnishment within days and negotiated a much lower amount.</div>
           <div class="review-author">David L. <span>— Phoenix, AZ</span></div>
         </div>
@@ -1187,7 +1185,7 @@
     <!-- Testimonials (auto-rotating) -->
     <div class="sb-testimonials" id="sb-testimonials">
       <div class="sb-testimonial sb-test-active">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"They reduced my $38,000 debt to just $2,100. The team was professional, fast, and kept me informed every step of the way."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">MR</div>
@@ -1198,7 +1196,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"I was drowning in $60,000 of IRS debt. SympleTax got me an Offer in Compromise for $4,800. I literally cried when I got the letter."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">JT</div>
@@ -1209,7 +1207,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"Wage garnishment stopped in 3 days. They negotiated a payment plan I could actually afford. Best decision I made all year."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">DW</div>
@@ -1220,7 +1218,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"They handled everything. I didn't have to speak to the IRS once. Clean, professional, and they actually delivered what they promised."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">LP</div>
@@ -1231,7 +1229,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"Professional from start to finish. They reduced my tax debt by 78% and set up an affordable monthly payment plan I can live with."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">RK</div>
@@ -1242,7 +1240,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"I had a $75,000 tax lien against my home. SympleTax got it released in 60 days. My family can finally sleep at night."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">SM</div>
@@ -1253,7 +1251,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"The IRS was about to levy my bank account. One call to SympleTax and they stopped it immediately. Incredible response time."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">TC</div>
@@ -1264,7 +1262,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"Filed taxes for 6 years missing. SympleTax got me compliant and settled my debt for $2,200 instead of $18,000."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">KP</div>
@@ -1275,7 +1273,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"My husband and I were facing wage garnishment. SympleTax negotiated a compromise that saved our home and our marriage."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">BL</div>
@@ -1286,7 +1284,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"Offer in Compromise accepted after 8 months of waiting. SympleTax handled all the paperwork and IRS communication."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">JR</div>
@@ -1297,7 +1295,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"Back taxes from my small business were destroying me. SympleTax set up an installment agreement I could manage."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">MW</div>
@@ -1308,7 +1306,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"The audit notification came and I was terrified. SympleTax represented me and the audit closed with no changes. Pure professionals."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">AH</div>
@@ -1319,7 +1317,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"I was self-employed and owed $52,000. They got my penalty abatement approved and reduced my debt dramatically."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">DG</div>
@@ -1330,7 +1328,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"Had a $90,000 IRS debt from unfiled years. SympleTax got me in the Current Year Resolution program and resolved everything."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">NP</div>
@@ -1341,7 +1339,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"They removed the federal tax lien from my credit report after settling my debt. My credit score jumped 120 points."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">LS</div>
@@ -1352,7 +1350,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"Called three other firms before SympleTax. None would take my case because it was too complex. They solved it in 90 days."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">RB</div>
@@ -1363,7 +1361,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"Innocent spouse relief granted after 11 months. SympleTax guided me through every step of that difficult process."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">EW</div>
@@ -1374,7 +1372,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"My rental property taxes were a mess. They filed amended returns, got me refunds, and applied them to my debt. Smart firm."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">CV</div>
@@ -1385,7 +1383,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"Payroll tax problems for my small business. SympleTax negotiated a trust fund penalty reduction of 60%. Can't recommend enough."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">JA</div>
@@ -1396,7 +1394,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"After my divorce, I was stuck with $48,000 in tax debt from my ex's business. SympleTax got me relief and a fresh start."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">MT</div>
@@ -1407,7 +1405,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"Crypto tax debt from 2017. The IRS wanted $83,000. SympleTax settled it for $9,500 through their penalty abatement program."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">PK</div>
@@ -1418,7 +1416,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"Restaurant owner here. SympleTax handled my back taxes and also saved me over $200 a month on my new payment plan. Great team."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">VG</div>
@@ -1429,7 +1427,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"They represented me during a tax audit and got the IRS to dismiss all penalties. The fee was worth every penny — saved me thousands."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">DL</div>
@@ -1440,7 +1438,7 @@
         </div>
       </div>
       <div class="sb-testimonial">
-        <div class="sb-test-stars" style="color:#F59E0B;">★★★★★</div>
+        <div class="sb-test-stars" style="color:#F59E0B;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <p class="sb-test-text">"Freelancer with 5 years of unfiled returns. SympleTax got me compliant, negotiated my debt down, and I'm finally debt-free."</p>
         <div class="sb-test-author">
           <div class="sb-test-av">RH</div>
@@ -1567,9 +1565,38 @@ const S_DEFAULTS = {
   issueType: '',
   bankruptcy: '',
   firstName: '', lastName: '', email: '', phone: '', agreed: false,
+  utm_source: '', utm_medium: '', utm_campaign: '', utm_content: '', utm_term: '',
 };
 
 const S = Object.assign({}, S_DEFAULTS);
+
+// Capture UTM parameters from URL
+(function captureUTMs() {
+  const params = new URLSearchParams(window.location.search);
+  S.utm_source   = params.get('utm_source')   || '';
+  S.utm_medium   = params.get('utm_medium')   || '';
+  S.utm_campaign = params.get('utm_campaign') || '';
+  S.utm_content  = params.get('utm_content')  || '';
+  S.utm_term     = params.get('utm_term')     || '';
+  // Store in localStorage so they persist if user refreshes
+  try { localStorage.setItem('sx_utms', JSON.stringify({
+    utm_source: S.utm_source, utm_medium: S.utm_medium,
+    utm_campaign: S.utm_campaign, utm_content: S.utm_content, utm_term: S.utm_term
+  })); } catch(e) {}
+})();
+
+// Load saved UTM params if navigating back (URL params won't be present on restore)
+(function restoreUTMs() {
+  if (!S.utm_source) {
+    try {
+      const saved = localStorage.getItem('sx_utms');
+      if (saved) {
+        const utms = JSON.parse(saved);
+        Object.assign(S, utms);
+      }
+    } catch(e) {}
+  }
+})();
 
 // Load saved state from localStorage
 (function loadState() {
@@ -1989,7 +2016,12 @@ async function submitForm() {
       tax_type:      S.taxType       || null,
       issue_type:    S.issueType     || null,
       bankruptcy:    S.bankruptcy    || null,
-      terms_agreed:  S.agreed        || false
+      terms_agreed:  S.agreed        || false,
+      utm_source:    S.utm_source    || null,
+      utm_medium:    S.utm_medium    || null,
+      utm_campaign:  S.utm_campaign  || null,
+      utm_content:   S.utm_content   || null,
+      utm_term:      S.utm_term      || null,
     };
     const res = await fetch(SUPABASE_URL, {
       method: 'POST',

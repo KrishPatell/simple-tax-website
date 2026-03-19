@@ -42,7 +42,12 @@ Deno.serve(async (req) => {
       bankruptcy:   body.bankruptcy   || null,
       terms_agreed: body.terms_agreed || false,
       status:       'new',
-      source:       'get-started',
+      source:       'free-consultation',
+      utm_source:   body.utm_source   || null,
+      utm_medium:   body.utm_medium   || null,
+      utm_campaign: body.utm_campaign || null,
+      utm_content:  body.utm_content  || null,
+      utm_term:     body.utm_term     || null,
     }
 
     const { data: lead, error } = await supabase
@@ -141,8 +146,8 @@ Deno.serve(async (req) => {
       <h1 style="color:#fff;font-size:22px;font-weight:800;margin:0">You're on your way!</h1>
     </div>
     <div style="padding:32px;text-align:center">
-      <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#00B4B0,#009B98);margin:0 auto 20px;display:flex;align-items:center;justify-content:center">
-        <svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5" style="width:30px;height:30px"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>
+      <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#00B4B0,#009B98);margin:0 auto 20px;display:flex;align-items:center;justify-content:center;text-align:center">
+        <svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="3" style="width:32px;height:32px;display:block"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>
       </div>
       <h2 style="font-family:Outfit,sans-serif;font-size:24px;font-weight:800;color:#0F1F45;margin:0 0 12px">Thanks, ${dbRow.first_name}!</h2>
       <p style="font-size:15px;color:#3D4A61;line-height:1.7;max-width:400px;margin:0 auto 28px">
@@ -158,22 +163,22 @@ Deno.serve(async (req) => {
       <!-- What happens next -->
       <div style="background:#F5F7FC;border-radius:12px;padding:20px;margin-bottom:28px;text-align:left">
         <p style="font-size:12px;font-weight:700;color:#8895AE;text-transform:uppercase;letter-spacing:.5px;margin:0 0 14px">What happens next</p>
-        <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px">
-          <div style="width:26px;height:26px;border-radius:50%;background:#00B4B0;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+          <div style="width:28px;height:28px;border-radius:50%;background:#00B4B0;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;letter-spacing:0">1</div>
           <div>
             <p style="font-size:13px;font-weight:700;color:#0F1F45;margin:0 0 2px">Case assigned to a specialist</p>
             <p style="font-size:12px;color:#8895AE;margin:0">Your dedicated rep is reviewing your info now</p>
           </div>
         </div>
-        <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px">
-          <div style="width:26px;height:26px;border-radius:50%;background:#00B4B0;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+          <div style="width:28px;height:28px;border-radius:50%;background:#00B4B0;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;letter-spacing:0">2</div>
           <div>
             <p style="font-size:13px;font-weight:700;color:#0F1F45;margin:0 0 2px">Personalized relief analysis</p>
             <p style="font-size:12px;color:#8895AE;margin:0">We'll identify every program you qualify for</p>
           </div>
         </div>
-        <div style="display:flex;align-items:flex-start;gap:12px">
-          <div style="width:26px;height:26px;border-radius:50%;background:#00B4B0;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">3</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:28px;height:28px;border-radius:50%;background:#00B4B0;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;letter-spacing:0">3</div>
           <div>
             <p style="font-size:13px;font-weight:700;color:#0F1F45;margin:0 0 2px">Free phone consultation</p>
             <p style="font-size:12px;color:#8895AE;margin:0">We'll call you to discuss your options</p>
