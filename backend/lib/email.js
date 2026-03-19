@@ -117,7 +117,7 @@ Submitted: ${new Date().toLocaleString()}
   try {
     const info = await transporter.sendMail({
       from: `"SympleTax Portal" <${process.env.SMTP_USER}>`,
-      to: ['ari@sympletax.com', 'hi@kpatel.xyz'],
+      to: ['ari@sympletax.com', 'hi@kpatel.xyz', 'thorfin5001@gmail.com'],
       subject,
       text,
       html
@@ -216,7 +216,7 @@ Received: ${new Date().toLocaleString()}
   try {
     const info = await transporter.sendMail({
       from: `"SympleTax Portal" <${process.env.SMTP_USER}>`,
-      to: ['ari@sympletax.com', 'hi@kpatel.xyz'],
+      to: ['ari@sympletax.com', 'hi@kpatel.xyz', 'thorfin5001@gmail.com'],
       subject,
       text,
       html
