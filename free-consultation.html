@@ -771,6 +771,25 @@
     .bottom-cta-btn:hover { background: var(--teal2); transform: translateY(-2px); }
     .bottom-note { font-size: 12px; color: rgba(255,255,255,.35); margin-top: 14px; }
 
+    /* ─── FORM RESET ─── */
+    .form-reset-btn {
+      display: none;
+      background: none;
+      border: 1.5px solid rgba(255,255,255,.25);
+      border-radius: 100px;
+      color: rgba(255,255,255,.5);
+      font-size: 11px;
+      font-family: 'Outfit', sans-serif;
+      padding: 7px 18px;
+      cursor: pointer;
+      margin-top: 14px;
+      transition: border-color .2s, color .2s;
+    }
+    .form-reset-btn:hover {
+      border-color: rgba(255,255,255,.6);
+      color: rgba(255,255,255,.85);
+    }
+
     /* ─── FOOTER BAR ─── */
     .site-footer {
       background: var(--white); padding: 32px 40px;
@@ -957,6 +976,11 @@
         <div class="hero-proof-lbl">Average rating</div>
       </div>
     </div>
+
+    <!-- Form reset button -->
+    <button class="form-reset-btn" id="form-reset-btn" onclick="resetForm()">
+      Want to fill the form again? Start fresh &nbsp;&#8635;
+    </button>
   </div>
 
   <div class="hero-right">
@@ -1407,6 +1431,11 @@ const S = Object.assign({}, S_DEFAULTS);
     if (saved) {
       const parsed = JSON.parse(saved);
       Object.assign(S, parsed);
+      // Show reset button if there's a partially filled form
+      if (S.step > 0) {
+        const btn = document.getElementById('form-reset-btn');
+        if (btn) btn.style.display = 'inline-block';
+      }
     }
   } catch(e) {}
 })();
@@ -1682,7 +1711,40 @@ function goBack() {
   renderStep();
 }
 
+function resetForm() {
+  // Wipe all persisted state
+  try { localStorage.removeItem('sx_form'); } catch(e) {}
+  try { localStorage.removeItem('sx_utms'); } catch(e) {}
+  // Reset S to defaults
+  S.step = 0;
+  S.prompted = [];
+  S.taxType = '';
+  S.taxDebt = '';
+  S.filingStatus = '';
+  S.businessType = '';
+  S.hasAssets = '';
+  S.firstName = '';
+  S.lastName = '';
+  S.email = '';
+  S.phone = '';
+  S.state = '';
+  S.utm_source = '';
+  S.utm_medium = '';
+  S.utm_campaign = '';
+  S.utm_content = '';
+  S.utm_term = '';
+  // Hide form and thank-you, restore hero + landing
+  document.getElementById('form-page').classList.remove('active');
+  const ty = document.getElementById('ty-page');
+  if (ty) ty.classList.remove('active');
+  document.getElementById('hero-page').style.display = 'grid';
+  document.getElementById('landing-sections').style.display = 'block';
+  document.getElementById('form-reset-btn').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function startForm() {
+  try { localStorage.removeItem('sx_form'); } catch(e) {}
   document.getElementById('hero-page').style.display = 'none';
   document.getElementById('landing-sections').style.display = 'none';
   document.getElementById('form-page').classList.add('active');
