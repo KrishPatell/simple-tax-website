@@ -270,16 +270,65 @@ body {
 }
 .review-card {
   flex-shrink: 0;
-  width: 273px;
-  background: #F9FAFB; border: 1px solid #F0F2F5;
-  border-radius: 20px; padding: 28px;
+  width: 305px;
+  background: #fff;
+  border: 1px solid #E8EDF5;
+  border-left: 4px solid #00B87C;
+  border-radius: 16px;
+  padding: 26px 26px 26px 22px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.04);
   transition: box-shadow .2s, transform .2s;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
-.review-card:hover { box-shadow: 0 6px 28px rgba(0,0,0,.07); transform: translateY(-2px); }
-.review-stars { color: #F59E0B; font-size: 12px; letter-spacing: 2px; margin-bottom: 14px; }
-.review-text { font-size: 14px; color: #4B5563; line-height: 1.72; margin-bottom: 18px; font-style: italic; }
-.review-author { font-size: 13px; font-weight: 700; color: #0A1629; }
-.review-author span { font-weight: 400; color: #9CA3AF; }
+.review-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.09); transform: translateY(-2px); }
+.review-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.review-card-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #00B87C;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+.review-card-logo svg { width: 14px; height: 14px; }
+.review-card-score {
+  font-size: 11px;
+  font-weight: 700;
+  color: #191919;
+}
+.review-stars { display: flex; gap: 2px; margin-bottom: 14px; }
+.review-stars svg { width: 14px; height: 14px; }
+.review-text { font-size: 14px; color: #374151; line-height: 1.7; margin-bottom: 18px; font-style: italic; flex-grow: 1; }
+.review-author { display: flex; align-items: center; gap: 8px; }
+.review-av {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, #0F1F45, #1A4080);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; color: #C8D8F0; flex-shrink: 0;
+}
+.review-author-name { font-size: 13px; font-weight: 700; color: #0A1629; }
+.review-author-meta { font-size: 11px; color: #9CA3AF; margin-top: 1px; }
+.review-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #00B87C;
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+.review-verified svg { width: 10px; height: 10px; }
 
 @media (max-width: 640px) {
   .reviews-section { padding: 48px 0; }
@@ -1431,7 +1480,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="logos-row">
         <div class="logo-item">
           <div class="logo-item-name">Trustpilot</div>
-          <div class="logo-item-rating"><span class="logo-item-stars">★★★★★</span> 4.9 / 5.0</div>
+          <div class="logo-item-rating">
+            <span class="logo-item-stars">
+              <svg viewBox="0 0 24 24" fill="#F59E0B" width="11" height="11"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B" width="11" height="11"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B" width="11" height="11"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B" width="11" height="11"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B" width="11" height="11"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </span>
+            4.9 / 5.0
+          </div>
         </div>
         <div class="logo-item">
           <div class="logo-item-name">NATP</div>
@@ -1453,44 +1511,228 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="reviews-track-wrap">
         <div class="reviews-track">
           <div class="review-card">
-            <div class="review-stars">★★★★★</div>
+            <div class="review-card-top">
+              <div class="review-card-logo">
+                <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                Trustpilot
+              </div>
+              <div class="review-card-score">4.9</div>
+            </div>
+            <div class="review-stars">
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
             <p class="review-text">I owed over $45,000 to the IRS and thought there was no way out. SympleTax helped me settle for a fraction of what I owed. The process was easy and completely online.</p>
-            <div class="review-author">Michael R. <span>— Dallas, TX</span></div>
+            <div class="review-author">
+              <div class="review-av">MR</div>
+              <div>
+                <div class="review-author-name">Michael R.</div>
+                <div class="review-author-meta">Dallas, TX</div>
+                <div class="review-verified">
+                  <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  Verified Client
+                </div>
+              </div>
+            </div>
           </div>
           <div class="review-card">
-            <div class="review-stars">★★★★★</div>
+            <div class="review-card-top">
+              <div class="review-card-logo">
+                <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                Trustpilot
+              </div>
+              <div class="review-card-score">4.9</div>
+            </div>
+            <div class="review-stars">
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
             <p class="review-text">Professional, fast, and actually affordable. My case manager kept me updated the whole way through. I finally feel like I can breathe again.</p>
-            <div class="review-author">Sarah T. <span>— Miami, FL</span></div>
+            <div class="review-author">
+              <div class="review-av">ST</div>
+              <div>
+                <div class="review-author-name">Sarah T.</div>
+                <div class="review-author-meta">Miami, FL</div>
+                <div class="review-verified">
+                  <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  Verified Client
+                </div>
+              </div>
+            </div>
           </div>
           <div class="review-card">
-            <div class="review-stars">★★★★★</div>
+            <div class="review-card-top">
+              <div class="review-card-logo">
+                <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                Trustpilot
+              </div>
+              <div class="review-card-score">4.9</div>
+            </div>
+            <div class="review-stars">
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
             <p class="review-text">I was getting wage garnishment notices and didn't know what to do. SympleTax stopped the garnishment within days and negotiated a much lower amount.</p>
-            <div class="review-author">David L. <span>— Phoenix, AZ</span></div>
+            <div class="review-author">
+              <div class="review-av">DL</div>
+              <div>
+                <div class="review-author-name">David L.</div>
+                <div class="review-author-meta">Phoenix, AZ</div>
+                <div class="review-verified">
+                  <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  Verified Client
+                </div>
+              </div>
+            </div>
           </div>
           <div class="review-card">
-            <div class="review-stars">★★★★★</div>
+            <div class="review-card-top">
+              <div class="review-card-logo">
+                <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                Trustpilot
+              </div>
+              <div class="review-card-score">4.9</div>
+            </div>
+            <div class="review-stars">
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
             <p class="review-text">I was drowning in back taxes from a failed business. SympleTax got the IRS off my back and cut my balance by more than half.</p>
-            <div class="review-author">Derek N. <span>— Phoenix, AZ</span></div>
+            <div class="review-author">
+              <div class="review-av">DN</div>
+              <div>
+                <div class="review-author-name">Derek N.</div>
+                <div class="review-author-meta">Houston, TX</div>
+                <div class="review-verified">
+                  <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  Verified Client
+                </div>
+              </div>
+            </div>
           </div>
           <div class="review-card">
-            <div class="review-stars">★★★★★</div>
+            <div class="review-card-top">
+              <div class="review-card-logo">
+                <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                Trustpilot
+              </div>
+              <div class="review-card-score">4.9</div>
+            </div>
+            <div class="review-stars">
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
             <p class="review-text">I owed over $45,000 to the IRS and thought there was no way out. SympleTax helped me settle for a fraction of what I owed. The process was easy and completely online.</p>
-            <div class="review-author">Michael R. <span>— Dallas, TX</span></div>
+            <div class="review-author">
+              <div class="review-av">MR</div>
+              <div>
+                <div class="review-author-name">Michael R.</div>
+                <div class="review-author-meta">Dallas, TX</div>
+                <div class="review-verified">
+                  <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  Verified Client
+                </div>
+              </div>
+            </div>
           </div>
           <div class="review-card">
-            <div class="review-stars">★★★★★</div>
+            <div class="review-card-top">
+              <div class="review-card-logo">
+                <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                Trustpilot
+              </div>
+              <div class="review-card-score">4.9</div>
+            </div>
+            <div class="review-stars">
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
             <p class="review-text">Professional, fast, and actually affordable. My case manager kept me updated the whole way through. I finally feel like I can breathe again.</p>
-            <div class="review-author">Sarah T. <span>— Miami, FL</span></div>
+            <div class="review-author">
+              <div class="review-av">ST</div>
+              <div>
+                <div class="review-author-name">Sarah T.</div>
+                <div class="review-author-meta">Miami, FL</div>
+                <div class="review-verified">
+                  <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  Verified Client
+                </div>
+              </div>
+            </div>
           </div>
           <div class="review-card">
-            <div class="review-stars">★★★★★</div>
+            <div class="review-card-top">
+              <div class="review-card-logo">
+                <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                Trustpilot
+              </div>
+              <div class="review-card-score">4.9</div>
+            </div>
+            <div class="review-stars">
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
             <p class="review-text">I was getting wage garnishment notices and didn't know what to do. SympleTax stopped the garnishment within days and negotiated a much lower amount.</p>
-            <div class="review-author">David L. <span>— Phoenix, AZ</span></div>
+            <div class="review-author">
+              <div class="review-av">DL</div>
+              <div>
+                <div class="review-author-name">David L.</div>
+                <div class="review-author-meta">Phoenix, AZ</div>
+                <div class="review-verified">
+                  <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  Verified Client
+                </div>
+              </div>
+            </div>
           </div>
           <div class="review-card">
-            <div class="review-stars">★★★★★</div>
+            <div class="review-card-top">
+              <div class="review-card-logo">
+                <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                Trustpilot
+              </div>
+              <div class="review-card-score">4.9</div>
+            </div>
+            <div class="review-stars">
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
             <p class="review-text">I was drowning in back taxes from a failed business. SympleTax got the IRS off my back and cut my balance by more than half.</p>
-            <div class="review-author">Derek N. <span>— Phoenix, AZ</span></div>
+            <div class="review-author">
+              <div class="review-av">DN</div>
+              <div>
+                <div class="review-author-name">Derek N.</div>
+                <div class="review-author-meta">Houston, TX</div>
+                <div class="review-verified">
+                  <svg viewBox="0 0 24 24" fill="#00B87C"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  Verified Client
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
