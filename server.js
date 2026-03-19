@@ -121,7 +121,7 @@ app.get('/get-started', (req, res) => {
   res.redirect(301, '/free-consultation');
 });
 
-// Serve static files
+// Serve static files LAST so explicit routes above always take priority
 app.use(express.static(__dirname));
 
 app.listen(PORT, '0.0.0.0', () => {
