@@ -1845,6 +1845,28 @@ function fmtPhone(el) {
 
 function validEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
 
+// ─── WEBHOOK CONFIGURATION ───
+// Zapier webhook URL (from Zapier Catch Hook trigger)
+const ZAPIER_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/26757503/un3lg6e/';
+// HubSpot webhook bridge URL (Render bridge service)
+const HUBSPOT_WEBHOOK_URL = 'https://sympletax-crm.onrender.com/webhook/free-consultation';
+
+// Fire-and-forget webhook sender — non-blocking, non-critical
+function sendToWebhooks(payload) {
+  const urls = [ZAPIER_WEBHOOK_URL, HUBSPOT_WEBHOOK_URL];
+  urls.forEach(url => {
+    if (!url) return;
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(err => {
+      // Silently ignore webhook failures — they are non-critical
+      console.warn('Webhook failed for ' + url + ':', err.message);
+    });
+  });
+}
+
 async function submitForm() {
   let ok = true;
   const fi = document.getElementById('f-first');
@@ -1872,28 +1894,31 @@ async function submitForm() {
   // Show processing overlay immediately — API call happens in background
   showSetupOverlay();
 
+  // Build the shared payload
+  const payload = {
+    first_name:    S.firstName.trim(),
+    last_name:     S.lastName.trim(),
+    email:         S.email.trim(),
+    phone:         S.phone.trim(),
+    prompted:      S.prompted      || [],
+    unfiled_years: S.unfiledYears  || null,
+    debt_amount:   S.debtAmount    || null,
+    tax_type:      S.taxType       || null,
+    issue_type:    S.issueType     || null,
+    bankruptcy:    S.bankruptcy    || null,
+    terms_agreed:  S.agreed        || false,
+    utm_source:    S.utm_source    || null,
+    utm_medium:    S.utm_medium    || null,
+    utm_campaign:  S.utm_campaign  || null,
+    utm_content:   S.utm_content   || null,
+    utm_term:      S.utm_term      || null,
+    source:        'free-consultation'
+  };
+
   // POST to Supabase qualify-lead edge function
   const SUPABASE_URL      = 'https://pmjtjmoekakaguovyndq.supabase.co/functions/v1/qualify-lead';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBtanRqbW9la2FrYWd1b3Z5bmRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzMDQ0NzQsImV4cCI6MjA4ODg4MDQ3NH0.SPY-9I78yUH0DSdLpWIxaZRHTQvJugIP12dySezO6KA';
   try {
-    const payload = {
-      first_name:    S.firstName.trim(),
-      last_name:     S.lastName.trim(),
-      email:         S.email.trim(),
-      phone:         S.phone.trim(),
-      prompted:      S.prompted      || [],
-      unfiled_years: S.unfiledYears  || null,
-      debt_amount:   S.debtAmount    || null,
-      tax_type:      S.taxType       || null,
-      issue_type:    S.issueType     || null,
-      bankruptcy:    S.bankruptcy    || null,
-      terms_agreed:  S.agreed        || false,
-      utm_source:    S.utm_source    || null,
-      utm_medium:    S.utm_medium    || null,
-      utm_campaign:  S.utm_campaign  || null,
-      utm_content:   S.utm_content   || null,
-      utm_term:      S.utm_term      || null,
-    };
     const res = await fetch(SUPABASE_URL, {
       method: 'POST',
       headers: {
@@ -1912,6 +1937,9 @@ async function submitForm() {
     // Non-fatal — UX continues regardless
     console.warn('Qualify lead submission failed:', err.message);
   }
+
+  // Fire webhooks in parallel (non-blocking) — Zapier + HubSpot
+  sendToWebhooks(payload);
 }
 
 function showSetupOverlay() {
