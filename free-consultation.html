@@ -1399,6 +1399,7 @@ const S_DEFAULTS = {
   bankruptcy: '',
   firstName: '', lastName: '', email: '', phone: '', agreed: false,
   utm_source: '', utm_medium: '', utm_campaign: '', utm_content: '', utm_term: '',
+  fbclid: '', gclid: '',
 };
 
 const S = Object.assign({}, S_DEFAULTS);
@@ -1411,10 +1412,13 @@ const S = Object.assign({}, S_DEFAULTS);
   S.utm_campaign = params.get('utm_campaign') || '';
   S.utm_content  = params.get('utm_content')  || '';
   S.utm_term     = params.get('utm_term')     || '';
+  S.fbclid       = params.get('fbclid')       || '';
+  S.gclid        = params.get('gclid')        || '';
   // Store in localStorage so they persist if user refreshes
   try { localStorage.setItem('sx_utms', JSON.stringify({
     utm_source: S.utm_source, utm_medium: S.utm_medium,
-    utm_campaign: S.utm_campaign, utm_content: S.utm_content, utm_term: S.utm_term
+    utm_campaign: S.utm_campaign, utm_content: S.utm_content, utm_term: S.utm_term,
+    fbclid: S.fbclid, gclid: S.gclid
   })); } catch(e) {}
 })();
 
@@ -1848,12 +1852,12 @@ function validEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
 // ─── WEBHOOK CONFIGURATION ───
 // Zapier webhook URL (from Zapier Catch Hook trigger)
 const ZAPIER_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/26757503/un3lg6e/';
-// HubSpot webhook bridge URL (Render bridge service)
-const HUBSPOT_WEBHOOK_URL = 'https://sympletax-crm.onrender.com/webhook/free-consultation';
+// Close CRM webhook bridge URL (Render bridge service)
+const CLOSE_WEBHOOK_URL = 'https://sympletax-close.onrender.com/webhook/free-consultation';
 
 // Fire-and-forget webhook sender — non-blocking, non-critical
 function sendToWebhooks(payload) {
-  const urls = [ZAPIER_WEBHOOK_URL, HUBSPOT_WEBHOOK_URL];
+  const urls = [ZAPIER_WEBHOOK_URL, CLOSE_WEBHOOK_URL];
   urls.forEach(url => {
     if (!url) return;
     fetch(url, {
@@ -1912,6 +1916,9 @@ async function submitForm() {
     utm_campaign:  S.utm_campaign  || null,
     utm_content:   S.utm_content   || null,
     utm_term:      S.utm_term      || null,
+    fbclid:        S.fbclid        || null,
+    gclid:         S.gclid         || null,
+    page_url:      window.location.href,
     source:        'free-consultation'
   };
 
@@ -1938,7 +1945,7 @@ async function submitForm() {
     console.warn('Qualify lead submission failed:', err.message);
   }
 
-  // Fire webhooks in parallel (non-blocking) — Zapier + HubSpot
+  // Fire webhooks in parallel (non-blocking) — Zapier + Close CRM
   sendToWebhooks(payload);
 }
 

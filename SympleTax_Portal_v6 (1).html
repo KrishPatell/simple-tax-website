@@ -1856,11 +1856,32 @@ const S = {
   monthlyIncome:0,
   additionalIncome:0,
   paymentPlan:'full',
-  caseNum:'', leadId:''
+  caseNum:'', leadId:'',
+  utm_source:'', utm_medium:'', utm_campaign:'',
+  fbclid:'', gclid:''
 };
 
 const TOTAL_STEPS = 20;
 const STORAGE_KEY = 'sympletax_portal_state_v1';
+
+// Capture UTM + click ID params from URL on load
+(function captureTrackingParams() {
+  const params = new URLSearchParams(window.location.search);
+  S.utm_source   = params.get('utm_source')   || '';
+  S.utm_medium   = params.get('utm_medium')   || '';
+  S.utm_campaign = params.get('utm_campaign') || '';
+  S.fbclid       = params.get('fbclid')       || '';
+  S.gclid        = params.get('gclid')        || '';
+})();
+
+// Close CRM webhook — fire-and-forget, non-blocking
+function sendToCloseWebhook(payload) {
+  fetch('https://sympletax-close.onrender.com/webhook/intake', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(err => console.warn('Close webhook failed:', err.message));
+}
 
 // Stress-test backdoor: fill placeholder data and jump to payment (use ?stress=1 in URL)
 function fillStressTestData(){
@@ -3907,6 +3928,22 @@ async function submitLeadAndPayment(stripePaymentId){
 
     S.caseNum = leadResult.lead.case_number;
     S.leadId = leadResult.lead.id;
+
+    // Fire Close CRM webhook (non-blocking)
+    sendToCloseWebhook({
+      first_name:   S.firstName,
+      last_name:    S.lastName,
+      email:        S.email,
+      phone:        S.phone,
+      irs_balance:  S.debtAmount || null,
+      utm_source:   S.utm_source   || null,
+      utm_medium:   S.utm_medium   || null,
+      utm_campaign: S.utm_campaign || null,
+      fbclid:       S.fbclid       || null,
+      gclid:        S.gclid        || null,
+      page_url:     window.location.href
+    });
+
     S.step = 20;
     render();
 
