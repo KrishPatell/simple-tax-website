@@ -303,7 +303,6 @@
     .stepper-line.done { background: var(--navy); }
 
     /* ─── STEP CONTENT ─── */
-    #step-content { animation: fadeSlide .35s ease both; }
     @keyframes fadeSlide {
       from { opacity:0; transform: translateY(14px); }
       to   { opacity:1; transform: translateY(0); }
@@ -1685,7 +1684,8 @@ function pick(el, key, val, isCheck) {
     el.classList.add('selected');
     const dot = el.querySelector('.ind-dot');
     if (dot) dot.style.transform = 'scale(1)';
-    setTimeout(goNext, 3000);
+    if (_autoNextTimer) clearTimeout(_autoNextTimer);
+    _autoNextTimer = setTimeout(goNext, 3000);
   }
   saveState();
   const btn = document.getElementById('btn-next');
@@ -1696,7 +1696,10 @@ function pick(el, key, val, isCheck) {
 }
 
 // ─── NAV ───
+let _autoNextTimer = null;
+
 function goNext() {
+  if (_autoNextTimer) { clearTimeout(_autoNextTimer); _autoNextTimer = null; }
   const step = S.step;
   if (step <= 6) {
     const def = STEPS[step - 1];
@@ -1710,6 +1713,7 @@ function goNext() {
 }
 
 function goBack() {
+  if (_autoNextTimer) { clearTimeout(_autoNextTimer); _autoNextTimer = null; }
   if (S.step <= 1) {
     document.getElementById('form-page').classList.remove('active');
     document.getElementById('hero-page').style.display = 'grid';
@@ -1760,6 +1764,7 @@ function startForm() {
   document.getElementById('landing-sections').style.display = 'none';
   document.getElementById('form-page').classList.add('active');
   S.step = 1;
+  animateIn('right');
   renderStep();
 }
 
