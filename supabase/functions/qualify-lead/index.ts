@@ -34,9 +34,9 @@ Deno.serve(async (req) => {
       last_name:     body.last_name    || '',
       email:         body.email        || '',
       phone:         body.phone        || '',
-      prompted:      Array.isArray(body.prompted) ? body.prompted : [],
+      prompted:      Array.isArray(body.tax_relief_reason) ? body.tax_relief_reason : (Array.isArray(body.prompted) ? body.prompted : []),
       unfiled_years: body.unfiled_years || null,
-      debt_amount:  body.debt_amount  || null,
+      debt_amount:  body.tax_debt_amount || body.debt_amount  || null,
       tax_type:     body.tax_type     || null,
       issue_type:   body.issue_type   || null,
       bankruptcy:   body.bankruptcy   || null,
@@ -69,18 +69,18 @@ Deno.serve(async (req) => {
       const resend = new Resend(resendApiKey)
 
       const promptedLabels: Record<string, string> = {
-        irs_notice:   'Received IRS notice',
-        garnishment:  'Garnishment, lien or levy',
-        unpaid_taxes: 'Unpaid taxes',
-        other:        'Other reason',
+        irs_notice:            'Received IRS notice',
+        garnishment_lien_levy: 'Garnishment, lien or levy',
+        unpaid_taxes:          'Unpaid taxes',
+        other:                 'Other reason',
       }
       const debtLabels: Record<string, string> = {
-        'under5k':  '$5,000 & under',
-        '5k-10k':   '$5,001 – $10,000',
-        '10k-25k':  '$10,001 – $25,000',
-        '25k-50k':  '$25,001 – $50,000',
-        '50k-75k':  '$50,001 – $75,000',
-        '75k-plus': '$75,001 & above',
+        'under_5000':   '$5,000 & under',
+        '5001_10000':   '$5,001 – $10,000',
+        '10001_25000':  '$10,001 – $25,000',
+        '25001_50000':  '$25,001 – $50,000',
+        '50001_75000':  '$50,001 – $75,000',
+        'over_75000':   '$75,001 & above',
       }
 
       const promptedHtml = (dbRow.prompted as string[])

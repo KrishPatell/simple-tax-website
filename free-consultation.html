@@ -1399,6 +1399,7 @@ const S_DEFAULTS = {
   bankruptcy: '',
   firstName: '', lastName: '', email: '', phone: '', agreed: false,
   utm_source: '', utm_medium: '', utm_campaign: '', utm_content: '', utm_term: '',
+  fbclid: '', gclid: '',
 };
 
 const S = Object.assign({}, S_DEFAULTS);
@@ -1411,10 +1412,13 @@ const S = Object.assign({}, S_DEFAULTS);
   S.utm_campaign = params.get('utm_campaign') || '';
   S.utm_content  = params.get('utm_content')  || '';
   S.utm_term     = params.get('utm_term')     || '';
+  S.fbclid       = params.get('fbclid')       || '';
+  S.gclid        = params.get('gclid')        || '';
   // Store in localStorage so they persist if user refreshes
   try { localStorage.setItem('sx_utms', JSON.stringify({
     utm_source: S.utm_source, utm_medium: S.utm_medium,
-    utm_campaign: S.utm_campaign, utm_content: S.utm_content, utm_term: S.utm_term
+    utm_campaign: S.utm_campaign, utm_content: S.utm_content, utm_term: S.utm_term,
+    fbclid: S.fbclid, gclid: S.gclid
   })); } catch(e) {}
 })();
 
@@ -1465,7 +1469,7 @@ const STEPS = [
     tip: { icon: 'bell', title: 'You\'re not alone', body: 'Over <span class="sb-tip-highlight">14 million Americans</span> currently owe back taxes to the IRS. Relief programs exist specifically for situations like yours.' },
     options: [
       { value: 'irs_notice', label: 'Received IRS notice', desc: 'CP14, CP2000, or other IRS letters', icon: 'envelope' },
-      { value: 'garnishment', label: 'Garnishment, lien or levy', desc: 'Wage garnishment or bank levy in place', icon: 'lock' },
+      { value: 'garnishment_lien_levy', label: 'Garnishment, lien or levy', desc: 'Wage garnishment or bank levy in place', icon: 'lock' },
       { value: 'unpaid_taxes', label: 'Unpaid taxes', desc: 'Owe taxes from prior years', icon: 'dollar' },
       { value: 'other', label: 'Other reason', desc: 'A different tax-related concern', icon: 'dots' },
     ]
@@ -1488,12 +1492,12 @@ const STEPS = [
     hint: 'Include penalties and interest in your estimate',
     tip: { icon: 'shield', title: 'Most debts can be reduced', body: 'Clients with <span class="sb-tip-highlight">$25K–$75K</span> in tax debt are prime candidates for an Offer in Compromise — often settling for 10–20 cents on the dollar.' },
     options: [
-      { value: 'under5k', label: '$5,000 & under', icon: 'bar1' },
-      { value: '5k-10k', label: '$5,001 – $10,000', icon: 'bar2' },
-      { value: '10k-25k', label: '$10,001 – $25,000', icon: 'bar3' },
-      { value: '25k-50k', label: '$25,001 – $50,000', icon: 'bar4' },
-      { value: '50k-75k', label: '$50,001 – $75,000', icon: 'bar5' },
-      { value: '75k-plus', label: '$75,001 & above', icon: 'bar6' },
+      { value: 'under_5000', label: '$5,000 & under', icon: 'bar1' },
+      { value: '5001_10000', label: '$5,001 – $10,000', icon: 'bar2' },
+      { value: '10001_25000', label: '$10,001 – $25,000', icon: 'bar3' },
+      { value: '25001_50000', label: '$25,001 – $50,000', icon: 'bar4' },
+      { value: '50001_75000', label: '$50,001 – $75,000', icon: 'bar5' },
+      { value: 'over_75000', label: '$75,001 & above', icon: 'bar6' },
     ]
   },
   {
@@ -1848,12 +1852,12 @@ function validEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
 // ─── WEBHOOK CONFIGURATION ───
 // Zapier webhook URL (from Zapier Catch Hook trigger)
 const ZAPIER_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/26757503/un3lg6e/';
-// HubSpot webhook bridge URL (Render bridge service)
-const HUBSPOT_WEBHOOK_URL = 'https://sympletax-crm.onrender.com/webhook/free-consultation';
+// Close CRM webhook bridge URL (Render bridge service)
+const CLOSE_WEBHOOK_URL = 'https://sympletax-close.onrender.com/webhook/free-consultation';
 
 // Fire-and-forget webhook sender — non-blocking, non-critical
 function sendToWebhooks(payload) {
-  const urls = [ZAPIER_WEBHOOK_URL, HUBSPOT_WEBHOOK_URL];
+  const urls = [ZAPIER_WEBHOOK_URL, CLOSE_WEBHOOK_URL];
   urls.forEach(url => {
     if (!url) return;
     fetch(url, {
@@ -1900,9 +1904,9 @@ async function submitForm() {
     last_name:     S.lastName.trim(),
     email:         S.email.trim(),
     phone:         S.phone.trim(),
-    prompted:      S.prompted      || [],
-    unfiled_years: S.unfiledYears  || null,
-    debt_amount:   S.debtAmount    || null,
+    tax_relief_reason: S.prompted      || [],
+    unfiled_years:     S.unfiledYears  || null,
+    tax_debt_amount:   S.debtAmount    || null,
     tax_type:      S.taxType       || null,
     issue_type:    S.issueType     || null,
     bankruptcy:    S.bankruptcy    || null,
@@ -1912,6 +1916,9 @@ async function submitForm() {
     utm_campaign:  S.utm_campaign  || null,
     utm_content:   S.utm_content   || null,
     utm_term:      S.utm_term      || null,
+    fbclid:        S.fbclid        || null,
+    gclid:         S.gclid         || null,
+    page_url:      window.location.href,
     source:        'free-consultation'
   };
 
@@ -1938,7 +1945,7 @@ async function submitForm() {
     console.warn('Qualify lead submission failed:', err.message);
   }
 
-  // Fire webhooks in parallel (non-blocking) — Zapier + HubSpot
+  // Fire webhooks in parallel (non-blocking) — Zapier + Close CRM
   sendToWebhooks(payload);
 }
 
